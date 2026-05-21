@@ -47,7 +47,7 @@
 <body>
 
 <div id="toast-container"></div> <div class="container">
-    <h1>🚀 ỨNG DỤNG ÔN THI DÀNH CHO TIỂU LONG</h1>
+    <h1>🚀 LEARNING IS HAPPY</h1>
     
     <div id="setup-screen">
         <h3>Thiết lập bài thi</h3>
@@ -188,7 +188,7 @@
         }, 1000);
     }
 
-    function loadQuestion() {
+   function loadQuestion() {
         questionStartTime = totalExamTime; 
         const q = currentExamQuestions[currentQuestionIndex];
         
@@ -197,32 +197,65 @@
         
         const optionsContainer = document.getElementById('options-container');
         optionsContainer.innerHTML = '';
-        q.options.forEach((opt, index) => {
-            optionsContainer.innerHTML += `<label class="option-label"><input type="radio" name="ans" value="${index}"> ${opt}</label>`;
-        });
+        
+        // KIỂM TRA ĐỊNH DẠNG ĐỂ HIỂN THỊ
+        if (!q.type || q.type === "mcq") {
+            // Trắc nghiệm
+            q.options.forEach((opt, index) => {
+                optionsContainer.innerHTML += `<label class="option-label"><input type="radio" name="ans" value="${index}"> ${opt}</label>`;
+            });
+        } else if (q.type === "fib") {
+            // Tự luận điền số
+            optionsContainer.innerHTML = `<input type="text" id="fib-answer" placeholder="Nhập số kết quả vào đây..." style="padding: 15px; font-size: 18px; width: 100%; border-radius: 5px; border: 2px solid var(--primary); box-sizing: border-box; font-weight: bold;">`;
+        }
 
         const btn = document.getElementById('submit-btn');
         btn.innerText = (currentQuestionIndex === currentExamQuestions.length - 1) ? "Nộp bài và Xem Điểm" : "Câu tiếp theo ➡";
     }
 
     function submitAndNext() {
-        const selected = document.querySelector('input[name="ans"]:checked');
-        if (!selected) return alert("Tiểu Long ơi, con chưa chọn đáp án kìa!");
-
-        const selectedIdx = parseInt(selected.value);
         const q = currentExamQuestions[currentQuestionIndex];
-        const isCorrect = (selectedIdx === q.answer);
+        let isCorrect = false;
+        let studentAnswer = "";
+        let correctAnswerToSave = "";
+
+        // LẤY VÀ KIỂM TRA ĐÁP ÁN DỰA TRÊN LOẠI CÂU HỎI
+        if (!q.type || q.type === "mcq") {
+            const selected = document.querySelector('input[name="ans"]:checked');
+            if (!selected) return alert("Tiểu Long ơi, con chưa chọn đáp án kìa!");
+            
+            const selectedIdx = parseInt(selected.value);
+            studentAnswer = q.options[selectedIdx];
+            correctAnswerToSave = q.options[q.answer];
+            isCorrect = (selectedIdx === q.answer);
+        } else if (q.type === "fib") {
+            const inputField = document.getElementById('fib-answer');
+            if (!inputField.value.trim()) return alert("Tiểu Long ơi, con chưa điền kết quả kìa!");
+            
+            studentAnswer = inputField.value.trim();
+            correctAnswerToSave = q.answer;
+            // Xóa dấu cách thừa để chấm điểm chính xác
+            isCorrect = (studentAnswer.replace(/\s+/g, '') === String(q.answer).replace(/\s+/g, ''));
+        }
         
         if (isCorrect) score += 10;
-        showToast(isCorrect); // Hiện thông báo nhỏ góc màn hình
+        showToast(isCorrect);
 
         currentExamHistoryRecord.details.push({
             question: q.question,
-            correctAnswer: q.options[q.answer],
-            studentAnswer: q.options[selectedIdx],
+            correctAnswer: correctAnswerToSave,
+            studentAnswer: studentAnswer,
             isCorrect: isCorrect,
             timeTaken: totalExamTime - questionStartTime
         });
+
+        currentQuestionIndex++;
+        if (currentQuestionIndex < currentExamQuestions.length) {
+            loadQuestion();
+        } else {
+            finishQuiz();
+        }
+    }
 
         currentQuestionIndex++;
         if (currentQuestionIndex < currentExamQuestions.length) {
