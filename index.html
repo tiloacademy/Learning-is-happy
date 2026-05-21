@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hệ thống Ôn thi Trực tuyến - Tiểu Long</title>
+    <style>
+        :root {
+            --primary: #4A90E2;
+            --success: #2ECC71;
+            --danger: #E74C3C;
+            --warning: #F1C40F;
+            --dark: #2C3E50;
+            --light: #ECF0F1;
+        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--light); color: var(--dark); margin: 0; padding: 20px; }
+        .container { max-width: 800px; margin: 0 auto; background: white; padding: 30px; border-radius: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        h1, h2, h3 { color: var(--primary); text-align: center; }
+        
+        /* Utility */
+        .hidden { display: none !important; }
+        .btn { padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.3s; }
+        .btn-primary { background: var(--primary); color: white; }
+        .btn-primary:hover { background: #357ABD; }
+        .btn-success { background: var(--success); color: white; }
+        
+        /* Setup Screen */
+        .config-group { margin-bottom: 20px; }
+        .subject-group { margin-bottom: 10px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; }
+        .topic-list { margin-left: 20px; display: flex; flex-direction: column; gap: 5px; }
+        
+        /* Quiz Screen */
+        #timer { font-size: 20px; font-weight: bold; color: var(--danger); text-align: right; }
+        .question-box { font-size: 18px; font-weight: bold; margin: 20px 0; }
+        .options-box { display: flex; flex-direction: column; gap: 10px; }
+        .option-label { display: block; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; }
+        .option-label:hover { background: #e9ecef; }
+        .feedback { margin-top: 15px; font-weight: bold; padding: 10px; border-radius: 5px; }
+        .feedback.correct { background: #d4edda; color: #155724; }
+        .feedback.wrong { background: #f8d7da; color: #721c24; }
+        
+        /* History Screen */
+        .history-card { background: #f8f9fa; border: 1px solid #ddd; padding: 15px; margin-bottom: 15px; border-radius: 8px; }
+        .history-details { font-size: 14px; margin-top: 10px; }
+        .correct-text { color: var(--success); font-weight: bold;}
+        .wrong-text { color: var(--danger); font-weight: bold;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚀 ỨNG DỤNG ÔN THI DÀNH CHO TIỂU LONG</h1>
+    
+    <div id="setup-screen">
+        <h3>Thiết lập bài thi</h3>
+        <div class="config-group">
+            <label><b>Nền tảng:</b></label>
+            <select id="platform-select"><option value="Vioedu">VioEdu</option><option value="Violympic" disabled>Violympic (Sắp ra mắt)</option></select>
+            <label style="margin-left: 20px;"><b>Lớp:</b></label>
+            <select id="grade-select"><option value="3">Lớp 3</option></select>
+        </div>
+
+        <div class="config-group">
+            <label><b>Số lượng câu hỏi:</b></label>
+            <input type="radio" name="numQ" value="20" checked> 20 câu
+            <input type="radio" name="numQ" value="30"> 30 câu
+            <input type="radio" name="numQ" value="custom"> Khác: 
+            <input type="number" id="customNumQ" style="width: 50px;" min="1" disabled>
+        </div>
+
+        <div class="config-group">
+            <label><b>Chọn Chủ điểm (Tích chọn để thi):</b></label>
+            <br><button class="btn btn-primary" style="margin: 10px 0; font-size:12px;" onclick="toggleAllTopics(true)">Chọn tất cả</button>
+            <button class="btn btn-primary" style="margin: 10px 0; font-size:12px;" onclick="toggleAllTopics(false)">Bỏ chọn tất cả</button>
+            <div id="topics-container"></div>
+        </div>
+
+        <div style="text-align: center;">
+            <button class="btn btn-success" style="font-size: 20px;" onclick="startQuiz()">BẮT ĐẦU THI</button>
+            <button class="btn btn-primary" style="margin-left: 10px; font-size: 20px;" onclick="showHistory()">XEM LỊCH SỬ</button>
+        </div>
+    </div>
+
+    <div id="quiz-screen" class="hidden">
+        <div id="timer">⏱ Thời gian: 00:00</div>
+        <h3 id="question-progress">Câu hỏi 1 / 20</h3>
+        <div class="question-box" id="question-text">Đề bài nằm ở đây</div>
+        
+        <div class="options-box" id="options-container">
+            </div>
+
+        <div id="feedback-box" class="feedback hidden"></div>
+
+        <div style="text-align: right; margin-top: 20px;">
+            <button id="submit-btn" class="btn btn-primary" onclick="submitAnswer()">Kiểm tra / Nộp câu</button>
+        </div>
+    </div>
+
+    <div id="result-screen" class="hidden">
+        <h2>🎉 HOÀN THÀNH BÀI THI 🎉</h2>
+        <h3 id="final-score" style="font-size: 28px; color: var(--danger);">Điểm: 0</h3>
+        <p id="final-time" style="text-align: center; font-size: 18px;">Tổng thời gian: 00:00</p>
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="goHome()">Về trang chủ</button>
+            <button class="btn btn-success" onclick="showHistory()">Xem chi tiết lịch sử</button>
+        </div>
+    </div>
+
+    <div id="history-screen" class="hidden">
+        <h2>LỊCH SỬ THI (10 BÀI GẦN NHẤT)</h2>
+        <div id="history-container"></div>
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="goHome()">Về trang chủ</button>
+            <button class="btn btn-danger" onclick="clearHistory()" style="background: var(--danger); color: white;">Xóa lịch sử</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    /* ==========================================
+       1. CẤU TRÚC CHƯƠNG TRÌNH & NGÂN HÀNG CÂU HỎI
+       ========================================== */
+    const CURRICULUM = {
+        "Toán học": ["Phép cộng trong phạm vi 10 000", "Phép trừ trong phạm vi 10 000", "Tìm các thành phần của phép nhân, phép chia trong phạm vi 10 000", "Chu vi hình chữ nhật, hình vuông", "Trung điểm của đoạn thẳng", "Tâm, bán kính, đường kính của hình tròn"],
+        "Tiếng Việt": ["Ôn tập về từ chỉ sự vật", "Mở rộng vốn từ: Măng non", "Ôn tập về từ chỉ hoạt động", "Phân biệt r / d / gi", "Ôn tập về từ chỉ đặc điểm", "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", "Mở rộng vốn từ: Gia đình", "Câu kể", "Ôn tập câu Ở đâu, Vì sao, Khi nào", "Viết đoạn văn tả đồ dùng"],
+        "Tiếng Anh": ["Structures: Greeting", "Vocabulary: Hello and Goodbye", "Phonics: /h/ and /b/", "Structures: Introduce yourself", "Vocabulary: Names and ages", "Phonics: /m/ and /n/", "Structures: Introducing a friend or a teacher", "Vocabulary: Friends and teachers", "Phonics: th - /ð/ and /θ/", "Structures: What's this?"],
+        "Kỹ năng sống": ["Tiền ra đời như thế nào?", "Em có bao nhiêu tiền?", "Những chiếc lọ thông minh", "Khi nào em đủ? Khi nào em thiếu?", "Quản lý tiền và ghi chép thông minh", "Bí mật hóa đơn siêu thị"]
+    };
+
+    // NGÂN HÀNG CÂU HỎI (Bạn sẽ nhập dần vào đây)
+    // Mỗi câu hỏi phải gán đúng "topic" giống như tên trong CURRICULUM
+    const QUESTION_BANK = [
+        {
+            topic: "Tìm các thành phần của phép nhân, phép chia trong phạm vi 10 000",
+            question: "Tìm x, biết: x × 3 = 612",
+            options: ["A. x = 24", "B. x = 204", "C. x = 1836", "D. x = 240"],
+            answer: 1 // Vị trí của đáp án đúng (B), index bắt đầu từ 0
+        },
+        {
+            topic: "Chu vi hình chữ nhật, hình vuông",
+            question: "Một mảnh đất hình vuông có chu vi là 36 m. Cứ cách 1m đóng 1 cọc tre xung quanh. Hỏi cần bao nhiêu cọc?",
+            options: ["A. 36 cọc", "B. 9 cọc", "C. 37 cọc", "D. 18 cọc"],
+            answer: 0 
+        },
+        {
+            topic: "Ôn tập về từ chỉ sự vật",
+            question: "Từ nào dưới đây KHÔNG phải là từ chỉ sự vật?",
+            options: ["A. Bàn ghế", "B. Sách vở", "C. Nhảy múa", "D. Bút thước"],
+            answer: 2
+        }
+    ];
+
+    /* ==========================================
+       2. TRẠNG THÁI (STATE) & LOGIC
+       ========================================== */
+    let currentExamQuestions = [];
+    let currentQuestionIndex = 0;
+    let score = 0;
+    let totalExamTime = 0;
+    let questionStartTime = 0;
+    let examTimerInterval;
+    let currentExamHistoryRecord = {}; // Lưu lịch sử chi tiết của bài thi hiện tại
+
+    // Thiết lập giao diện ban đầu
+    window.onload = () => {
+        renderTopicSelection();
+        
+        // Xử lý radio button số câu hỏi
+        document.getElementsByName('numQ').forEach(radio => {
+            radio.addEventListener('change', function() {
+                document.getElementById('customNumQ').disabled = (this.value !== 'custom');
+            });
+        });
+    };
+
+    function renderTopicSelection() {
+        const container = document.getElementById('topics-container');
+        let html = '';
+        for (let subject in CURRICULUM) {
+            html += `<div class="subject-group">
+                        <label><b><input type="checkbox" class="subject-cb" onchange="toggleSubject(this, '${subject}')" checked> Môn ${subject}</b></label>
+                        <div class="topic-list" id="list-${subject}">`;
+            CURRICULUM[subject].forEach(topic => {
+                html += `<label><input type="checkbox" class="topic-cb" value="${topic}" checked> ${topic}</label>`;
+            });
+            html += `</div></div>`;
+        }
+        container.innerHTML = html;
+    }
+
+    function toggleAllTopics(isChecked) {
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => cb.checked = isChecked);
+    }
+
+    function toggleSubject(subjectCb, subjectStr) {
+        const div = document.getElementById(`list-${subjectStr}`);
+        div.querySelectorAll('.topic-cb').forEach(cb => cb.checked = subjectCb.checked);
+    }
+
+    /* ==========================================
+       3. CHẠY BÀI THI
+       ========================================== */
+    function startQuiz() {
+        // Lấy danh sách topic đã chọn
+        const selectedTopics = Array.from(document.querySelectorAll('.topic-cb:checked')).map(cb => cb.value);
+        if(selectedTopics.length === 0) return alert("Mẹ nhắc Tiểu Long chọn ít nhất 1 chủ điểm nhé!");
+
+        // Lấy số câu hỏi
+        let numQ = document.querySelector('input[name="numQ"]:checked').value;
+        if (numQ === 'custom') {
+            numQ = parseInt(document.getElementById('customNumQ').value);
+            if (!numQ || numQ <= 0) return alert("Vui lòng nhập số câu hỏi hợp lệ!");
+        } else {
+            numQ = parseInt(numQ);
+        }
+
+        // Lọc ngân hàng câu hỏi
+        let availableQuestions = QUESTION_BANK.filter(q => selectedTopics.includes(q.topic));
+        if (availableQuestions.length === 0) return alert("Kho câu hỏi của các chủ điểm này hiện đang trống. Mẹ thêm câu hỏi vào code nhé!");
+        
+        // Trộn ngẫu nhiên và chọn đủ số câu
+        availableQuestions = availableQuestions.sort(() => 0.5 - Math.random());
+        currentExamQuestions = availableQuestions.slice(0, numQ);
+
+        // Khởi tạo thông số
+        currentQuestionIndex = 0;
+        score = 0;
+        totalExamTime = 0;
+        currentExamHistoryRecord = { date: new Date().toLocaleString(), score: 0, totalTime: 0, details: [] };
+
+        // Chuyển màn hình
+        document.getElementById('setup-screen').classList.add('hidden');
+        document.getElementById('quiz-screen').classList.remove('hidden');
+        
+        startTimer();
+        loadQuestion();
+    }
+
+    function startTimer() {
+        clearInterval(examTimerInterval);
+        examTimerInterval = setInterval(() => {
+            totalExamTime++;
+            const mins = String(Math.floor(totalExamTime / 60)).padStart(2, '0');
+            const secs = String(totalExamTime % 60).padStart(2, '0');
+            document.getElementById('timer').innerText = `⏱ Thời gian: ${mins}:${secs}`;
+        }, 1000);
+    }
+
+    function loadQuestion() {
+        questionStartTime = totalExamTime; // Bắt đầu tính giờ cho câu này
+        const q = currentExamQuestions[currentQuestionIndex];
+        
+        document.getElementById('question-progress').innerText = `Câu hỏi ${currentQuestionIndex + 1} / ${currentExamQuestions.length}`;
+        document.getElementById('question-text').innerText = q.question;
+        document.getElementById('feedback-box').classList.add('hidden');
+        document.getElementById('submit-btn').innerText = "Kiểm tra đáp án";
+        document.getElementById('submit-btn').setAttribute("onclick", "checkAnswer()");
+
+        const optionsContainer = document.getElementById('options-container');
+        optionsContainer.innerHTML = '';
+        q.options.forEach((opt, index) => {
+            optionsContainer.innerHTML += `
+                <label class="option-label">
+                    <input type="radio" name="ans" value="${index}"> ${opt}
+                </label>`;
+        });
+    }
+
+    function checkAnswer() {
+        const selected = document.querySelector('input[name="ans"]:checked');
+        if (!selected) return alert("Tiểu Long ơi, con chưa chọn đáp án kìa!");
+
+        const selectedIdx = parseInt(selected.value);
+        const q = currentExamQuestions[currentQuestionIndex];
+        const feedbackBox = document.getElementById('feedback-box');
+        const timeTakenForQuestion = totalExamTime - questionStartTime;
+        
+        let isCorrect = false;
+
+        if (selectedIdx === q.answer) {
+            isCorrect = true;
+            score += 10;
+            feedbackBox.innerHTML = "✅ Xuất sắc! Con làm đúng rồi.";
+            feedbackBox.className = "feedback correct";
+        } else {
+            feedbackBox.innerHTML = `❌ Tiếc quá! Đáp án đúng là: <b>${q.options[q.answer]}</b>`;
+            feedbackBox.className = "feedback wrong";
+        }
+        
+        feedbackBox.classList.remove('hidden');
+        
+        // Khóa không cho chọn lại
+        document.querySelectorAll('input[name="ans"]').forEach(radio => radio.disabled = true);
+
+        // Lưu lịch sử câu hỏi này
+        currentExamHistoryRecord.details.push({
+            question: q.question,
+            correctAnswer: q.options[q.answer],
+            studentAnswer: q.options[selectedIdx],
+            isCorrect: isCorrect,
+            timeTaken: timeTakenForQuestion
+        });
+
+        // Đổi nút thành "Câu tiếp theo"
+        const submitBtn = document.getElementById('submit-btn');
+        if (currentQuestionIndex < currentExamQuestions.length - 1) {
+            submitBtn.innerText = "Câu tiếp theo ➡";
+            submitBtn.setAttribute("onclick", "nextQuestion()");
+        } else {
+            submitBtn.innerText = "Nộp bài và Xem Điểm";
+            submitBtn.setAttribute("onclick", "finishQuiz()");
+        }
+    }
+
+    function nextQuestion() {
+        currentQuestionIndex++;
+        loadQuestion();
+    }
+
+    function finishQuiz() {
+        clearInterval(examTimerInterval);
+        
+        // Hoàn thiện record lịch sử
+        currentExamHistoryRecord.score = score;
+        currentExamHistoryRecord.totalTime = totalExamTime;
+        saveHistory(currentExamHistoryRecord);
+
+        // Hiện kết quả
+        document.getElementById('quiz-screen').classList.add('hidden');
+        document.getElementById('result-screen').classList.remove('hidden');
+        
+        document.getElementById('final-score').innerText = `Điểm: ${score} / ${currentExamQuestions.length * 10}`;
+        const mins = String(Math.floor(totalExamTime / 60)).padStart(2, '0');
+        const secs = String(totalExamTime % 60).padStart(2, '0');
+        document.getElementById('final-time').innerText = `Tổng thời gian làm bài: ${mins} phút ${secs} giây`;
+    }
+
+    /* ==========================================
+       4. QUẢN LÝ LỊCH SỬ (LOCALSTORAGE)
+       ========================================== */
+    function saveHistory(record) {
+        let history = JSON.parse(localStorage.getItem('vioeduHistory') || '[]');
+        history.unshift(record); // Thêm lên đầu
+        if (history.length > 10) history.pop(); // Chỉ giữ 10 bài gần nhất
+        localStorage.setItem('vioeduHistory', JSON.stringify(history));
+    }
+
+    function showHistory() {
+        document.getElementById('setup-screen').classList.add('hidden');
+        document.getElementById('result-screen').classList.add('hidden');
+        document.getElementById('history-screen').classList.remove('hidden');
+
+        const historyContainer = document.getElementById('history-container');
+        let history = JSON.parse(localStorage.getItem('vioeduHistory') || '[]');
+        
+        if (history.length === 0) {
+            historyContainer.innerHTML = "<p>Chưa có dữ liệu bài thi nào.</p>";
+            return;
+        }
+
+        let html = "";
+        history.forEach((record, index) => {
+            const mins = Math.floor(record.totalTime / 60);
+            const secs = record.totalTime % 60;
+            html += `<div class="history-card">
+                        <h3>Lần thi ${history.length - index}: ${record.date}</h3>
+                        <p><b>Điểm:</b> <span class="correct-text">${record.score}</span> | <b>Tổng thời gian:</b> ${mins}p ${secs}s</p>
+                        <button class="btn btn-primary" style="font-size: 12px; padding: 5px 10px;" onclick="document.getElementById('hist-detail-${index}').classList.toggle('hidden')">Xem/Ẩn chi tiết từng câu</button>
+                        <div id="hist-detail-${index}" class="history-details hidden">`;
+            
+            record.details.forEach((dt, qIndex) => {
+                html += `<div style="margin-top: 10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px;">
+                            <p><b>Câu ${qIndex + 1}:</b> ${dt.question}</p>
+                            <p>Thời gian làm: ${dt.timeTaken} giây</p>
+                            <p>Con chọn: <span class="${dt.isCorrect ? 'correct-text' : 'wrong-text'}">${dt.studentAnswer}</span></p>
+                            ${!dt.isCorrect ? `<p>Đáp án đúng: <span class="correct-text">${dt.correctAnswer}</span></p>` : ''}
+                         </div>`;
+            });
+            html += `</div></div>`;
+        });
+        historyContainer.innerHTML = html;
+    }
+
+    function clearHistory() {
+        if(confirm("Bạn có chắc muốn xóa toàn bộ lịch sử thi không?")) {
+            localStorage.removeItem('vioeduHistory');
+            showHistory();
+        }
+    }
+
+    function goHome() {
+        document.getElementById('result-screen').classList.add('hidden');
+        document.getElementById('history-screen').classList.add('hidden');
+        document.getElementById('setup-screen').classList.remove('hidden');
+    }
+</script>
+
+</body>
+</html>
