@@ -8,7 +8,7 @@ const CURRICULUM = {
 
 // NGÂN HÀNG CÂU HỎI (Bạn sẽ thêm các câu hỏi vào đây)
 const QUESTION_BANK = [
-  /* =================================================================
+   /* =================================================================
        CHỦ ĐIỂM: TRUNG ĐIỂM CỦA ĐOẠN THẲNG (ĐỦ 50 CÂU)
        ================================================================= */
     
@@ -63,7 +63,7 @@ const QUESTION_BANK = [
     { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Tấm ván dài 10 dm. Cưa đôi lấy 1 nửa, lại cưa đôi nửa đó. Mảnh ván bé nhất dài bao nhiêu xăng-ti-mét?", answer: "25" },
     { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Một ống nước dài 2 m được cắt đúng ở vị trí chính giữa. Một nửa của ống nước dài bao nhiêu xăng-ti-mét?", answer: "100" },
     { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Băng giấy dài 3 dm 6 cm được cắt làm 2 phần bằng nhau. Mỗi phần dài bao nhiêu xăng-ti-mét?", answer: "18" },
-    { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Đường từ nhà đến trường là 1 km. Một trạm xe buýt ở chính giữa đoạn đường. Trạm xe buýt cách nhà bao nhiêu mét?", answer: "500" }
+    { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Đường từ nhà đến trường là 1 km. Một trạm xe buýt ở chính giữa đoạn đường. Trạm xe buýt cách nhà bao nhiêu mét?", answer: "500" }, // LƯU Ý: DẤU PHẨY ĐƯỢC BỔ SUNG Ở ĐÂY
 
     /* =================================================================
        CHỦ ĐIỂM: TÂM, BÁN KÍNH, ĐƯỜNG KÍNH CỦA HÌNH TRÒN (60 CÂU)
