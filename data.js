@@ -37,8 +37,7 @@ const QUESTION_BANK = [
     { topic: "Trung điểm của đoạn thẳng", type: "mcq", question: "Đường từ nhà An đến trường dài 2 km. Một cửa hàng nằm ở chính giữa quãng đường. Cửa hàng cách nhà An là:", options: ["A. 1000 m", "B. 200 m", "C. 4000 m", "D. 100 m"], answer: 0 },
     { topic: "Trung điểm của đoạn thẳng", type: "mcq", question: "Tấm vải dài 40 dm. Mẹ cắt đôi lấy 1 mảnh, rồi lại gập đôi mảnh đó cắt lấy 1 mảnh nhỏ nhất. Mảnh nhỏ nhất dài:", options: ["A. 20 dm", "B. 5 dm", "C. 10 dm", "D. 4 dm"], answer: 2 },
     { topic: "Trung điểm của đoạn thẳng", type: "mcq", question: "Hộp bút dài 2 dm. Bạn Long dán một chiếc tem ở chính giữa hộp. Tem cách mép hộp là:", options: ["A. 10 cm", "B. 1 cm", "C. 5 cm", "D. 20 cm"], answer: 0 },
-    { topic: "Trung điểm của đoạn thẳng", type: "mcq", question: "Đoạn đường từ tỉnh A đến tỉnh B dài 8 dm. Một trạm dừng chân nằm chính giữa đường. Trạm cách tỉnh A là:", options: ["A. 40 cm", "B. 4 cm", "C. 400 cm", "D. 16 cm"], answer: 0 },
-
+   { topic: "Trung điểm của đoạn thẳng", type: "mcq", question: "Trên bản đồ, đoạn đường từ tỉnh A đến tỉnh B dài 8 dm. Một trạm O nằm chính giữa đường. Khoảng cách từ tỉnh A đến trạm O trên bản đồ là:", options: ["A. 40 cm", "B. 4 cm", "C. 400 cm", "D. 16 cm"], answer: 0 },
     // --- 25 CÂU TỰ LUẬN ĐIỀN SỐ (FIB) ---
     { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Đoạn thẳng EF dài 12 cm. I là trung điểm của EF. Độ dài EI là bao nhiêu cm?", answer: "6" },
     { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Đoạn thẳng GH dài 40 cm. K là trung điểm của GH. Độ dài KH là bao nhiêu cm?", answer: "20" },
