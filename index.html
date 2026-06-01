@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -28,16 +28,22 @@
         /* Quiz Screen */
         #timer { font-size: 20px; font-weight: bold; color: var(--danger); text-align: right; }
         .question-box { font-size: 18px; font-weight: bold; margin: 20px 0; line-height: 1.5; }
-        .options-box { display: flex; flex-direction: column; gap: 10px; }
+        .options-box { display: flex; flex-direction: column; gap: 10px; position: relative; }
         .option-label { display: block; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; }
         .option-label:hover { background: #e9ecef; }
         
-        /* Order & Match UI */
+        /* Giao diện Sắp xếp */
         #ordered-box { min-height: 60px; border: 2px dashed #bdc3c7; padding: 15px; border-radius: 8px; margin-bottom: 15px; background: #fdfdfd; display: flex; flex-wrap: wrap; align-items: center; }
         #word-pool { display: flex; flex-wrap: wrap; gap: 10px; }
-        .match-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; background: #f8f9fa; padding: 10px; border-radius: 8px; border: 1px solid #eee; }
-        .match-left { font-weight: bold; width: 40%; font-size: 16px;}
-        .match-select { width: 55%; padding: 10px; border-radius: 5px; border: 1px solid var(--primary); font-size: 15px; cursor: pointer;}
+        
+        /* GIAO DIỆN NỐI TỪ VIOEDU (SVG MATCHING) */
+        #match-board { position: relative; display: flex; justify-content: space-between; padding: 20px 10px; min-height: 250px; }
+        #match-svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; }
+        .match-col { width: 45%; display: flex; flex-direction: column; gap: 20px; z-index: 2; }
+        .match-btn { background: white; border: 2px solid #bdc3c7; border-radius: 8px; padding: 15px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; box-shadow: 0 2px 4px rgba(0,0,0,0.05); text-align: center; }
+        .match-btn:hover { border-color: #95a5a6; background: #f9f9f9; }
+        .match-btn.selected { border-color: var(--primary); background: #ebf5ff; box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3); }
+        .match-btn.connected { border-color: #bdc3c7; background: #fdfdfd; opacity: 0.6; }
         
         /* Thông báo (Toast) */
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 1000; }
@@ -58,7 +64,7 @@
 
 <div id="toast-container"></div>
 <div class="container">
-    <h1>🚀 ỨNG DỤNG ÔN THI VIOEDU - TIỂU LONG</h1>
+    <h1>🚀 LEARNING IS HAPPY</h1>
     
     <div id="setup-screen">
         <h3>Thiết lập bài thi</h3>
@@ -71,8 +77,7 @@
 
         <div class="config-group">
             <label><b>Số lượng câu hỏi:</b></label>
-            <input type="radio" name="numQ" value="5" checked> 5 câu (Test)
-            <input type="radio" name="numQ" value="20"> 20 câu
+            <input type="radio" name="numQ" value="20" checked> 20 câu
             <input type="radio" name="numQ" value="30"> 30 câu
             <input type="radio" name="numQ" value="custom"> Khác: 
             <input type="number" id="customNumQ" style="width: 50px;" min="1" disabled>
@@ -133,13 +138,18 @@
     let currentExamHistoryRecord = {};
 
     window.onload = () => {
-        if(typeof CURRICULUM === 'undefined') {
-            alert("Lỗi: Không tìm thấy file data.js. Vui lòng kiểm tra lại cấu trúc file!");
+        if(typeof CURRICULUM === 'undefined' || typeof QUESTION_BANK === 'undefined') {
+            alert("Lỗi: Không tìm thấy file data.js. Vui lòng đảm bảo file data.js nằm cùng thư mục và có nội dung chuẩn xác!");
             return;
         }
         renderTopicSelection();
         document.getElementsByName('numQ').forEach(radio => {
             radio.addEventListener('change', function() { document.getElementById('customNumQ').disabled = (this.value !== 'custom'); });
+        });
+        
+        // Vẽ lại đường nối khi đổi kích thước màn hình
+        window.addEventListener('resize', () => {
+            if(document.getElementById('match-board')) drawAllLines();
         });
     };
 
@@ -201,7 +211,9 @@
         }, 1000);
     }
 
-    // Logic UI cho bài Sắp xếp (Order)
+    // ==========================================
+    // LOGIC CHO BÀI TẬP SẮP XẾP (ORDER)
+    // ==========================================
     window.selectWordForOrder = function(btn) {
         document.getElementById('ordered-box').appendChild(btn);
         btn.setAttribute('onclick', 'returnWordToPool(this)');
@@ -211,6 +223,97 @@
         btn.setAttribute('onclick', 'selectWordForOrder(this)');
     };
 
+    // ==========================================
+    // LOGIC CHO BÀI TẬP NỐI TỪ VẼ ĐƯỜNG THẲNG (MATCH)
+    // ==========================================
+    window.matchState = {
+        selectedLeft: null,
+        selectedRight: null,
+        connections: [],
+        colors: ['#e74c3c', '#2ecc71', '#3498db', '#f1c40f', '#9b59b6', '#e67e22', '#1abc9c']
+    };
+
+    window.handleMatchClick = function(btn, side) {
+        if (btn.classList.contains('connected')) {
+            removeConnectionByNode(btn);
+            return;
+        }
+
+        if (side === 'left') {
+            if (window.matchState.selectedLeft) window.matchState.selectedLeft.classList.remove('selected');
+            window.matchState.selectedLeft = btn;
+            btn.classList.add('selected');
+        } else {
+            if (window.matchState.selectedRight) window.matchState.selectedRight.classList.remove('selected');
+            window.matchState.selectedRight = btn;
+            btn.classList.add('selected');
+        }
+
+        if (window.matchState.selectedLeft && window.matchState.selectedRight) {
+            window.matchState.selectedLeft.classList.add('connected');
+            window.matchState.selectedRight.classList.add('connected');
+            
+            window.matchState.connections.push({
+                leftBtn: window.matchState.selectedLeft,
+                rightBtn: window.matchState.selectedRight,
+                leftVal: window.matchState.selectedLeft.getAttribute('data-val'),
+                rightVal: window.matchState.selectedRight.getAttribute('data-val')
+            });
+
+            window.matchState.selectedLeft.classList.remove('selected');
+            window.matchState.selectedRight.classList.remove('selected');
+            window.matchState.selectedLeft = null;
+            window.matchState.selectedRight = null;
+            
+            drawAllLines();
+        }
+    };
+
+    window.removeConnectionByNode = function(btn) {
+        const idx = window.matchState.connections.findIndex(c => c.leftBtn === btn || c.rightBtn === btn);
+        if (idx > -1) {
+            const conn = window.matchState.connections[idx];
+            conn.leftBtn.classList.remove('connected');
+            conn.rightBtn.classList.remove('connected');
+            window.matchState.connections.splice(idx, 1);
+            drawAllLines(); 
+        }
+    };
+
+    window.drawAllLines = function() {
+        const board = document.getElementById('match-board');
+        const svg = document.getElementById('match-svg');
+        if (!board || !svg) return;
+        
+        svg.innerHTML = '';
+        const boardRect = board.getBoundingClientRect();
+
+        window.matchState.connections.forEach((conn, index) => {
+            const leftRect = conn.leftBtn.getBoundingClientRect();
+            const rightRect = conn.rightBtn.getBoundingClientRect();
+
+            const x1 = leftRect.right - boardRect.left;
+            const y1 = leftRect.top + leftRect.height / 2 - boardRect.top;
+            
+            const x2 = rightRect.left - boardRect.left;
+            const y2 = rightRect.top + rightRect.height / 2 - boardRect.top;
+
+            const color = window.matchState.colors[index % window.matchState.colors.length];
+
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', x1);
+            line.setAttribute('y1', y1);
+            line.setAttribute('x2', x2);
+            line.setAttribute('y2', y2);
+            line.setAttribute('stroke', color);
+            line.setAttribute('stroke-width', '4');
+            svg.appendChild(line);
+        });
+    };
+
+    // ==========================================
+    // RENDER CÂU HỎI RA MÀN HÌNH
+    // ==========================================
     function loadQuestion() {
         questionStartTime = totalExamTime; 
         const q = currentExamQuestions[currentQuestionIndex];
@@ -218,7 +321,7 @@
         document.getElementById('question-progress').innerText = `Câu hỏi ${currentQuestionIndex + 1} / ${currentExamQuestions.length}`;
         document.getElementById('question-text').innerText = q.question;
         
-        // Vẽ hình học tự động nếu là Toán
+        // 1. Vẽ hình học tự động (Toán học)
         const illusContainer = document.getElementById('illustration-container');
         illusContainer.innerHTML = ''; 
         if (q.topic.includes("Trung điểm")) {
@@ -262,28 +365,37 @@
         const optionsContainer = document.getElementById('options-container');
         optionsContainer.innerHTML = '';
         
-        // Render UI dựa trên Dạng câu hỏi (4 Dạng)
+        // 2. Render UI theo Dạng bài
         if (!q.type || q.type === "mcq") {
             q.options.forEach((opt, index) => {
                 optionsContainer.innerHTML += `<label class="option-label"><input type="radio" name="ans" value="${index}"> ${opt}</label>`;
             });
         } else if (q.type === "fib") {
-            optionsContainer.innerHTML = `<input type="text" id="fib-answer" placeholder="Nhập câu trả lời..." style="padding: 15px; font-size: 18px; width: 100%; border-radius: 5px; border: 2px solid var(--primary); box-sizing: border-box; font-weight: bold;">`;
+            optionsContainer.innerHTML = `<input type="text" id="fib-answer" placeholder="Nhập câu trả lời vào đây..." style="padding: 15px; font-size: 18px; width: 100%; border-radius: 5px; border: 2px solid var(--primary); box-sizing: border-box; font-weight: bold;">`;
         } else if (q.type === "order") {
             let html = `<div id="ordered-box" title="Click vào từ ở dưới để đưa lên đây"></div><div id="word-pool">`;
             let shuffledWords = [...q.words].sort(() => 0.5 - Math.random());
             shuffledWords.forEach(w => { html += `<button class="btn btn-outline" onclick="selectWordForOrder(this)">${w}</button>`; });
-            html += `</div><p style="font-size:13px; color:#7f8c8d;"><i>* Mẹo: Click vào từ ở khung trên để đưa trở lại khung dưới.</i></p>`;
+            html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:15px;"><i>* Mẹo: Click vào thẻ chữ bên dưới để đưa lên trên. Click lại vào chữ ở trên để bỏ xuống.</i></p>`;
             optionsContainer.innerHTML = html;
         } else if (q.type === "match") {
-            let html = `<div class="match-container">`;
-            q.left.forEach((leftItem, i) => {
-                html += `<div class="match-row"><span class="match-left">${leftItem}</span><select id="match-${i}" class="match-select"><option value="">-- Chọn vế tương ứng --</option>`;
-                let shuffledRight = [...q.right].sort(() => 0.5 - Math.random());
-                shuffledRight.forEach(rightItem => { html += `<option value="${rightItem}">${rightItem}</option>`; });
-                html += `</select></div>`;
-            });
-            html += `</div>`;
+            window.matchState.selectedLeft = null;
+            window.matchState.selectedRight = null;
+            window.matchState.connections = [];
+
+            let html = `
+            <p style="font-size:13px; color:#7f8c8d; margin-bottom:5px;"><i>* Mẹo: Bấm vào 1 ô bên trái, sau đó bấm 1 ô bên phải để nối. Bấm lại vào ô đã nối để hủy.</i></p>
+            <div id="match-board">
+                <svg id="match-svg"></svg>
+                <div class="match-col" id="match-left-col">`;
+            
+            let shuffledLeft = [...q.left].sort(() => 0.5 - Math.random());
+            let shuffledRight = [...q.right].sort(() => 0.5 - Math.random());
+
+            shuffledLeft.forEach(text => { html += `<button class="match-btn" data-val="${text}" onclick="handleMatchClick(this, 'left')">${text}</button>`; });
+            html += `</div><div class="match-col" id="match-right-col">`;
+            shuffledRight.forEach(text => { html += `<button class="match-btn" data-val="${text}" onclick="handleMatchClick(this, 'right')">${text}</button>`; });
+            html += `</div></div>`;
             optionsContainer.innerHTML = html;
         }
 
@@ -291,40 +403,46 @@
         btn.innerText = (currentQuestionIndex === currentExamQuestions.length - 1) ? "Nộp bài và Xem Điểm" : "Câu tiếp theo ➡";
     }
 
+    // ==========================================
+    // CHẤM ĐIỂM
+    // ==========================================
     function submitAndNext() {
         const q = currentExamQuestions[currentQuestionIndex];
         let isCorrect = false;
         let studentAnswer = "";
         let correctAnswerToSave = "";
 
-        // CHẤM ĐIỂM DỰA TRÊN DẠNG CÂU HỎI
         if (!q.type || q.type === "mcq") {
             const selected = document.querySelector('input[name="ans"]:checked');
             if (!selected) return alert("Tiểu Long ơi, con chưa chọn đáp án kìa!");
             studentAnswer = q.options[parseInt(selected.value)];
             correctAnswerToSave = q.options[q.answer];
             isCorrect = (parseInt(selected.value) === q.answer);
+            
         } else if (q.type === "fib") {
             const inputField = document.getElementById('fib-answer');
             if (!inputField.value.trim()) return alert("Tiểu Long ơi, con chưa điền kết quả kìa!");
             studentAnswer = inputField.value.trim();
             correctAnswerToSave = q.answer;
             isCorrect = (studentAnswer.toLowerCase().replace(/\s+/g, '') === String(q.answer).toLowerCase().replace(/\s+/g, ''));
+            
         } else if (q.type === "order") {
             const selectedWords = Array.from(document.getElementById('ordered-box').children).map(btn => btn.innerText);
             if (selectedWords.length !== q.words.length) return alert("Con chưa sắp xếp đủ các từ kìa!");
             studentAnswer = selectedWords.join(" ");
             correctAnswerToSave = q.answer;
             isCorrect = (studentAnswer === q.answer);
+            
         } else if (q.type === "match") {
+            if (window.matchState.connections.length !== q.left.length) return alert("Con chưa nối đủ các câu kìa!");
+            
             let isAllCorrect = true;
             let studentAnsObj = {};
-            for (let i = 0; i < q.left.length; i++) {
-                let selectedVal = document.getElementById(`match-${i}`).value;
-                if (!selectedVal) return alert("Con chưa nối đủ các câu kìa!");
-                studentAnsObj[q.left[i]] = selectedVal;
-                if (q.answer[q.left[i]] !== selectedVal) isAllCorrect = false;
-            }
+            window.matchState.connections.forEach(conn => {
+                studentAnsObj[conn.leftVal] = conn.rightVal;
+                if (q.answer[conn.leftVal] !== conn.rightVal) isAllCorrect = false;
+            });
+
             studentAnswer = JSON.stringify(studentAnsObj);
             correctAnswerToSave = JSON.stringify(q.answer);
             isCorrect = isAllCorrect;
@@ -389,11 +507,24 @@
                         <button class="btn btn-primary" style="font-size: 12px; padding: 5px 10px;" onclick="document.getElementById('hist-detail-${index}').classList.toggle('hidden')">Xem/Ẩn chi tiết</button>
                         <div id="hist-detail-${index}" class="history-details hidden">`;
             record.details.forEach((dt, qIndex) => {
+                let displayStudentAns = dt.studentAnswer;
+                let displayCorrectAns = dt.correctAnswer;
+                
+                // Trình bày lịch sử đẹp hơn nếu là bài nối (JSON)
+                if (displayStudentAns.startsWith('{')) {
+                    try {
+                        const parsed = JSON.parse(displayStudentAns);
+                        displayStudentAns = Object.entries(parsed).map(([k,v]) => `${k} -> ${v}`).join('<br>');
+                        const parsedC = JSON.parse(displayCorrectAns);
+                        displayCorrectAns = Object.entries(parsedC).map(([k,v]) => `${k} -> ${v}`).join('<br>');
+                    } catch(e){}
+                }
+
                 html += `<div style="margin-top: 10px; border-bottom: 1px dashed #ccc; padding-bottom: 5px;">
                             <p><b>Câu ${qIndex + 1}:</b> ${dt.question}</p>
                             <p>Thời gian làm: ${dt.timeTaken} giây</p>
-                            <p>Con chọn: <span class="${dt.isCorrect ? 'correct-text' : 'wrong-text'}">${dt.studentAnswer}</span></p>
-                            ${!dt.isCorrect ? `<p>Đáp án đúng: <span class="correct-text">${dt.correctAnswer}</span></p>` : ''}
+                            <p>Con chọn: <br><span class="${dt.isCorrect ? 'correct-text' : 'wrong-text'}">${displayStudentAns}</span></p>
+                            ${!dt.isCorrect ? `<p>Đáp án đúng: <br><span class="correct-text">${displayCorrectAns}</span></p>` : ''}
                          </div>`;
             });
             html += `</div></div>`;
