@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Learning is happy</title>
+    <title>Hệ thống Ôn thi Trực tuyến - Tiểu Long</title>
+    <!-- GỌI FILE DỮ LIỆU TỪ DATA.JS -->
     <script src="data.js"></script>
     <style>
         :root { --primary: #4A90E2; --success: #2ECC71; --danger: #E74C3C; --warning: #F1C40F; --dark: #2C3E50; --light: #ECF0F1; }
@@ -16,6 +17,8 @@
         .btn-primary { background: var(--primary); color: white; }
         .btn-primary:hover { background: #357ABD; }
         .btn-success { background: var(--success); color: white; }
+        .btn-outline { background: white; color: var(--primary); border: 2px solid var(--primary); margin: 5px; border-radius: 8px; }
+        .btn-outline:hover { background: #e9f2fb; }
         
         /* Setup Screen */
         .config-group { margin-bottom: 20px; }
@@ -24,10 +27,17 @@
         
         /* Quiz Screen */
         #timer { font-size: 20px; font-weight: bold; color: var(--danger); text-align: right; }
-        .question-box { font-size: 18px; font-weight: bold; margin: 20px 0; }
+        .question-box { font-size: 18px; font-weight: bold; margin: 20px 0; line-height: 1.5; }
         .options-box { display: flex; flex-direction: column; gap: 10px; }
         .option-label { display: block; padding: 10px; background: #f8f9fa; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; }
         .option-label:hover { background: #e9ecef; }
+        
+        /* Order & Match UI */
+        #ordered-box { min-height: 60px; border: 2px dashed #bdc3c7; padding: 15px; border-radius: 8px; margin-bottom: 15px; background: #fdfdfd; display: flex; flex-wrap: wrap; align-items: center; }
+        #word-pool { display: flex; flex-wrap: wrap; gap: 10px; }
+        .match-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; background: #f8f9fa; padding: 10px; border-radius: 8px; border: 1px solid #eee; }
+        .match-left { font-weight: bold; width: 40%; font-size: 16px;}
+        .match-select { width: 55%; padding: 10px; border-radius: 5px; border: 1px solid var(--primary); font-size: 15px; cursor: pointer;}
         
         /* Thông báo (Toast) */
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 1000; }
@@ -48,7 +58,7 @@
 
 <div id="toast-container"></div>
 <div class="container">
-    <h1>🚀 LEARNING IS HAPPY</h1>
+    <h1>🚀 ỨNG DỤNG ÔN THI VIOEDU - TIỂU LONG</h1>
     
     <div id="setup-screen">
         <h3>Thiết lập bài thi</h3>
@@ -61,7 +71,8 @@
 
         <div class="config-group">
             <label><b>Số lượng câu hỏi:</b></label>
-            <input type="radio" name="numQ" value="20" checked> 20 câu
+            <input type="radio" name="numQ" value="5" checked> 5 câu (Test)
+            <input type="radio" name="numQ" value="20"> 20 câu
             <input type="radio" name="numQ" value="30"> 30 câu
             <input type="radio" name="numQ" value="custom"> Khác: 
             <input type="number" id="customNumQ" style="width: 50px;" min="1" disabled>
@@ -83,7 +94,7 @@
     <div id="quiz-screen" class="hidden">
         <div id="timer">⏱ Thời gian: 00:00</div>
         <h3 id="question-progress">Câu hỏi 1 / 20</h3>
-        <div id="illustration-container" style="text-align: center; margin-bottom: 10px;"></div> 
+        <div id="illustration-container" style="text-align: center; margin-bottom: 10px;"></div>
         <div class="question-box" id="question-text"></div>
         <div class="options-box" id="options-container"></div>
 
@@ -190,61 +201,54 @@
         }, 1000);
     }
 
-   function loadQuestion() {
+    // Logic UI cho bài Sắp xếp (Order)
+    window.selectWordForOrder = function(btn) {
+        document.getElementById('ordered-box').appendChild(btn);
+        btn.setAttribute('onclick', 'returnWordToPool(this)');
+    };
+    window.returnWordToPool = function(btn) {
+        document.getElementById('word-pool').appendChild(btn);
+        btn.setAttribute('onclick', 'selectWordForOrder(this)');
+    };
+
+    function loadQuestion() {
         questionStartTime = totalExamTime; 
         const q = currentExamQuestions[currentQuestionIndex];
         
         document.getElementById('question-progress').innerText = `Câu hỏi ${currentQuestionIndex + 1} / ${currentExamQuestions.length}`;
         document.getElementById('question-text').innerText = q.question;
         
-        // --- PHẦN VẼ HÌNH TỰ ĐỘNG - ĐÃ ĐƯỢC NÂNG CẤP THÔNG MINH ---
+        // Vẽ hình học tự động nếu là Toán
         const illusContainer = document.getElementById('illustration-container');
-        illusContainer.innerHTML = ''; // Xóa hình cũ
-
+        illusContainer.innerHTML = ''; 
         if (q.topic.includes("Trung điểm")) {
-            // 1. TỰ ĐỘNG TÌM TÊN CÁC ĐIỂM TỪ ĐỀ BÀI (Dùng Regex)
-            const pointsPattern = /[A-Z]+/g; // Tìm tất cả các chữ cái in hoa
-            const foundPoints = q.question.match(pointsPattern) || [];
-
-            // Thiết lập các biến điểm mặc định
-            let p1 = "A"; // Đầu 1
-            let p2 = "B"; // Đầu 2
-            let mid = "M"; // Trung điểm
-
-            // Logic tìm điểm từ danh sách chữ cái:
-            if (foundPoints.length >= 2) {
-                // Thường thì tên đoạn thẳng là 2 chữ cái (ví dụ: MN), tên trung điểm là 1 chữ (K)
-                if (foundPoints[0].length === 2) {
-                    p1 = foundPoints[0][0]; // Chữ đầu
-                    p2 = foundPoints[0][1]; // Chữ sau
-                } else if (foundPoints[1] && foundPoints[1].length === 2) {
-                     // Dự phòng nếu tên trung điểm đứng trước
-                     p1 = foundPoints[1][0];
-                     p2 = foundPoints[1][1];
-                }
-                
-                // Tìm chữ cái đơn lẻ đầu cho trung điểm
-                for (let i=0; i<foundPoints.length; i++) {
-                    if (foundPoints[i].length === 1) {
-                        mid = foundPoints[i];
-                        break;
-                    }
-                }
+            const words = q.question.match(/[A-Z]{1,2}/g) || [];
+            const uniqueWords = [...new Set(words)]; 
+            let p1 = "A", p2 = "B", mid = "M"; 
+            const twoLetter = uniqueWords.find(w => w.length === 2);
+            if (twoLetter) {
+                p1 = twoLetter[0]; p2 = twoLetter[1]; 
+                const oneLetter = uniqueWords.find(w => w.length === 1 && w !== p1 && w !== p2);
+                if (oneLetter) mid = oneLetter;
+            } else {
+                const ones = uniqueWords.filter(w => w.length === 1);
+                if (ones.length >= 2) { p1 = ones[0]; p2 = ones[1]; }
+                if (ones.length >= 3) { mid = ones[2]; } else { mid = "O"; }
             }
-
-            // 2. VẼ HÌNH SVG VỚI CÁC BIẾN ĐIỂM ĐÃ TÌM ĐƯỢC
             illusContainer.innerHTML = `
                 <svg width="300" height="60">
                     <line x1="50" y1="30" x2="250" y2="30" stroke="#2C3E50" stroke-width="3" />
                     <circle cx="50" cy="30" r="5" fill="#E74C3C" />
                     <circle cx="150" cy="30" r="5" fill="#E74C3C" />
                     <circle cx="250" cy="30" r="5" fill="#E74C3C" />
-                    <text x="45" y="55" font-weight="bold">${p1}</text>  <text x="145" y="55" font-weight="bold">${mid}</text> <text x="245" y="55" font-weight="bold">${p2}</text>  <path d="M50 20 L50 10 L145 10 M155 10 L250 10 L250 20" fill="none" stroke="#4A90E2" />
+                    <text x="45" y="55" font-weight="bold">${p1}</text>
+                    <text x="145" y="55" font-weight="bold">${mid}</text>
+                    <text x="245" y="55" font-weight="bold">${p2}</text>
+                    <path d="M50 20 L50 10 L145 10 M155 10 L250 10 L250 20" fill="none" stroke="#4A90E2" />
                     <text x="90" y="25" font-size="10" fill="#4A90E2">=</text>
                     <text x="190" y="25" font-size="10" fill="#4A90E2">=</text>
                 </svg>`;
         } else if (q.topic.includes("hình tròn")) {
-            // Giữ nguyên logic vẽ hình tròn
             illusContainer.innerHTML = `
                 <svg width="150" height="150">
                     <circle cx="75" cy="75" r="50" fill="none" stroke="#2C3E50" stroke-width="2" />
@@ -254,17 +258,33 @@
                     <text x="118" y="45" font-size="12" font-weight="bold">A</text>
                 </svg>`;
         }
-        // ----------------------------
 
         const optionsContainer = document.getElementById('options-container');
         optionsContainer.innerHTML = '';
         
+        // Render UI dựa trên Dạng câu hỏi (4 Dạng)
         if (!q.type || q.type === "mcq") {
             q.options.forEach((opt, index) => {
                 optionsContainer.innerHTML += `<label class="option-label"><input type="radio" name="ans" value="${index}"> ${opt}</label>`;
             });
         } else if (q.type === "fib") {
-            optionsContainer.innerHTML = `<input type="text" id="fib-answer" placeholder="Nhập số kết quả..." style="padding: 15px; font-size: 18px; width: 100%; border-radius: 5px; border: 2px solid var(--primary); box-sizing: border-box; font-weight: bold;">`;
+            optionsContainer.innerHTML = `<input type="text" id="fib-answer" placeholder="Nhập câu trả lời..." style="padding: 15px; font-size: 18px; width: 100%; border-radius: 5px; border: 2px solid var(--primary); box-sizing: border-box; font-weight: bold;">`;
+        } else if (q.type === "order") {
+            let html = `<div id="ordered-box" title="Click vào từ ở dưới để đưa lên đây"></div><div id="word-pool">`;
+            let shuffledWords = [...q.words].sort(() => 0.5 - Math.random());
+            shuffledWords.forEach(w => { html += `<button class="btn btn-outline" onclick="selectWordForOrder(this)">${w}</button>`; });
+            html += `</div><p style="font-size:13px; color:#7f8c8d;"><i>* Mẹo: Click vào từ ở khung trên để đưa trở lại khung dưới.</i></p>`;
+            optionsContainer.innerHTML = html;
+        } else if (q.type === "match") {
+            let html = `<div class="match-container">`;
+            q.left.forEach((leftItem, i) => {
+                html += `<div class="match-row"><span class="match-left">${leftItem}</span><select id="match-${i}" class="match-select"><option value="">-- Chọn vế tương ứng --</option>`;
+                let shuffledRight = [...q.right].sort(() => 0.5 - Math.random());
+                shuffledRight.forEach(rightItem => { html += `<option value="${rightItem}">${rightItem}</option>`; });
+                html += `</select></div>`;
+            });
+            html += `</div>`;
+            optionsContainer.innerHTML = html;
         }
 
         const btn = document.getElementById('submit-btn');
@@ -277,23 +297,37 @@
         let studentAnswer = "";
         let correctAnswerToSave = "";
 
-        // LẤY VÀ KIỂM TRA ĐÁP ÁN DỰA TRÊN LOẠI CÂU HỎI
+        // CHẤM ĐIỂM DỰA TRÊN DẠNG CÂU HỎI
         if (!q.type || q.type === "mcq") {
             const selected = document.querySelector('input[name="ans"]:checked');
             if (!selected) return alert("Tiểu Long ơi, con chưa chọn đáp án kìa!");
-            
-            const selectedIdx = parseInt(selected.value);
-            studentAnswer = q.options[selectedIdx];
+            studentAnswer = q.options[parseInt(selected.value)];
             correctAnswerToSave = q.options[q.answer];
-            isCorrect = (selectedIdx === q.answer);
+            isCorrect = (parseInt(selected.value) === q.answer);
         } else if (q.type === "fib") {
             const inputField = document.getElementById('fib-answer');
             if (!inputField.value.trim()) return alert("Tiểu Long ơi, con chưa điền kết quả kìa!");
-            
             studentAnswer = inputField.value.trim();
             correctAnswerToSave = q.answer;
-            // Xóa dấu cách thừa để chấm điểm chính xác
-            isCorrect = (studentAnswer.replace(/\s+/g, '') === String(q.answer).replace(/\s+/g, ''));
+            isCorrect = (studentAnswer.toLowerCase().replace(/\s+/g, '') === String(q.answer).toLowerCase().replace(/\s+/g, ''));
+        } else if (q.type === "order") {
+            const selectedWords = Array.from(document.getElementById('ordered-box').children).map(btn => btn.innerText);
+            if (selectedWords.length !== q.words.length) return alert("Con chưa sắp xếp đủ các từ kìa!");
+            studentAnswer = selectedWords.join(" ");
+            correctAnswerToSave = q.answer;
+            isCorrect = (studentAnswer === q.answer);
+        } else if (q.type === "match") {
+            let isAllCorrect = true;
+            let studentAnsObj = {};
+            for (let i = 0; i < q.left.length; i++) {
+                let selectedVal = document.getElementById(`match-${i}`).value;
+                if (!selectedVal) return alert("Con chưa nối đủ các câu kìa!");
+                studentAnsObj[q.left[i]] = selectedVal;
+                if (q.answer[q.left[i]] !== selectedVal) isAllCorrect = false;
+            }
+            studentAnswer = JSON.stringify(studentAnsObj);
+            correctAnswerToSave = JSON.stringify(q.answer);
+            isCorrect = isAllCorrect;
         }
         
         if (isCorrect) score += 10;
