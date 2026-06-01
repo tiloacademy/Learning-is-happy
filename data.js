@@ -63,7 +63,7 @@ const QUESTION_BANK = [
     { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Tấm ván dài 10 dm. Cưa đôi lấy 1 nửa, lại cưa đôi nửa đó. Mảnh ván bé nhất dài bao nhiêu xăng-ti-mét?", answer: "25" },
     { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Một ống nước dài 2 m được cắt đúng ở vị trí chính giữa. Một nửa của ống nước dài bao nhiêu xăng-ti-mét?", answer: "100" },
     { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Băng giấy dài 3 dm 6 cm được cắt làm 2 phần bằng nhau. Mỗi phần dài bao nhiêu xăng-ti-mét?", answer: "18" },
-    { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Đường từ nhà đến trường là 1 km. Một trạm xe buýt ở chính giữa đoạn đường. Trạm xe buýt cách nhà bao nhiêu mét?", answer: "500" }, // LƯU Ý: DẤU PHẨY ĐƯỢC BỔ SUNG Ở ĐÂY
+    { topic: "Trung điểm của đoạn thẳng", type: "fib", question: "Đường từ nhà đến trường là 1 km. Một trạm xe buýt ở chính giữa đoạn đường. Trạm xe buýt cách nhà bao nhiêu mét?", answer: "500" }, 
 
     /* =================================================================
        CHỦ ĐIỂM: TÂM, BÁN KÍNH, ĐƯỜNG KÍNH CỦA HÌNH TRÒN (60 CÂU)
@@ -147,7 +147,8 @@ const QUESTION_BANK = [
     { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Nắp cống hình tròn bằng gang nặng 50 kg có bán kính 350 mm. Đường kính của nắp cống đó là bao nhiêu cm?", answer: "70" },
     { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Chiếc chảo chống dính có đường kính 28 cm. Bán kính của lòng chảo là bao nhiêu cm?", answer: "14" },
     { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Khay trà bằng gỗ có đường kính 4 dm 2 cm. Bán kính của khay trà là bao nhiêu xăng-ti-mét?", answer: "21" },
-    { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Đường tròn tâm O có bán kính là kết quả của phép chia 8424 : 4 (đơn vị cm). Đường kính của đường tròn đó là bao nhiêu cm?", answer: "4212" }
+    { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Đường tròn tâm O có bán kính là kết quả của phép chia 8424 : 4 (đơn vị cm). Đường kính của đường tròn đó là bao nhiêu cm?", answer: "4212" }, // ĐÃ THÊM DẤU PHẨY VÀO ĐÂY
+
     /* =================================================================
        CHỦ ĐIỂM: MỞ RỘNG VỐN TỪ: MĂNG NON (TỔNG HỢP 91 CÂU)
        ================================================================= */
