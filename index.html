@@ -46,9 +46,9 @@
         .match-btn.connected { border-color: #bdc3c7; background: #fdfdfd; opacity: 0.6; }
         
         /* CÁC DẠNG BÀI MỚI: CHỌN NHIỀU, GẠCH CHÂN, ĐIỀN ĐOẠN VĂN */
-        .highlight-word { display: inline-block; padding: 3px 6px; margin: 3px; cursor: pointer; border-radius: 4px; border: 1px solid transparent; transition: 0.2s; font-size: 18px; line-height: 1.8; }
-        .highlight-word:hover { background-color: #f0f0f0; border-color: #ccc; }
-        .highlight-word.highlighted { background-color: #ffeaa7; border-bottom: 3px solid var(--warning); font-weight: bold; }
+        .highlight-word { display: inline; cursor: pointer; transition: 0.2s; font-size: 18px; line-height: 1.8; }
+        .highlight-word:hover { color: var(--primary); }
+        .highlight-word.highlighted { font-weight: bold; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; color: var(--dark); background: transparent; border: none; }
         
         .inline-text { font-size: 18px; line-height: 2.2; }
         .inline-select { font-size: 16px; padding: 5px 10px; margin: 0 5px; border-radius: 5px; border: 2px solid var(--primary); font-weight: bold; color: var(--primary); background: #fdfdfd; cursor: pointer; outline: none; }
@@ -412,11 +412,18 @@
             });
             optionsContainer.innerHTML += `<p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Câu hỏi này có thể có nhiều đáp án đúng. Hãy đánh dấu chọn tất cả!</i></p>`;
         } else if (q.type === "highlight") {
-            let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px;">`;
-            q.words.forEach((w, index) => {
-                html += `<span class="highlight-word" onclick="this.classList.toggle('highlighted')" data-index="${index}">${w}</span>`;
+            let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; text-align: center;">`;
+            q.words.forEach((chunk, chunkIndex) => {
+                // Tự động chẻ cụm từ (chunk) thành từng tiếng (syllable) rời rạc dựa vào khoảng trắng
+                let syllables = chunk.trim().split(/\s+/);
+                syllables.forEach((syllable) => {
+                    if (syllable) {
+                        // Mỗi tiếng đều giữ chung một data-chunk để lúc chấm điểm tự gom lại
+                        html += `<span class="highlight-word" onclick="this.classList.toggle('highlighted')" data-chunk="${chunkIndex}">${syllable}</span> `;
+                    }
+                });
             });
-            html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào chữ để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
+            html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào từng tiếng (chữ) để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
             optionsContainer.innerHTML = html;
         } else if (q.type === "inline_dropdown") {
             let html = `<div class="inline-text">`;
@@ -483,6 +490,7 @@
             studentAnswer = JSON.stringify(studentAnsObj);
             correctAnswerToSave = JSON.stringify(q.answer);
             isCorrect = isAllCorrect;
+            
         } else if (q.type === "multi_select") {
             const selectedElements = document.querySelectorAll('input[name="ans"]:checked');
             if (selectedElements.length === 0) return alert("Tiểu Long ơi, con chưa chọn đáp án kìa!");
@@ -499,13 +507,48 @@
             const selectedSpans = document.querySelectorAll('.highlight-word.highlighted');
             if (selectedSpans.length === 0) return alert("Con chưa gạch chân từ nào kìa!");
             
-            let selectedIdx = Array.from(selectedSpans).map(span => parseInt(span.getAttribute('data-index'))).sort((a,b) => a-b);
+            let chunkTotal = {};
+            let chunkSelected = {};
+            
+            // Đếm số tiếng (syllable) trong mỗi cụm (chunk)
+            document.querySelectorAll('.highlight-word').forEach(span => {
+                let idx = parseInt(span.getAttribute('data-chunk'));
+                chunkTotal[idx] = (chunkTotal[idx] || 0) + 1;
+                if (span.classList.contains('highlighted')) {
+                    chunkSelected[idx] = (chunkSelected[idx] || 0) + 1;
+                }
+            });
+
+            let selectedIdx = [];
+            let hasPartial = false;
+
+            // Kiểm tra xem bé có chọn ĐỦ CÁC CHỮ trong cụm từ đáp án không
+            // Ví dụ: Đáp án là "bạn nhỏ", bé chỉ chọn "bạn" mà không chọn "nhỏ" thì sẽ bị tính là sai (hasPartial = true)
+            for (let idx in chunkSelected) {
+                if (chunkSelected[idx] === chunkTotal[idx]) {
+                    selectedIdx.push(parseInt(idx));
+                } else {
+                    hasPartial = true;
+                }
+            }
+
+            selectedIdx.sort((a,b) => a-b);
             let correctIdx = [...q.answer].sort((a,b) => a-b);
             
-            studentAnswer = selectedIdx.map(idx => q.words[idx].trim()).join(" | ");
-            correctAnswerToSave = correctIdx.map(idx => q.words[idx].trim()).join(" | ");
+            let studentWords = [];
+            selectedSpans.forEach(span => studentWords.push(span.innerText.trim()));
+            studentAnswer = studentWords.join(" ");
             
-            isCorrect = (selectedIdx.length === correctIdx.length && selectedIdx.every((val, index) => val === correctIdx[index]));
+            let correctWords = [];
+            document.querySelectorAll('.highlight-word').forEach(span => {
+                let idx = parseInt(span.getAttribute('data-chunk'));
+                if (q.answer.includes(idx)) {
+                    correctWords.push(span.innerText.trim());
+                }
+            });
+            correctAnswerToSave = correctWords.join(" ");
+            
+            isCorrect = (!hasPartial && selectedIdx.length === correctIdx.length && selectedIdx.every((val, index) => val === correctIdx[index]));
             
         } else if (q.type === "inline_dropdown") {
             let isAllFilled = true;
