@@ -254,7 +254,7 @@ const QUESTION_BANK = [
     { topic: "Mở rộng vốn từ: Măng non", type: "mcq", question: "Trong các từ sau, từ nào là Tính từ chỉ đặc điểm thể hiện sự thông minh của trẻ em?", options: ["A. lanh lợi, nhanh trí", "B. chậm chạp, lầm lì", "C. xinh xắn, bụ bẫm", "D. hiền lành, nhút nhát"], answer: 0 },
     { topic: "Mở rộng vốn từ: Măng non", type: "mcq", question: "Từ ghép nào dưới đây KHÔNG có tiếng 'trẻ' mang nghĩa là trẻ em?", options: ["A. trẻ con", "B. trẻ em", "C. tuổi trẻ", "D. chẻ củi"], answer: 3 },
     { topic: "Mở rộng vốn từ: Măng non", type: "mcq", question: "Chọn cặp từ trái nghĩa đúng nhất nói về tính cách của trẻ em:", options: ["A. ngoan ngoãn - hiền lành", "B. chăm chỉ - siêng năng", "C. ngoan ngoãn - hư hỏng", "D. thông minh - nhanh nhẹn"], answer: 2 },
-    { topic: "Mở rộng vốn từ: Măng non", type: "mcq", question: "Câu 'Học sinh lớp 3A đang sôi nổi thảo luận bài tập nhóm.' thuộc mẫu câu gì?", options: ["A. Ai là gì?", "B. Ai làm gì?", "C. Ai thế nào?", "D. Khi nào?"], answer: 1 }
+    { topic: "Mở rộng vốn từ: Măng non", type: "mcq", question: "Câu 'Học sinh lớp 3A đang sôi nổi thảo luận bài tập nhóm.' thuộc mẫu câu gì?", options: ["A. Ai là gì?", "B. Ai làm gì?", "C. Ai thế nào?", "D. Khi nào?"], answer: 1 },
 
     /* =================================================================
        CHỦ ĐIỂM: ÔN TẬP VỀ TỪ CHỈ SỰ VẬT (33 CÂU HỎI)
