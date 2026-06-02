@@ -228,7 +228,7 @@ const QUESTION_BANK = [
     { topic: "Mở rộng vốn từ: Măng non", type: "fib", question: "Người Đội trưởng đầu tiên của Đội Thiếu niên Tiền phong Hồ Chí Minh là ai? (Gợi ý: Tên của anh là Kim ...)", answer: "Đồng" },
     { topic: "Mở rộng vốn từ: Măng non", type: "fib", question: "Anh Kim Đồng tên thật là Nông Văn ... (Điền 1 chữ cái)", answer: "Dèn" },
     { topic: "Mở rộng vốn từ: Măng non", type: "fib", question: "Khẩu hiệu của Đội: 'Vì tổ quốc xã hội chủ nghĩa, vì lý tưởng của Bác Hồ vĩ đại: Sẵn ...!'", answer: "sàng" },
-    { topic: "Mở rộng vốn từ: Măng non", type: "fib", question: "Ghép chữ 'nhi' với một chữ khác để tạo thành từ chỉ bệnh viện dành riêng cho trẻ em: Bệnh viện Nhi ...", answer: "khoa" },
+    { topic: "Mở rộng vốn từ: Măng non", type: "fib", question: "Ghép chữ 'nhi' với một chữ khác để tạo thành từ chỉ bệnh viện dành riêng cho trẻ em: Bệnh viện Nhi ...", answer: "đồng" },
     { topic: "Mở rộng vốn từ: Măng non", type: "order", question: "Sắp xếp để tạo thành câu chỉ hoạt động:", words: ["bài tập.", "đang", "Em", "làm"], answer: "Em đang làm bài tập." },
     { topic: "Mở rộng vốn từ: Măng non", type: "fib", question: "Trong câu 'Em đang làm bài tập', từ chỉ hoạt động là từ nào?", answer: "làm" },
     { topic: "Mở rộng vốn từ: Măng non", type: "fib", question: "Trái nghĩa với từ 'già' là từ gì?", answer: "trẻ" },
