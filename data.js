@@ -255,4 +255,48 @@ const QUESTION_BANK = [
     { topic: "Mở rộng vốn từ: Măng non", type: "mcq", question: "Từ ghép nào dưới đây KHÔNG có tiếng 'trẻ' mang nghĩa là trẻ em?", options: ["A. trẻ con", "B. trẻ em", "C. tuổi trẻ", "D. chẻ củi"], answer: 3 },
     { topic: "Mở rộng vốn từ: Măng non", type: "mcq", question: "Chọn cặp từ trái nghĩa đúng nhất nói về tính cách của trẻ em:", options: ["A. ngoan ngoãn - hiền lành", "B. chăm chỉ - siêng năng", "C. ngoan ngoãn - hư hỏng", "D. thông minh - nhanh nhẹn"], answer: 2 },
     { topic: "Mở rộng vốn từ: Măng non", type: "mcq", question: "Câu 'Học sinh lớp 3A đang sôi nổi thảo luận bài tập nhóm.' thuộc mẫu câu gì?", options: ["A. Ai là gì?", "B. Ai làm gì?", "C. Ai thế nào?", "D. Khi nào?"], answer: 1 }
+
+    /* =================================================================
+       CHỦ ĐIỂM: ÔN TẬP VỀ TỪ CHỈ SỰ VẬT (33 CÂU HỎI)
+       ================================================================= */
+    
+    // --- 3 CÂU LẤY CHÍNH XÁC TỪ FILE WORD CỦA BẠN ---
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Trong câu 'Không khí thật là thoáng đãng.', từ chỉ sự vật là:", options: ["A. thật là", "B. thoáng đãng", "C. Không khí", "D. là"], answer: 2 },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Em hãy gạch chân những từ ngữ chỉ sự vật trong câu văn sau:", words: ["Bà ngoại ", "rất ", "thích ", "hoa hồng."], answer: [0, 3] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Em hãy cho biết trong câu văn sau có bao nhiêu từ ngữ chỉ sự vật? 'Kiến đang tha mồi về tổ.'", options: ["A. 4 từ", "B. 1 từ", "C. 2 từ", "D. 3 từ"], answer: 3 },
+
+    // --- 15 CÂU CƠ BẢN (Nhận diện Người, Vật, Con vật, Cây cối) ---
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Từ nào dưới đây là từ chỉ sự vật?", options: ["A. Chạy bộ", "B. Sách vở", "C. Xinh đẹp", "D. Vui vẻ"], answer: 1 },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "multi_select", question: "Em hãy chọn TẤT CẢ các từ chỉ sự vật trong các từ dưới đây:", options: ["Ngôi nhà", "Bay lượn", "Đám mây", "Ông nội", "Rực rỡ"], answer: [0, 2, 3] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Em hãy gạch chân từ chỉ sự vật trong câu sau:", words: ["Con mèo ", "đang ", "ngủ ", "say."], answer: [0] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Em hãy gạch chân các từ chỉ sự vật trong câu sau:", words: ["Sân trường ", "rợp ", "bóng mát."], answer: [0, 2] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "inline_dropdown", question: "Em hãy chọn từ chỉ sự vật thích hợp điền vào chỗ trống:", text: "Học sinh dùng ___ để viết bài, dùng ___ để đo độ dài.", dropdowns: [["cái bút", "cái tẩy", "cục gôm"], ["cái bút", "cái thước", "cái kéo"]], answer: ["cái bút", "cái thước"] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Dòng nào dưới đây CHỈ GỒM các từ chỉ sự vật?", options: ["A. chó, mèo, hót, sủa", "B. học sinh, cô giáo, hiền lành", "C. bàn, ghế, bảng đen, phấn", "D. xanh, đỏ, tím, vàng"], answer: 2 },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "multi_select", question: "Em hãy chọn các từ chỉ CÂY CỐI (thuộc nhóm từ chỉ sự vật):", options: ["Cây bàng", "Hoa phượng", "Thơm ngát", "Rễ cây", "Cao lớn"], answer: [0, 1, 3] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "match", question: "Em hãy nối các nhóm từ chỉ sự vật với tên gọi phân loại phù hợp:", left: ["Ông, bà, bố, mẹ", "Bút, thước, cặp, tẩy", "Chó, mèo, lợn, gà"], right: ["Từ chỉ con vật", "Từ chỉ người", "Từ chỉ đồ vật"], answer: {"Ông, bà, bố, mẹ": "Từ chỉ người", "Bút, thước, cặp, tẩy": "Từ chỉ đồ vật", "Chó, mèo, lợn, gà": "Từ chỉ con vật"} },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Em hãy gạch chân các từ chỉ sự vật trong câu sau:", words: ["Những ", "chú chim ", "hót ", "líu lo ", "trên ", "cành cây."], answer: [1, 5] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Từ nào dưới đây KHÔNG PHẢI là từ chỉ sự vật?", options: ["A. Bác sĩ", "B. Dòng sông", "C. Róc rách", "D. Bầu trời"], answer: 2 },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Câu 'Bé Mai nhặt rau giúp mẹ.' có bao nhiêu từ chỉ sự vật?", options: ["A. 1 từ", "B. 2 từ", "C. 3 từ", "D. 4 từ"], answer: 2 }, 
+    { topic: "Ôn tập về từ chỉ sự vật", type: "multi_select", question: "Em hãy chọn các từ chỉ NGƯỜI (thuộc nhóm từ chỉ sự vật):", options: ["Cô giáo", "Bác nông dân", "Cánh đồng", "Học sinh", "Chăm chỉ"], answer: [0, 1, 3] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "match", question: "Nối các sự vật với môi trường sống thường gặp của chúng:", left: ["Con cá, rùa biển", "Đám mây, mặt trời", "Cây cối, nhà cửa"], right: ["Trên bầu trời", "Dưới nước", "Trên mặt đất"], answer: {"Con cá, rùa biển": "Dưới nước", "Đám mây, mặt trời": "Trên bầu trời", "Cây cối, nhà cửa": "Trên mặt đất"} },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Trong câu 'Mùa xuân, cây cối đâm chồi nảy lộc.', các từ chỉ sự vật là:", options: ["A. Mùa xuân, đâm, nảy", "B. cây cối, đâm chồi, nảy lộc", "C. Mùa xuân, cây cối, chồi, lộc", "D. Mùa xuân, cây cối, đâm, nảy"], answer: 2 },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "inline_dropdown", question: "Chọn từ chỉ sự vật điền vào chỗ trống:", text: "Tiếng ___ gáy sáng đánh thức ___ dậy ra đồng làm việc.", dropdowns: [["con gà trống", "con chó", "con lợn"], ["đàn chim", "bác nông dân", "cây cối"]], answer: ["con gà trống", "bác nông dân"] },
+
+    // --- 15 CÂU NÂNG CAO (Nhận diện Khái niệm trừu tượng, Thời gian, Hiện tượng tự nhiên) ---
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Từ 'Mùa hè' thuộc nhóm từ chỉ gì?", options: ["A. Từ chỉ đặc điểm", "B. Từ chỉ hoạt động", "C. Từ chỉ sự vật", "D. Cả A, B, C đều sai"], answer: 2 },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Trong câu 'Cơn mưa rào ập đến rất nhanh.', từ chỉ sự vật (hiện tượng tự nhiên) là:", options: ["A. Cơn mưa rào", "B. ập đến", "C. rất nhanh", "D. mưa rào ập đến"], answer: 0 },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "multi_select", question: "Em hãy chọn các từ chỉ HIỆN TƯỢNG TỰ NHIÊN (thuộc nhóm từ chỉ sự vật):", options: ["Gió mùa", "Sấm chớp", "Tỏa nắng", "Chạy nhảy", "Cơn bão"], answer: [0, 1, 4] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Gạch chân các từ chỉ sự vật trong câu thơ sau:", words: ["Tiếng suối ", "trong ", "như ", "tiếng hát ", "xa."], answer: [0, 3] }, 
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Câu 'Ánh nắng xuyên qua kẽ lá, sưởi ấm những con suối nhỏ.' có bao nhiêu từ chỉ sự vật?", options: ["A. 2 từ", "B. 3 từ", "C. 4 từ", "D. 5 từ"], answer: 1 }, 
+    { topic: "Ôn tập về từ chỉ sự vật", type: "multi_select", question: "Chọn các từ chỉ sự vật trong câu 'Ngoài cánh đồng, lúa đang trổ bông.':", options: ["Ngoài", "cánh đồng", "lúa", "đang trổ", "bông"], answer: [1, 2, 4] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Gạch chân các từ chỉ sự vật (bao gồm cả thời gian, cảnh quan) trong câu sau:", words: ["Bầu trời ", "mùa thu ", "xanh thẳm, ", "cao vợi."], answer: [0, 1] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "inline_dropdown", question: "Điền từ chỉ sự vật phù hợp để câu văn sinh động hơn:", text: "Những ___ đang bay lượn rợp trời, mang theo báo hiệu của mùa ___.", dropdowns: [["chú én nhỏ", "cơn gió", "tiếng hót"], ["xuân", "ấm áp", "vui vẻ"]], answer: ["chú én nhỏ", "xuân"] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "match", question: "Phân loại các từ chỉ sự vật (Mức độ Nâng cao):", left: ["Mưa, bão, sấm, chớp", "Xuân, hạ, thu, đông", "Núi, sông, biển, hồ"], right: ["Chỉ các mùa trong năm", "Chỉ địa hình, cảnh quan", "Chỉ hiện tượng tự nhiên"], answer: {"Mưa, bão, sấm, chớp": "Chỉ hiện tượng tự nhiên", "Xuân, hạ, thu, đông": "Chỉ các mùa trong năm", "Núi, sông, biển, hồ": "Chỉ địa hình, cảnh quan"} },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Từ nào dưới đây CHỈ SỰ VẬT nhưng KHÔNG thể cầm, nắm được?", options: ["A. Quyển sách", "B. Cơn gió", "C. Cây bút", "D. Quả táo"], answer: 1 },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Gạch chân các từ chỉ sự vật mang ý nghĩa khái niệm/trừu tượng/thời gian trong câu:", words: ["Tuổi thơ ", "của ", "em ", "gắn liền ", "với ", "cánh diều."], answer: [0, 2, 5] }, 
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Dòng nào dưới đây có chứa từ KHÔNG PHẢI từ chỉ sự vật?", options: ["A. Sấm, chớp, mưa, bão", "B. Sông, suối, ao, hồ", "C. Ngoan ngoãn, hiền lành, thông minh", "D. Đường, phố, ngõ, xóm"], answer: 2 },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Trong câu 'Mẹ mua cho em một chiếc áo mới tuyệt đẹp nhân ngày sinh nhật.', có bao nhiêu từ chỉ sự vật?", options: ["A. 2 từ", "B. 3 từ", "C. 4 từ", "D. 5 từ"], answer: 2 }, 
+    { topic: "Ôn tập về từ chỉ sự vật", type: "multi_select", question: "Đánh dấu vào các từ chỉ sự vật (bao gồm từ chỉ thời gian, buổi trong ngày):", options: ["Buổi sáng", "Chiều tà", "Chăm chỉ", "Ngày mai", "Xanh biếc"], answer: [0, 1, 3] },
+    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Gạch chân 3 từ chỉ sự vật xuất hiện trong câu văn sau:", words: ["Ánh trăng ", "sáng vằng vặc ", "chiếu xuống ", "mặt hồ ", "tạo thành ", "những ", "vệt sáng ", "lấp lánh."], answer: [0, 3, 6] }
+
 ];
