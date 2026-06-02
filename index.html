@@ -1,4 +1,4 @@
-!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="vi">
 <head>
     <meta charset="UTF-8">
@@ -44,6 +44,15 @@
         .match-btn:hover { border-color: #95a5a6; background: #f9f9f9; }
         .match-btn.selected { border-color: var(--primary); background: #ebf5ff; box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.3); }
         .match-btn.connected { border-color: #bdc3c7; background: #fdfdfd; opacity: 0.6; }
+        
+        /* CÁC DẠNG BÀI MỚI: CHỌN NHIỀU, GẠCH CHÂN, ĐIỀN ĐOẠN VĂN */
+        .highlight-word { display: inline-block; padding: 3px 6px; margin: 3px; cursor: pointer; border-radius: 4px; border: 1px solid transparent; transition: 0.2s; font-size: 18px; line-height: 1.8; }
+        .highlight-word:hover { background-color: #f0f0f0; border-color: #ccc; }
+        .highlight-word.highlighted { background-color: #ffeaa7; border-bottom: 3px solid var(--warning); font-weight: bold; }
+        
+        .inline-text { font-size: 18px; line-height: 2.2; }
+        .inline-select { font-size: 16px; padding: 5px 10px; margin: 0 5px; border-radius: 5px; border: 2px solid var(--primary); font-weight: bold; color: var(--primary); background: #fdfdfd; cursor: pointer; outline: none; }
+        .inline-select:hover { background-color: #e9f2fb; }
         
         /* Thông báo (Toast) */
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 1000; }
@@ -397,6 +406,34 @@
             shuffledRight.forEach(text => { html += `<button class="match-btn" data-val="${text}" onclick="handleMatchClick(this, 'right')">${text}</button>`; });
             html += `</div></div>`;
             optionsContainer.innerHTML = html;
+        } else if (q.type === "multi_select") {
+            q.options.forEach((opt, index) => {
+                optionsContainer.innerHTML += `<label class="option-label"><input type="checkbox" name="ans" value="${index}"> ${opt}</label>`;
+            });
+            optionsContainer.innerHTML += `<p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Câu hỏi này có thể có nhiều đáp án đúng. Hãy đánh dấu chọn tất cả!</i></p>`;
+        } else if (q.type === "highlight") {
+            let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px;">`;
+            q.words.forEach((w, index) => {
+                html += `<span class="highlight-word" onclick="this.classList.toggle('highlighted')" data-index="${index}">${w}</span>`;
+            });
+            html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào chữ để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
+            optionsContainer.innerHTML = html;
+        } else if (q.type === "inline_dropdown") {
+            let html = `<div class="inline-text">`;
+            let parts = q.text.split('___');
+            parts.forEach((part, index) => {
+                html += `<span>${part}</span>`;
+                if (index < q.dropdowns.length) {
+                    html += `<select class="inline-select" id="inline-${index}">
+                                <option value="" disabled selected>-- Chọn --</option>`;
+                    q.dropdowns[index].forEach(opt => {
+                        html += `<option value="${opt}">${opt}</option>`;
+                    });
+                    html += `</select>`;
+                }
+            });
+            html += `</div>`;
+            optionsContainer.innerHTML = html;
         }
 
         const btn = document.getElementById('submit-btn');
@@ -445,6 +482,47 @@
 
             studentAnswer = JSON.stringify(studentAnsObj);
             correctAnswerToSave = JSON.stringify(q.answer);
+            isCorrect = isAllCorrect;
+        } else if (q.type === "multi_select") {
+            const selectedElements = document.querySelectorAll('input[name="ans"]:checked');
+            if (selectedElements.length === 0) return alert("Tiểu Long ơi, con chưa chọn đáp án kìa!");
+            
+            const selectedIdx = Array.from(selectedElements).map(cb => parseInt(cb.value)).sort((a,b) => a-b);
+            const correctIdx = [...q.answer].sort((a,b) => a-b);
+            
+            studentAnswer = selectedIdx.map(idx => q.options[idx]).join(" | ");
+            correctAnswerToSave = correctIdx.map(idx => q.options[idx]).join(" | ");
+            
+            isCorrect = (selectedIdx.length === correctIdx.length && selectedIdx.every((val, index) => val === correctIdx[index]));
+            
+        } else if (q.type === "highlight") {
+            const selectedSpans = document.querySelectorAll('.highlight-word.highlighted');
+            if (selectedSpans.length === 0) return alert("Con chưa gạch chân từ nào kìa!");
+            
+            let selectedIdx = Array.from(selectedSpans).map(span => parseInt(span.getAttribute('data-index'))).sort((a,b) => a-b);
+            let correctIdx = [...q.answer].sort((a,b) => a-b);
+            
+            studentAnswer = selectedIdx.map(idx => q.words[idx].trim()).join(" | ");
+            correctAnswerToSave = correctIdx.map(idx => q.words[idx].trim()).join(" | ");
+            
+            isCorrect = (selectedIdx.length === correctIdx.length && selectedIdx.every((val, index) => val === correctIdx[index]));
+            
+        } else if (q.type === "inline_dropdown") {
+            let isAllFilled = true;
+            let stuAnsArr = [];
+            let isAllCorrect = true;
+            
+            for(let i = 0; i < q.dropdowns.length; i++) {
+                let val = document.getElementById(`inline-${i}`).value;
+                if (!val) isAllFilled = false;
+                stuAnsArr.push(val);
+                if (val !== q.answer[i]) isAllCorrect = false;
+            }
+            
+            if (!isAllFilled) return alert("Con chưa chọn đủ các từ trong đoạn văn kìa!");
+            
+            studentAnswer = stuAnsArr.join(" | ");
+            correctAnswerToSave = q.answer.join(" | ");
             isCorrect = isAllCorrect;
         }
         
