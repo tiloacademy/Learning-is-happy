@@ -297,6 +297,6 @@ const QUESTION_BANK = [
     { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Dòng nào dưới đây có chứa từ KHÔNG PHẢI từ chỉ sự vật?", options: ["A. Sấm, chớp, mưa, bão", "B. Sông, suối, ao, hồ", "C. Ngoan ngoãn, hiền lành, thông minh", "D. Đường, phố, ngõ, xóm"], answer: 2 },
     { topic: "Ôn tập về từ chỉ sự vật", type: "mcq", question: "Trong câu 'Mẹ mua cho em một chiếc áo mới tuyệt đẹp nhân ngày sinh nhật.', có bao nhiêu từ chỉ sự vật?", options: ["A. 2 từ", "B. 3 từ", "C. 4 từ", "D. 5 từ"], answer: 2 }, 
     { topic: "Ôn tập về từ chỉ sự vật", type: "multi_select", question: "Đánh dấu vào các từ chỉ sự vật (bao gồm từ chỉ thời gian, buổi trong ngày):", options: ["Buổi sáng", "Chiều tà", "Chăm chỉ", "Ngày mai", "Xanh biếc"], answer: [0, 1, 3] },
-    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Gạch chân 3 từ chỉ sự vật xuất hiện trong câu văn sau:", words: ["Ánh trăng ", "sáng vằng vặc ", "chiếu xuống ", "mặt hồ ", "tạo thành ", "những ", "vệt sáng ", "lấp lánh."], answer: [0, 3, 6] }
+    { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Gạch chân 3 từ chỉ sự vật xuất hiện trong câu văn sau:", words: ["Ánh trăng ", "sáng vằng vặc ", "chiếu xuống ", "mặt hồ ", "tạo thành ", "những ", "vệt sáng ", "lấp lánh."], answer: [0, 3, 6] },
 
 ];
