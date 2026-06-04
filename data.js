@@ -501,10 +501,10 @@ const QUESTION_BANK = [
             ["tối", "xám xịt", "trong"],
             ["mát mẻ", "đi", "cong"],
             ["xanh", "đỏ", "tốt"],
-            ["đỏ", "xanh", "vàng"],
+            ["đầy", "ấm áp", "lấp lánh"],
             ["trong veo", "đục ngầu", "cạn khô"]
         ],
-        answer: ["xám xịt", "mát mẻ", "xanh", "xanh", "trong veo"]
+        answer: ["xám xịt", "mát mẻ", "xanh", "lấp lánh", "trong veo"]
     },
 
     /* =================================================================
