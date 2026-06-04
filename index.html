@@ -230,102 +230,21 @@
     }
 
     // ==========================================
-    // LOGIC CHO BÀI TẬP SẮP XẾP (ORDER)
+    // LOGIC CHO DẠNG BÀI GẠCH CHÂN (HIGHLIGHT TỰ ĐỘNG THEO CỤM)
     // ==========================================
-    window.selectWordForOrder = function(btn) {
-        document.getElementById('ordered-box').appendChild(btn);
-        btn.setAttribute('onclick', 'returnWordToPool(this)');
-    };
-    window.returnWordToPool = function(btn) {
-        document.getElementById('word-pool').appendChild(btn);
-        btn.setAttribute('onclick', 'selectWordForOrder(this)');
-    };
-
-    // ==========================================
-    // LOGIC CHO BÀI TẬP NỐI TỪ VẼ ĐƯỜNG THẲNG (MATCH)
-    // ==========================================
-    window.matchState = {
-        selectedLeft: null,
-        selectedRight: null,
-        connections: [],
-        colors: ['#e74c3c', '#2ecc71', '#3498db', '#f1c40f', '#9b59b6', '#e67e22', '#1abc9c']
-    };
-
-    window.handleMatchClick = function(btn, side) {
-        if (btn.classList.contains('connected')) {
-            removeConnectionByNode(btn);
-            return;
-        }
-
-        if (side === 'left') {
-            if (window.matchState.selectedLeft) window.matchState.selectedLeft.classList.remove('selected');
-            window.matchState.selectedLeft = btn;
-            btn.classList.add('selected');
-        } else {
-            if (window.matchState.selectedRight) window.matchState.selectedRight.classList.remove('selected');
-            window.matchState.selectedRight = btn;
-            btn.classList.add('selected');
-        }
-
-        if (window.matchState.selectedLeft && window.matchState.selectedRight) {
-            window.matchState.selectedLeft.classList.add('connected');
-            window.matchState.selectedRight.classList.add('connected');
-            
-            window.matchState.connections.push({
-                leftBtn: window.matchState.selectedLeft,
-                rightBtn: window.matchState.selectedRight,
-                leftVal: window.matchState.selectedLeft.getAttribute('data-val'),
-                rightVal: window.matchState.selectedRight.getAttribute('data-val')
-            });
-
-            window.matchState.selectedLeft.classList.remove('selected');
-            window.matchState.selectedRight.classList.remove('selected');
-            window.matchState.selectedLeft = null;
-            window.matchState.selectedRight = null;
-            
-            drawAllLines();
-        }
-    };
-
-    window.removeConnectionByNode = function(btn) {
-        const idx = window.matchState.connections.findIndex(c => c.leftBtn === btn || c.rightBtn === btn);
-        if (idx > -1) {
-            const conn = window.matchState.connections[idx];
-            conn.leftBtn.classList.remove('connected');
-            conn.rightBtn.classList.remove('connected');
-            window.matchState.connections.splice(idx, 1);
-            drawAllLines(); 
-        }
-    };
-
-    window.drawAllLines = function() {
-        const board = document.getElementById('match-board');
-        const svg = document.getElementById('match-svg');
-        if (!board || !svg) return;
+    window.toggleHighlight = function(element) {
+        let chunkId = element.getAttribute('data-chunk');
+        // Tìm tất cả các chữ thuộc cùng 1 câu/cụm
+        let allSpans = document.querySelectorAll(`.highlight-word[data-chunk="${chunkId}"]`);
+        let isCurrentlyHighlighted = element.classList.contains('highlighted');
         
-        svg.innerHTML = '';
-        const boardRect = board.getBoundingClientRect();
-
-        window.matchState.connections.forEach((conn, index) => {
-            const leftRect = conn.leftBtn.getBoundingClientRect();
-            const rightRect = conn.rightBtn.getBoundingClientRect();
-
-            const x1 = leftRect.right - boardRect.left;
-            const y1 = leftRect.top + leftRect.height / 2 - boardRect.top;
-            
-            const x2 = rightRect.left - boardRect.left;
-            const y2 = rightRect.top + rightRect.height / 2 - boardRect.top;
-
-            const color = window.matchState.colors[index % window.matchState.colors.length];
-
-            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            line.setAttribute('x1', x1);
-            line.setAttribute('y1', y1);
-            line.setAttribute('x2', x2);
-            line.setAttribute('y2', y2);
-            line.setAttribute('stroke', color);
-            line.setAttribute('stroke-width', '4');
-            svg.appendChild(line);
+        // Bật/tắt highlight cho toàn bộ câu cùng 1 lúc
+        allSpans.forEach(span => {
+            if(isCurrentlyHighlighted) {
+                span.classList.remove('highlighted');
+            } else {
+                span.classList.add('highlighted');
+            }
         });
     };
 
@@ -432,11 +351,12 @@
                 } else if (syllable.trim() === '') {
                     html += syllable; // Giữ nguyên khoảng trắng
                 } else {
-                    html += `<span class="highlight-word" onclick="this.classList.toggle('highlighted')" data-chunk="${chunkIndex}">${syllable}</span>`;
+                    // SỬ DỤNG HÀM toggleHighlight VỪA TẠO
+                    html += `<span class="highlight-word" onclick="toggleHighlight(this)" data-chunk="${chunkIndex}">${syllable}</span>`;
                 }
             });
         });
-        html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào từng tiếng (chữ) để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
+        html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào câu/từ để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
         optionsContainer.innerHTML = html;
     } else if (q.type === "inline_dropdown") {
             let html = `<div class="inline-text">`;
