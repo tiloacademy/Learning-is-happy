@@ -776,4 +776,52 @@ const QUESTION_BANK = [
         options: ["3 câu", "6 câu", "5 câu", "4 câu"], 
         answer: 2 
     },
+    /* =================================================================
+       CHỦ ĐIỂM: ÔN TẬP CÂU "AI LÀ GÌ?", "AI LÀM GÌ?", "AI THẾ NÀO?" (30 CÂU)
+       ================================================================= */
+
+    // --- DẠNG 1: NHẬN DIỆN MẪU CÂU CƠ BẢN (Trắc nghiệm - MCQ) ---
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "mcq", question: "Câu văn 'Ông Nguyễn Sơn Hà là người khai sinh ra ngành sơn Việt Nam.' thuộc mẫu câu nào?", options: ["A. Ai là gì?", "B. Ai làm gì?", "C. Ai thế nào?", "D. Khi nào?"], answer: 0 },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "mcq", question: "Câu văn 'Giờ ra chơi, cả lớp ùa ra sân trường.' thuộc mẫu câu nào?", options: ["A. Ai là gì?", "B. Ai làm gì?", "C. Ai thế nào?", "D. Vì sao?"], answer: 1 },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "mcq", question: "Câu văn 'Nắng vườn trưa mênh mông.' thuộc mẫu câu nào?", options: ["A. Ai là gì?", "B. Ai làm gì?", "C. Ai thế nào?", "D. Ở đâu?"], answer: 2 },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "mcq", question: "Trong các câu sau, câu nào là câu kể 'Ai thế nào?'", options: ["A. Bác sĩ Đặng Văn Ngữ rời Nhật Bản về nước.", "B. Chiếc va li nấm rất quý giá.", "C. Ông tự tiêm thử liều thuốc đầu tiên.", "D. Ông là một người trí thức yêu nước."], answer: 1 },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "mcq", question: "Trong các câu sau, câu nào là câu kể 'Ai làm gì?'", options: ["A. Lương Thế Vinh là Trạng nguyên nước Việt.", "B. Ông được mọi người nể phục vì học rộng.", "C. Cuốn sách toán đầu tiên rất dễ sử dụng.", "D. Sứ thần xé một trang sách mỏng."], answer: 3 },
+
+    // --- DẠNG 2: TÌM BỘ PHẬN CỦA CÂU (Tự luận - FIB & Inline Dropdown) ---
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "fib", question: "Trong câu 'Hai bàn tay em xinh như hoa đầu cành.', bộ phận trả lời cho câu hỏi 'Ai (cái gì, con gì)?' là:", answer: "Hai bàn tay em" },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "fib", question: "Trong câu 'Đàn chim én đang chao lượn trên bầu trời mùa xuân.', bộ phận trả lời cho câu hỏi 'Làm gì?' là:", answer: "đang chao lượn trên bầu trời mùa xuân" },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "fib", question: "Xác định từ để hỏi cho bộ phận in đậm: 'Lá cờ Tổ quốc bay **phấp phới trong gió**.' (Điền từ: là gì / làm gì / thế nào)", answer: "thế nào" },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "inline_dropdown", question: "Em hãy phân tích câu 'Mùa thu của em là vàng hoa cúc.' bằng cách chọn đáp án đúng:", text: "Bộ phận 'Mùa thu của em' trả lời cho câu hỏi ___. Bộ phận 'là vàng hoa cúc' trả lời cho câu hỏi ___. Câu này thuộc mẫu câu ___.", dropdowns: [["Ai?", "Là gì?", "Làm gì?"], ["Làm gì?", "Là gì?", "Thế nào?"], ["Ai làm gì?", "Ai thế nào?", "Ai là gì?"]], answer: ["Ai?", "Là gì?", "Ai là gì?"] },
+
+    // --- DẠNG 3: GẠCH CHÂN TÌM CÂU TRONG ĐOẠN VĂN/THƠ (Highlight) ---
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "highlight", question: "Em hãy gạch chân TẤT CẢ các câu theo mẫu 'Ai thế nào?' trong đoạn văn sau (Click vào câu để gạch chân):", words: ["Mùa thu đến. ", "Bầu trời trong xanh, cao vợi. ", "Đàn chim én rủ nhau bay về phương nam. ", "Nắng mùa thu dịu dàng trải vàng trên mặt đất. "], answer: [1, 3] },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "highlight", question: "Gạch chân dưới câu kể 'Ai làm gì?' có trong đoạn văn sau (Trích bài Bạn mới - SGK):", words: ["Giờ ra chơi, cả lớp ùa ra sân trường. ", "A-i-a là học sinh mới. ", "Thầy giáo đứng quan sát học trò. "], answer: [0, 2] },
+    // Ứng dụng code chẻ dòng \n cho bài thơ
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "highlight", question: "Gạch chân dưới câu kể 'Ai là gì?' có trong đoạn thơ sau (Trích Mùa thu của em - SGK):", words: ["Mùa thu của em\n", "Là xanh cốm mới\n", "Mùi hương như gợi\n", "Từ màu lá sen.\n"], answer: [0, 1] }, 
+
+    // --- DẠNG 4: NỐI CÂU, GHÉP CẶP (Match) ---
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "match", question: "Ghép các chủ ngữ và vị ngữ để tạo thành câu 'Ai là gì?' hợp lý:", left: ["Trường học", "Quyển sách", "Thầy giáo"], right: ["là người cha thứ hai của em.", "là ngôi nhà thứ hai của em.", "là người bạn cung cấp kiến thức."], answer: {"Trường học": "là ngôi nhà thứ hai của em.", "Quyển sách": "là người bạn cung cấp kiến thức.", "Thầy giáo": "là người cha thứ hai của em."} },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "match", question: "Nối các sự vật với hoạt động của chúng (Mẫu Ai làm gì?):", left: ["Bác nông dân", "Con ong", "Mặt trời"], right: ["đang gặt lúa trên đồng.", "đang hút mật trong vườn.", "tỏa tia nắng ấm áp."], answer: {"Bác nông dân": "đang gặt lúa trên đồng.", "Con ong": "đang hút mật trong vườn.", "Mặt trời": "tỏa tia nắng ấm áp."} },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "match", question: "Phân loại các câu văn sau vào đúng mẫu câu của nó:", left: ["Nắng vàng trải khắp nơi.", "Quả cầu giấy xanh xanh.", "Diều là hạt cau."], right: ["Ai làm gì?", "Ai thế nào?", "Ai là gì?"], answer: {"Nắng vàng trải khắp nơi.": "Ai làm gì?", "Quả cầu giấy xanh xanh.": "Ai thế nào?", "Diều là hạt cau.": "Ai là gì?"} },
+
+    // --- DẠNG 5: SẮP XẾP CÂU (Order) ---
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "order", question: "Sắp xếp các từ sau để tạo thành câu 'Ai là gì?' (Trích bài Cánh Diều):", words: ["toán", "Đó", "ở Việt Nam.", "là", "cuốn sách", "đầu tiên"], answer: "Đó là cuốn sách toán đầu tiên ở Việt Nam." },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "order", question: "Sắp xếp các từ sau để tạo thành câu 'Ai làm gì?':", words: ["tự", "thí nghiệm.", "mình", "làm", "Cô bé"], answer: "Cô bé tự mình làm thí nghiệm." },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "order", question: "Sắp xếp các từ sau để tạo thành câu 'Ai thế nào?':", words: ["của", "Đôi mắt", "bé", "đen láy.", "rất"], answer: "Đôi mắt của bé rất đen láy." },
+
+    // --- DẠNG 6: TRẮC NGHIỆM NHIỀU ĐÁP ÁN (Multi Select) ---
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "multi_select", question: "Em hãy chọn TẤT CẢ các câu thuộc mẫu 'Ai thế nào?' trong các câu dưới đây:", options: ["Trăng đêm nay sáng vằng vặc.", "Học sinh xếp hàng tập thể dục.", "Bông hoa mười giờ đỏ rực.", "Bố em là công nhân nhà máy."], answer: [0, 2] },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "multi_select", question: "Những câu nào dưới đây KHÔNG PHẢI là câu 'Ai làm gì?'", options: ["Chú chim sẻ đang hót líu lo.", "Lông chú chim sẻ có màu nâu nhạt.", "Con mèo nhảy phốc lên bàn.", "Con mèo là loài vật bắt chuột rất giỏi."], answer: [1, 3] },
+
+    // --- DẠNG 7: NÂNG CAO VÀ CÁC BẪY TƯ DUY ---
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "mcq", question: "Bẫy tư duy: Trong câu 'Bạn Mai đang chăm chỉ làm bài tập.', mẫu câu đúng của nó là gì? (Chú ý từ 'làm bài tập')", options: ["A. Ai thế nào? (vì có từ 'chăm chỉ')", "B. Ai làm gì? (vì có hoạt động 'làm bài tập')", "C. Ai là gì?", "D. Không thuộc 3 mẫu câu trên"], answer: 1 },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "fib", question: "Cho câu: 'Chiếc đồng hồ reo báo thức ầm ĩ.'. Để chuyển thành mẫu câu 'Ai thế nào?', ta viết: 'Chiếc đồng hồ rất...' (Điền 2 chữ)", answer: "ầm ĩ" },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "inline_dropdown", question: "Phân loại các câu thơ sau (Trích bài thơ Bận - SGK):", text: "Câu 'Trời thu bận xanh' thuộc mẫu câu ___. Câu 'Sông Hồng bận chảy' thuộc mẫu câu ___.", dropdowns: [["Ai là gì?", "Ai làm gì?", "Ai thế nào?"], ["Ai là gì?", "Ai làm gì?", "Ai thế nào?"]], answer: ["Ai thế nào?", "Ai làm gì?"] },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "highlight", question: "Gạch chân câu văn thuộc mẫu 'Ai thế nào?' trong đoạn sau (Trích bài Nhớ lại buổi đầu đi học):", words: ["Buổi mai hôm ấy, một buổi mai đầy sương thu và gió lạnh. ", "Mẹ tôi âu yếm nắm tay tôi đi trên con đường làng dài và hẹp. ", "Con đường này tôi đã quen đi lại lắm lần. ", "Nhưng lần này, tôi tự nhiên thấy lạ. "], answer: [3] },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "mcq", question: "Có bao nhiêu câu 'Ai là gì?' trong đoạn văn sau: 'Nam là học sinh lớp 3A. Khang cũng là học sinh lớp 3A. Cả hai bạn đều là những học sinh giỏi. Hôm nay, hai bạn cùng nhau đi thư viện.'", options: ["A. 1 câu", "B. 2 câu", "C. 3 câu", "D. 4 câu"], answer: 2 },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "mcq", question: "Có bao nhiêu câu 'Ai thế nào?' trong đoạn văn sau: 'Nhà rông thật là đặc sắc. Làng càng lớn thì nhà rông càng bề thế, khang trang. Nhà rông là nơi đón tiếp khách đến làng.' (Trích bài Nhà rông)", options: ["A. 1 câu", "B. 2 câu", "C. 3 câu", "D. 0 câu"], answer: 1 },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "order", question: "Sắp xếp lại các phần để được câu phân tích đúng:", words: ["như ngọn đèn", "Câu 'Trái nhót", "tín hiệu.'", "là câu kể", "Ai là gì?"], answer: "Câu 'Trái nhót như ngọn đèn tín hiệu.' là câu kể Ai là gì?" },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "multi_select", question: "Khẳng định nào sau đây là SAI?", options: ["Câu 'Ai là gì?' dùng để giới thiệu hoặc nhận định.", "Câu 'Ai làm gì?' dùng để kể về màu sắc, hình dáng.", "Bộ phận trả lời câu hỏi 'Ai?' luôn chỉ con người.", "Câu 'Ai thế nào?' dùng để miêu tả đặc điểm, tính chất."], answer: [1, 2] },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "fib", question: "Cho câu 'Bà ngoại đang ngồi nhặt rau ngoài hiên.'. Bộ phận trả lời cho câu hỏi 'Ai?' là từ gì? (Điền 2 chữ)", answer: "Bà ngoại" },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "inline_dropdown", question: "Xác định mẫu câu cho các hoạt động của bạn Bống trong bài Nhật kí của Bống:", text: "- Câu 'Bống chuẩn bị đồ bơi cho hai chị em.' thuộc mẫu ___.<br>- Câu 'Chiếc kính bơi màu hồng rất đẹp.' thuộc mẫu ___.", dropdowns: [["Ai là gì?", "Ai làm gì?", "Ai thế nào?"], ["Ai là gì?", "Ai làm gì?", "Ai thế nào?"]], answer: ["Ai làm gì?", "Ai thế nào?"] },
 ];
