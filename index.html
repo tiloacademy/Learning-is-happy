@@ -54,6 +54,10 @@
         .inline-select { font-size: 16px; padding: 5px 10px; margin: 0 5px; border-radius: 5px; border: 2px solid var(--primary); font-weight: bold; color: var(--primary); background: #fdfdfd; cursor: pointer; outline: none; }
         .inline-select:hover { background-color: #e9f2fb; }
         
+        /* DẠNG BÀI ĐIỀN CHỮ VÀO ĐOẠN VĂN (INLINE FIB) */
+        .inline-input { font-size: 16px; padding: 5px 10px; margin: 0 5px; border-radius: 5px; border: 2px solid var(--primary); font-weight: bold; color: var(--primary); width: 140px; outline: none; text-align: center; }
+        .inline-input:focus { background-color: #e9f2fb; }
+        
         /* DẠNG BÀI TOÁN HỌC MỚI: KÉO THẢ SẮP XẾP DỌC */
         .sortable-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
         .sortable-item { background: white; border: 2px solid var(--primary); padding: 15px; border-radius: 8px; cursor: grab; font-size: 18px; font-weight: bold; text-align: center; user-select: none; transition: transform 0.1s ease; }
@@ -333,9 +337,10 @@
         const q = currentExamQuestions[currentQuestionIndex];
         
         document.getElementById('question-progress').innerText = `Câu hỏi ${currentQuestionIndex + 1} / ${currentExamQuestions.length}`;
+        // HIỂN THỊ ĐÚNG CÚ PHÁP XUỐNG DÒNG CỦA ĐỀ THI
         document.getElementById('question-text').innerHTML = q.question;
         
-        // 1. Vẽ hình học tự động (Toán học)
+        // Vẽ hình học tự động (Toán)
         const illusContainer = document.getElementById('illustration-container');
         illusContainer.innerHTML = ''; 
         if (q.topic.includes("Trung điểm")) {
@@ -379,7 +384,7 @@
         const optionsContainer = document.getElementById('options-container');
         optionsContainer.innerHTML = '';
         
-        // 2. Render UI theo Dạng bài
+        // Render UI theo Dạng bài
         if (!q.type || q.type === "mcq") {
             q.options.forEach((opt, index) => {
                 optionsContainer.innerHTML += `<label class="option-label"><input type="radio" name="ans" value="${index}"> ${opt}</label>`;
@@ -417,14 +422,16 @@
             });
             optionsContainer.innerHTML += `<p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Câu hỏi này có thể có nhiều đáp án đúng. Hãy đánh dấu chọn tất cả!</i></p>`;
         } else if (q.type === "highlight") {
-            let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; text-align: center;">`;
+            let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; text-align: left;">`;
             q.words.forEach((chunk, chunkIndex) => {
-                // Tự động chẻ cụm từ (chunk) thành từng tiếng (syllable) rời rạc dựa vào khoảng trắng
-                let syllables = chunk.trim().split(/\s+/);
+                let syllables = chunk.split(/(?=[ \n])|(?<=[ \n])/g); // Split keeping spaces and newlines
                 syllables.forEach((syllable) => {
-                    if (syllable) {
-                        // Mỗi tiếng đều giữ chung một data-chunk để lúc chấm điểm tự gom lại
-                        html += `<span class="highlight-word" onclick="this.classList.toggle('highlighted')" data-chunk="${chunkIndex}">${syllable}</span> `;
+                    if (syllable === '\n') {
+                        html += '<br>';
+                    } else if (syllable.trim() === '') {
+                        html += syllable; // Keep spaces as normal text
+                    } else {
+                        html += `<span class="highlight-word" onclick="this.classList.toggle('highlighted')" data-chunk="${chunkIndex}">${syllable}</span>`;
                     }
                 });
             });
@@ -446,11 +453,22 @@
             });
             html += `</div>`;
             optionsContainer.innerHTML = html;
+        } else if (q.type === "inline_fib") {
+            let html = `<div class="inline-text">`;
+            let parts = q.text.split('___');
+            parts.forEach((part, index) => {
+                html += `<span>${part}</span>`;
+                if (index < parts.length - 1) { // Tạo ô nhập liệu ở giữa các đoạn text
+                    html += `<input type="text" class="inline-input" id="inline-fib-${index}" placeholder="...">`;
+                }
+            });
+            html += `</div><p style="font-size:13px; color:#e74c3c; margin-top:15px;"><i>* Chú ý: Cần viết đúng chính tả và viết hoa (nếu là tên riêng hoặc đầu câu).</i></p>`;
+            optionsContainer.innerHTML = html;
         } else if (q.type === "drag_drop_sort") {
             let html = `<p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;"><i>* Mẹo: Nhấn giữ và kéo thả các ô bên dưới để sắp xếp theo đúng thứ tự.</i></p>
             <div class="sortable-list" id="sortable-list">`;
             
-            // Xáo trộn thứ tự hiển thị ban đầu
+            // Xáo trộn thứ tự hiển thị ban đầu để bé tự xếp lại
             let shuffled = [...q.items].sort(() => 0.5 - Math.random());
             shuffled.forEach((item) => {
                 html += `<div class="sortable-item" draggable="true" data-val="${item}">${item}</div>`;
@@ -458,7 +476,7 @@
             html += `</div>`;
             optionsContainer.innerHTML = html;
 
-            // Logic Kéo Thả (Drag and Drop)
+            // Xử lý sự kiện Kéo Thả (Drag and Drop)
             const list = document.getElementById('sortable-list');
             list.addEventListener('dragstart', (e) => {
                 if (e.target.classList.contains('sortable-item')) {
@@ -549,7 +567,6 @@
             let chunkTotal = {};
             let chunkSelected = {};
             
-            // Đếm số tiếng (syllable) trong mỗi cụm (chunk)
             document.querySelectorAll('.highlight-word').forEach(span => {
                 let idx = parseInt(span.getAttribute('data-chunk'));
                 chunkTotal[idx] = (chunkTotal[idx] || 0) + 1;
@@ -561,8 +578,6 @@
             let selectedIdx = [];
             let hasPartial = false;
 
-            // Kiểm tra xem bé có chọn ĐỦ CÁC CHỮ trong cụm từ đáp án không
-            // Ví dụ: Đáp án là "bạn nhỏ", bé chỉ chọn "bạn" mà không chọn "nhỏ" thì sẽ bị tính là sai (hasPartial = true)
             for (let idx in chunkSelected) {
                 if (chunkSelected[idx] === chunkTotal[idx]) {
                     selectedIdx.push(parseInt(idx));
@@ -585,7 +600,8 @@
                     correctWords.push(span.innerText.trim());
                 }
             });
-            correctAnswerToSave = correctWords.join(" ");
+            // Loại bỏ các chữ lặp lại khi nối chuỗi đáp án đúng
+            correctAnswerToSave = [...new Set(correctWords)].join(" ");
             
             isCorrect = (!hasPartial && selectedIdx.length === correctIdx.length && selectedIdx.every((val, index) => val === correctIdx[index]));
             
@@ -606,16 +622,38 @@
             studentAnswer = stuAnsArr.join(" | ");
             correctAnswerToSave = q.answer.join(" | ");
             isCorrect = isAllCorrect;
+        } else if (q.type === "inline_fib") {
+            let isAllFilled = true;
+            let stuAnsArr = [];
+            let isAllCorrect = true;
+            
+            let partsCount = q.text.split('___').length - 1;
+            for(let i = 0; i < partsCount; i++) {
+                let val = document.getElementById(`inline-fib-${i}`).value;
+                if (!val.trim()) isAllFilled = false;
+                stuAnsArr.push(val.trim());
+                
+                // KIỂM TRA CHÍNH XÁC TUYỆT ĐỐI (Phân biệt Hoa/Thường)
+                if (val.trim() !== q.answer[i]) isAllCorrect = false;
+            }
+            
+            if (!isAllFilled) return alert("Con chưa điền đủ các ô trống kìa!");
+            
+            studentAnswer = stuAnsArr.join(" | ");
+            correctAnswerToSave = q.answer.join(" | ");
+            isCorrect = isAllCorrect;
         } else if (q.type === "drag_drop_sort") {
             const items = Array.from(document.getElementById('sortable-list').children);
             let studentArr = items.map(item => item.getAttribute('data-val'));
             
             studentAnswer = studentArr.join(" -> ");
             correctAnswerToSave = q.answer.join(" -> ");
+            // Chấm điểm: Mảng của học sinh phải khớp hoàn toàn với mảng đáp án
             isCorrect = (studentArr.length === q.answer.length && studentArr.every((val, index) => val === q.answer[index]));
         }
         
         if (isCorrect) score += 10;
+
         showToast(isCorrect);
 
         currentExamHistoryRecord.details.push({
