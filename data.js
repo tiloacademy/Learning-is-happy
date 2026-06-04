@@ -705,5 +705,102 @@ const QUESTION_BANK = [
         text: "Dù băng qua rừng ___ hay suối ___, lúc nào ông cũng giữ bên mình chiếc va li đựng nấm pê-ni-xi-lin.", 
         dropdowns: [["rậm", "hoang", "vắng"], ["sâu", "cạn", "trong"]], 
         answer: ["rậm", "sâu"] 
+    },
+
+    /* =================================================================
+       CHỦ ĐIỂM: ÔN TẬP CÂU AI LÀ GÌ, AI LÀM GÌ, AI THẾ NÀO
+       ================================================================= */
+       
+    // Hình 1 (image_4de724.png)
+    { 
+        topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
+        type: "mcq", 
+        question: "Trong các câu sau, câu nào là câu kể Ai thế nào?", 
+        options: [
+            "Thái độ dũng cảm và sự xả thân vì bạn của con bướm mảnh mai đã khiến tôi cảm động.", 
+            "Kẻ tấn công tôi là một con bướm đôi cánh rất đẹp.", 
+            "Hoá ra, con bướm kia tấn công tôi là vì sự bình yên của bạn.", 
+            "Tôi bước thẳng vào vũng nước để không dẫm phải bạn nó cho dù đôi giày mới mua của tôi sục cả trong bùn."
+        ], 
+        answer: 0 
+    },
+
+    // Hình 2 (image_4de745.png)
+    { 
+        topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
+        type: "mcq", 
+        question: "Cho câu sau: “Mẹ là người nội trợ trong gia đình.”. Em hãy chọn bộ phận trả lời cho câu hỏi “là gì?”:", 
+        options: [
+            "Mẹ", 
+            "người nội trợ", 
+            "là người nội trợ trong gia đình."
+        ], 
+        answer: 2 
+    },
+
+    // Hình 3 (image_4deaa9.png)
+    { 
+        topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
+        type: "highlight", 
+        question: "Hãy gạch chân dưới câu kể “Ai là gì?” có trong đoạn thơ sau:", 
+        words: [
+            "Vì con, mẹ khổ đủ điều\n", 
+            "Quanh đôi mắt mẹ đã nhiều nếp nhăn\n", 
+            "Con mong mẹ khoẻ dần dần\n", 
+            "Ngày ăn ngon miệng, đêm nằm ngủ say.\n", 
+            "Rồi ra đọc sách, cấy cày\n", 
+            "Mẹ là đất nước, tháng ngày của con.\n", 
+            "(Trích Mẹ ốm, Trần Đăng Khoa)"
+        ], 
+        answer: [5] 
+    },
+
+    // Hình 4 (image_4deac1.png)
+    { 
+        topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
+        type: "inline_dropdown", 
+        question: "Em hãy đọc đoạn văn sau và trả lời câu hỏi.<br>(1) Lúc này Mèo Con khoái chí lắm. (2) Nắng ấm, sân rộng và sạch. (3) Mèo Con chạy giỡn hết góc này đến góc khác, hai tai dựng đứng lên, cái đuôi ngoe nguẩy. (4) Chạy chán, Mèo Con lại nép vào một gốc cau, một sợi lông cũng không động – nó rình một con bướm đang chập chờn bay qua. (5) Bỗng cái đuôi quất mạnh một cái, Mèo Con chồm ra. (6) Hụt rồi!<br><div style='text-align: right'><i>(Trích Cái Tết của mèo con – Nguyễn Đình Thi)</i></div><br>Các câu kể nêu đặc điểm <b>Ai thế nào?</b> có trong đoạn văn là câu số:", 
+        text: "___ : ___", 
+        dropdowns: [
+            ["1", "2", "3", "4", "5", "6"],
+            ["1", "2", "3", "4", "5", "6"]
+        ], 
+        answer: ["1", "2"] 
+    },
+
+    // Hình 5 (image_4deac3.png)
+    { 
+        topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
+        type: "mcq", 
+        question: "Trong đoạn văn sau, có bao nhiêu câu viết theo mẫu câu nêu hoạt động: Ai (con gì? cái gì?) làm gì?<br><br>Sáng hôm qua là ngày tổ em trực nhật, vì thế cả tổ ai cũng đi học sớm hơn mọi ngày. Theo sự phân công của tổ trưởng chúng em bắt tay vào làm việc. Hai bạn Hiếu và Vân quét thật sạch nền lớp. Bạn Trâm lau chùi bàn cô giáo và bảng đen, giặt khăn lau. Hai bạn Phát và Hào kê lại bàn ghế. Em lấy chổi lông gà quét thật sạch bụi trên bàn ghế và giá sách cuối lớp. Bạn Ngọc tổ trưởng quét hành lang, bậc thềm. Chỉ một lúc sau, chúng em đã làm xong mọi việc.", 
+        options: ["3 câu", "6 câu", "5 câu", "4 câu"], 
+        answer: 2 
+    },
+
+    // Hình 6 (image_4deac6.png)
+    { 
+        topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
+        type: "inline_dropdown", 
+        question: "Điền từ ngữ thích hợp vào chỗ trống để hoàn chỉnh câu kể <i>Ai làm gì?</i> rồi giải câu đố sau:", 
+        text: "Con gì mào đỏ<br>___ ò ó o...<br>Từ sáng tinh mơ<br>Gọi người thức giấc?<br><i>Là con</i> ___", 
+        dropdowns: [
+            ["gáy", "hót", "kêu", "hú"],
+            ["gà trống", "gà mái", "chim", "vịt"]
+        ], 
+        answer: ["gáy", "gà trống"] 
+    },
+
+    // Hình 7 (image_4deac9.png)
+    { 
+        topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
+        type: "inline_dropdown", 
+        question: "Em điền tên thành phố phù hợp với câu kể <i>Ai thế nào?</i> miêu tả thành phố đó.", 
+        text: "- Thành phố ___ nổi tiếng với rừng thông và thác nước.<br>- Thủ đô ___ tự hào vì có Văn Miếu - Quốc Tử Giám, trường đại học đầu tiên ở nước ta.<br>- Thành phố ___ vinh dự được mang tên Bác.", 
+        dropdowns: [
+            ["Đà Lạt", "Hà Nội", "Hồ Chí Minh", "Huế"],
+            ["Đà Lạt", "Hà Nội", "Hồ Chí Minh", "Huế"],
+            ["Đà Lạt", "Hà Nội", "Hồ Chí Minh", "Huế"]
+        ], 
+        answer: ["Đà Lạt", "Hà Nội", "Hồ Chí Minh"] 
     }
 ];
