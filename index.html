@@ -167,7 +167,7 @@
         
         // Vẽ lại đường nối khi đổi kích thước màn hình
         window.addEventListener('resize', () => {
-            if(document.getElementById('match-board')) drawAllLines();
+            if(document.getElementById('match-board')) window.drawAllLines();
         });
     };
 
@@ -228,6 +228,7 @@
             document.getElementById('timer').innerText = `⏱ Thời gian: ${mins}:${secs}`;
         }, 1000);
     }
+
     // ==========================================
     // LOGIC CHO BÀI TẬP SẮP XẾP CÂU (ORDER)
     // ==========================================
@@ -241,22 +242,98 @@
     };
 
     // ==========================================
-    // LOGIC CHO DẠNG BÀI GẠCH CHÂN (HIGHLIGHT TỰ ĐỘNG THEO CỤM)
+    // LOGIC CHO BÀI TẬP GẠCH CHÂN TÌM CÂU (HIGHLIGHT)
     // ==========================================
-    window.toggleHighlight = function(element) {
-        let chunkId = element.getAttribute('data-chunk');
-        // Tìm tất cả các chữ thuộc cùng 1 câu/cụm
-        let allSpans = document.querySelectorAll(`.highlight-word[data-chunk="${chunkId}"]`);
-        let isCurrentlyHighlighted = element.classList.contains('highlighted');
+    window.toggleHighlight = function(span) {
+        let chunkIdx = span.getAttribute('data-chunk');
+        let allSpansInChunk = document.querySelectorAll(`.highlight-word[data-chunk="${chunkIdx}"]`);
+        let isHighlighted = span.classList.contains('highlighted');
         
-        // Bật/tắt highlight cho toàn bộ câu cùng 1 lúc
-        allSpans.forEach(span => {
-            if(isCurrentlyHighlighted) {
-                span.classList.remove('highlighted');
-            } else {
-                span.classList.add('highlighted');
-            }
+        allSpansInChunk.forEach(s => {
+            if (isHighlighted) s.classList.remove('highlighted');
+            else s.classList.add('highlighted');
         });
+    };
+
+    // ==========================================
+    // LOGIC CHO BÀI TẬP NỐI TỪ VẼ ĐƯỜNG THẲNG (MATCH)
+    // ==========================================
+    window.matchState = {
+        selectedLeft: null,
+        selectedRight: null,
+        connections: []
+    };
+
+    window.handleMatchClick = function(btn, side) {
+        let state = window.matchState;
+        
+        // Nếu click vào ô đã nối -> Hủy nối
+        if (btn.classList.contains('connected')) {
+            let connIdx = state.connections.findIndex(c => c.leftBtn === btn || c.rightBtn === btn);
+            if (connIdx > -1) {
+                let conn = state.connections[connIdx];
+                conn.leftBtn.classList.remove('connected');
+                conn.rightBtn.classList.remove('connected');
+                state.connections.splice(connIdx, 1);
+                window.drawAllLines();
+            }
+            return;
+        }
+
+        // Xử lý chọn
+        document.querySelectorAll(`#match-${side}-col .match-btn`).forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        if (side === 'left') state.selectedLeft = btn;
+        else state.selectedRight = btn;
+
+        // Nối nếu cả 2 bên đều được chọn
+        if (state.selectedLeft && state.selectedRight) {
+            state.selectedLeft.classList.remove('selected');
+            state.selectedLeft.classList.add('connected');
+            state.selectedRight.classList.remove('selected');
+            state.selectedRight.classList.add('connected');
+
+            state.connections.push({
+                leftVal: state.selectedLeft.getAttribute('data-val'),
+                rightVal: state.selectedRight.getAttribute('data-val'),
+                leftBtn: state.selectedLeft,
+                rightBtn: state.selectedRight
+            });
+
+            state.selectedLeft = null;
+            state.selectedRight = null;
+            window.drawAllLines();
+        }
+    };
+
+    window.drawAllLines = function() {
+        const svg = document.getElementById('match-svg');
+        if (!svg) return;
+        svg.innerHTML = '';
+        window.matchState.connections.forEach(conn => {
+            window.drawLine(conn.leftBtn, conn.rightBtn, svg);
+        });
+    };
+
+    window.drawLine = function(btn1, btn2, svg) {
+        const svgRect = svg.getBoundingClientRect();
+        const rect1 = btn1.getBoundingClientRect();
+        const rect2 = btn2.getBoundingClientRect();
+
+        const x1 = rect1.right - svgRect.left;
+        const y1 = rect1.top + rect1.height / 2 - svgRect.top;
+        const x2 = rect2.left - svgRect.left;
+        const y2 = rect2.top + rect2.height / 2 - svgRect.top;
+
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', x1);
+        line.setAttribute('y1', y1);
+        line.setAttribute('x2', x2);
+        line.setAttribute('y2', y2);
+        line.setAttribute('stroke', '#4A90E2');
+        line.setAttribute('stroke-width', '4');
+        line.setAttribute('stroke-linecap', 'round');
+        svg.appendChild(line);
     };
 
     // ==========================================
@@ -349,27 +426,26 @@
         } else if (q.type === "multi_select") {
             q.options.forEach((opt, index) => {
                 optionsContainer.innerHTML += `<label class="option-label"><input type="checkbox" name="ans" value="${index}"> ${opt}</label>`;
-        });
-        optionsContainer.innerHTML += `<p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Câu hỏi này có thể có nhiều đáp án đúng. Hãy đánh dấu chọn tất cả!</i></p>`;
-    } else if (q.type === "highlight") {
-        let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; text-align: left;">`;
-        q.words.forEach((chunk, chunkIndex) => {
-            // Chẻ nhỏ đoạn text để phát hiện ký tự \n (xuống dòng) và các khoảng trắng
-            let syllables = chunk.split(/(?=[ \n])|(?<=[ \n])/g); 
-            syllables.forEach((syllable) => {
-                if (syllable === '\n') {
-                    html += '<br>'; // Xuống dòng
-                } else if (syllable.trim() === '') {
-                    html += syllable; // Giữ nguyên khoảng trắng
-                } else {
-                    // SỬ DỤNG HÀM toggleHighlight VỪA TẠO
-                    html += `<span class="highlight-word" onclick="toggleHighlight(this)" data-chunk="${chunkIndex}">${syllable}</span>`;
-                }
             });
-        });
-        html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào câu/từ để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
-        optionsContainer.innerHTML = html;
-    } else if (q.type === "inline_dropdown") {
+            optionsContainer.innerHTML += `<p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Câu hỏi này có thể có nhiều đáp án đúng. Hãy đánh dấu chọn tất cả!</i></p>`;
+        } else if (q.type === "highlight") {
+            let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; text-align: left;">`;
+            q.words.forEach((chunk, chunkIndex) => {
+                // Chẻ nhỏ đoạn text để phát hiện ký tự \n (xuống dòng) và các khoảng trắng
+                let syllables = chunk.split(/(?=[ \n])|(?<=[ \n])/g); 
+                syllables.forEach((syllable) => {
+                    if (syllable === '\n') {
+                        html += '<br>'; // Xuống dòng
+                    } else if (syllable.trim() === '') {
+                        html += syllable; // Giữ nguyên khoảng trắng
+                    } else {
+                        html += `<span class="highlight-word" onclick="toggleHighlight(this)" data-chunk="${chunkIndex}">${syllable}</span>`;
+                    }
+                });
+            });
+            html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào câu/từ để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
+            optionsContainer.innerHTML = html;
+        } else if (q.type === "inline_dropdown") {
             let html = `<div class="inline-text">`;
             let parts = q.text.split('___');
             parts.forEach((part, index) => {
