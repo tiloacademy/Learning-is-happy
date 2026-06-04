@@ -150,22 +150,88 @@ const QUESTION_BANK = [
     { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Đường tròn tâm O có bán kính là kết quả của phép chia 8424 : 4 (đơn vị cm). Đường kính của đường tròn đó là bao nhiêu cm?", answer: "4212" }, // ĐÃ THÊM DẤU PHẨY VÀO ĐÂY
     
     /* =================================================================
-       MÔN TOÁN: BẢNG NHÂN 7, BẢNG CHIA 7
+       MÔN TOÁN: BẢNG NHÂN 7, BẢNG CHIA 7 (60 CÂU CƠ BẢN & NÂNG CAO)
        ================================================================= */
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Kết quả của phép tính 7 x 8 là:", options: ["54", "56", "48", "64"], answer: 1 },
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Điền số thích hợp vào chỗ chấm: 63 : 7 = ...", answer: "9" },
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Phép tính nào dưới đây có kết quả lớn nhất?", options: ["7 x 5", "49 : 7", "7 x 6", "42 : 7"], answer: 2 },
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tìm x, biết: x : 7 = 5. Giá trị của x là:", answer: "35" },
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Mỗi tuần lễ có 7 ngày. Hỏi 4 tuần lễ có tất cả bao nhiêu ngày?", options: ["24 ngày", "28 ngày", "32 ngày", "21 ngày"], answer: 1 },
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Cô giáo có 56 quyển vở, chia đều cho 7 nhóm. Hỏi mỗi nhóm nhận được bao nhiêu quyển vở?", answer: "8" },
-    
-    // --- DẠNG MỚI: KÉO THẢ SẮP XẾP THỨ TỰ ---
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "drag_drop_sort", question: "Sắp xếp các phép tính sau theo thứ tự kết quả từ bé đến lớn:", items: ["7 x 8", "42 : 7", "7 x 4", "35 : 7"], answer: ["35 : 7", "42 : 7", "7 x 4", "7 x 8"] },
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "drag_drop_sort", question: "Sắp xếp các kết quả sau theo thứ tự từ lớn đến bé:", items: ["Kết quả của 7 x 9", "Kết quả của 21 : 7", "Kết quả của 7 x 3", "Kết quả của 70 : 7"], answer: ["Kết quả của 7 x 9", "Kết quả của 70 : 7", "Kết quả của 7 x 3", "Kết quả của 21 : 7"] },
-    
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Điền dấu thích hợp vào chỗ chấm: 7 x 5 ... 7 x 4 + 7", options: [">", "<", "="], answer: 2 },
-    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính giá trị biểu thức: 7 x 10 - 25 = ...", answer: "45" },
+       
+    // -----------------------------------------------------------------
+    // PHẦN 1: 30 CÂU CƠ BẢN (NHẬN BIẾT & TÍNH NHẨM NHANH)
+    // -----------------------------------------------------------------
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 7 x 4 = ...", answer: "28" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 7 x 6 = ...", answer: "42" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 7 x 8 = ...", answer: "56" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 7 x 9 = ...", answer: "63" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 7 x 7 = ...", answer: "49" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 28 : 7 = ...", answer: "4" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 42 : 7 = ...", answer: "6" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 56 : 7 = ...", answer: "8" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 63 : 7 = ...", answer: "9" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhẩm: 35 : 7 = ...", answer: "5" },
 
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Số thích hợp để điền vào chỗ chấm: 7 x ... = 21 là:", options: ["A. 3", "B. 4", "C. 5", "D. 6"], answer: 0 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Số thích hợp để điền vào chỗ chấm: ... : 7 = 10 là:", options: ["A. 17", "B. 70", "C. 3", "D. 700"], answer: 1 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Số thích hợp để điền vào chỗ chấm: 49 : ... = 7 là:", options: ["A. 6", "B. 7", "C. 8", "D. 9"], answer: 1 },
+    
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Mỗi tuần lễ có 7 ngày. Hỏi 5 tuần lễ có tất cả bao nhiêu ngày?", options: ["A. 30 ngày", "B. 35 ngày", "C. 40 ngày", "D. 42 ngày"], answer: 1 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Cô giáo có 42 viên kẹo, chia đều cho 7 bạn. Hỏi mỗi bạn nhận được mấy viên kẹo?", options: ["A. 6 viên", "B. 7 viên", "C. 8 viên", "D. 9 viên"], answer: 0 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Một thanh gỗ dài 63cm được bác thợ mộc cưa thành 7 đoạn bằng nhau. Mỗi đoạn dài bao nhiêu cm?", options: ["A. 7 cm", "B. 8 cm", "C. 9 cm", "D. 10 cm"], answer: 2 },
+
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "match", question: "Nối phép tính ở cột trái với kết quả tương ứng ở cột phải:", left: ["7 x 3", "14 : 7", "7 x 5"], right: ["21", "2", "35"], answer: {"7 x 3": "21", "14 : 7": "2", "7 x 5": "35"} },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "match", question: "Nối phép tính ở cột trái với kết quả tương ứng ở cột phải:", left: ["70 : 7", "7 x 6", "63 : 7"], right: ["10", "42", "9"], answer: {"70 : 7": "10", "7 x 6": "42", "63 : 7": "9"} },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "match", question: "Nối phép tính ở cột trái với kết quả tương ứng ở cột phải:", left: ["7 x 8", "49 : 7", "7 x 0"], right: ["56", "7", "0"], answer: {"7 x 8": "56", "49 : 7": "7", "7 x 0": "0"} },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "match", question: "Nối phép tính ở cột trái với kết quả tương ứng ở cột phải:", left: ["56 : 7", "7 x 9", "28 : 7"], right: ["8", "63", "4"], answer: {"56 : 7": "8", "7 x 9": "63", "28 : 7": "4"} },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "match", question: "Nối phép tính ở cột trái với kết quả tương ứng ở cột phải:", left: ["7 x 2", "7 x 4", "42 : 7"], right: ["14", "28", "6"], answer: {"7 x 2": "14", "7 x 4": "28", "42 : 7": "6"} },
+
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Chọn phép tính (+, -, x, :) thích hợp để điền vào chỗ trống:", text: "7 ___ 5 = 35", dropdowns: [["+", "-", "x", ":"]], answer: ["x"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Chọn phép tính (+, -, x, :) thích hợp để điền vào chỗ trống:", text: "42 ___ 7 = 6", dropdowns: [["+", "-", "x", ":"]], answer: [":"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Chọn phép tính (+, -, x, :) thích hợp để điền vào chỗ trống:", text: "7 ___ 8 = 56", dropdowns: [["+", "-", "x", ":"]], answer: ["x"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Chọn phép tính (+, -, x, :) thích hợp để điền vào chỗ trống:", text: "63 ___ 7 = 9", dropdowns: [["+", "-", "x", ":"]], answer: [":"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Chọn phép tính (+, -, x, :) thích hợp để điền vào chỗ trống:", text: "7 ___ 7 = 49", dropdowns: [["+", "-", "x", ":"]], answer: ["x"] },
+
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "multi_select", question: "Những phép tính nào dưới đây có kết quả BẰNG 7? (Có thể chọn nhiều đáp án)", options: ["49 : 7", "7 x 1", "14 : 2", "7 : 1"], answer: [0, 1, 2, 3] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "multi_select", question: "Những phép tính nào dưới đây có kết quả BẰNG 0? (Có thể chọn nhiều đáp án)", options: ["7 x 0", "0 : 7", "7 : 7", "7 x 1"], answer: [0, 1] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "multi_select", question: "Những phép tính nào dưới đây thực hiện ĐÚNG? (Có thể chọn nhiều đáp án)", options: ["7 x 6 = 42", "35 : 7 = 5", "7 x 8 = 54", "49 : 7 = 6"], answer: [0, 1] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "multi_select", question: "Những phép tính nào dưới đây có kết quả LỚN HƠN 50? (Có thể chọn nhiều đáp án)", options: ["7 x 8", "7 x 9", "7 x 7", "7 x 6"], answer: [0, 1] },
+
+    // -----------------------------------------------------------------
+    // PHẦN 2: 30 CÂU NÂNG CAO (PHÉP TÍNH NHIỀU BƯỚC, TÌM X, SO SÁNH, TOÁN ĐỐ)
+    // -----------------------------------------------------------------
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính giá trị của biểu thức: 7 x 4 + 15 = ...", answer: "43" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính giá trị của biểu thức: 7 x 8 - 26 = ...", answer: "30" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính giá trị của biểu thức: 63 : 7 + 85 = ...", answer: "94" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính giá trị của biểu thức: 56 : 7 x 4 = ...", answer: "32" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính giá trị của biểu thức: 7 x 9 - 18 = ...", answer: "45" },
+
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Điền dấu so sánh (>, <, =) thích hợp vào chỗ trống:", text: "7 x 6 ___ 40", dropdowns: [[">", "<", "="]], answer: [">"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Điền dấu so sánh (>, <, =) thích hợp vào chỗ trống:", text: "49 : 7 ___ 7", dropdowns: [[">", "<", "="]], answer: ["="] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Điền dấu so sánh (>, <, =) thích hợp vào chỗ trống:", text: "7 x 8 ___ 60", dropdowns: [[">", "<", "="]], answer: ["<"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Điền dấu so sánh (>, <, =) thích hợp vào chỗ trống:", text: "63 : 7 ___ 3 x 3", dropdowns: [[">", "<", "="]], answer: ["="] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Điền dấu so sánh (>, <, =) thích hợp vào chỗ trống:", text: "7 x 5 ___ 5 x 7", dropdowns: [[">", "<", "="]], answer: ["="] },
+
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "drag_drop_sort", question: "Sắp xếp các phép tính sau theo thứ tự kết quả từ BÉ đến LỚN:", items: ["7 x 3", "42 : 7", "7 x 6", "63 : 7"], answer: ["42 : 7", "63 : 7", "7 x 3", "7 x 6"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "drag_drop_sort", question: "Sắp xếp các phép tính sau theo thứ tự kết quả từ BÉ đến LỚN:", items: ["7 x 8", "56 : 7", "7 x 9", "70 : 7"], answer: ["56 : 7", "70 : 7", "7 x 8", "7 x 9"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "drag_drop_sort", question: "Sắp xếp các phép tính sau theo thứ tự kết quả từ LỚN đến BÉ:", items: ["7 x 5", "7 x 2", "49 : 7", "28 : 7"], answer: ["7 x 5", "7 x 2", "49 : 7", "28 : 7"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "drag_drop_sort", question: "Sắp xếp các phép tính sau theo thứ tự kết quả từ LỚN đến BÉ:", items: ["63 : 7", "7 x 7", "35 : 7", "7 x 4"], answer: ["7 x 7", "7 x 4", "63 : 7", "35 : 7"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "drag_drop_sort", question: "Sắp xếp các phép tính sau theo thứ tự kết quả từ BÉ đến LỚN:", items: ["14 : 7", "7 x 0", "7 x 10", "21 : 7"], answer: ["7 x 0", "14 : 7", "21 : 7", "7 x 10"] },
+
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Lớp 3A có 35 học sinh chia đều vào 7 nhóm. Lớp 3B có 32 học sinh chia đều vào 4 nhóm. Hỏi nhóm của lớp nào đông hơn và đông hơn mấy bạn?", options: ["A. Nhóm lớp 3B đông hơn 3 bạn", "B. Nhóm lớp 3A đông hơn 3 bạn", "C. Nhóm lớp 3B đông hơn 1 bạn", "D. Số bạn ở mỗi nhóm bằng nhau"], answer: 0 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Một thùng có 56 lít dầu. Sau khi bán, số dầu còn lại trong thùng bằng số dầu ban đầu giảm đi 7 lần. Hỏi trong thùng còn lại bao nhiêu lít dầu?", options: ["A. 8 lít", "B. 48 lít", "C. 49 lít", "D. 7 lít"], answer: 0 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Đoạn dây thứ nhất dài 7cm. Đoạn dây thứ hai dài gấp 6 lần đoạn thứ nhất. Hỏi CẢ HAI đoạn dây dài bao nhiêu cm?", options: ["A. 42 cm", "B. 49 cm", "C. 13 cm", "D. 35 cm"], answer: 1 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Mẹ mua 7 vỉ sữa, mỗi vỉ có 4 hộp. Mẹ biếu bà 12 hộp. Mẹ còn lại bao nhiêu hộp sữa?", options: ["A. 16 hộp", "B. 28 hộp", "C. 40 hộp", "D. 19 hộp"], answer: 0 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Túi thứ nhất có 42 quả cam. Túi thứ hai có số cam bằng một phần bảy số cam túi thứ nhất. Hỏi túi thứ nhất nhiều hơn túi thứ hai bao nhiêu quả cam?", options: ["A. 6 quả", "B. 49 quả", "C. 36 quả", "D. 48 quả"], answer: 2 },
+
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tìm x, biết: x : 7 = 15 - 6. Giá trị của x là:", answer: "63" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tìm x, biết: 7 x x = 100 - 44. Giá trị của x là:", answer: "8" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính nhanh biểu thức: 7 x 8 + 7 x 2 = ...", answer: "70" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Một can dầu chứa 63 lít. Người ta rót đều vào 7 can nhỏ. Hỏi 4 can nhỏ như thế chứa bao nhiêu lít dầu?", answer: "36" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tìm một số, biết rằng lấy số đó chia cho 7 rồi cộng với 45 thì được kết quả là 54. Số đó là:", answer: "63" },
+
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "multi_select", question: "Những biểu thức nào dưới đây có giá trị BẰNG 8? (Chọn nhiều đáp án)", options: ["56 : 7", "72 : 9", "42 : 7 + 2", "7 x 1 + 2"], answer: [0, 1, 2] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "multi_select", question: "Những biểu thức nào dưới đây có giá trị LỚN HƠN 40? (Chọn nhiều đáp án)", options: ["7 x 6", "7 x 8", "63 : 7 + 30", "7 x 5"], answer: [0, 1] },
+    
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "match", question: "Nối các biểu thức ở cột trái và cột phải có CÙNG GIÁ TRỊ với nhau:", left: ["7 x 4", "63 : 7", "7 x 8"], right: ["14 x 2", "81 : 9", "28 x 2"], answer: {"7 x 4": "14 x 2", "63 : 7": "81 : 9", "7 x 8": "28 x 2"} },
+    
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Điền dấu thích hợp (+, -, x, :) để được phép tính ĐÚNG:", text: "7 ___ 4 ___ 12 = 40", dropdowns: [["+", "-", "x", ":"], ["+", "-", "x", ":"]], answer: ["x", "+"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "inline_dropdown", question: "Điền dấu thích hợp (+, -, x, :) để được phép tính ĐÚNG:", text: "56 ___ 7 ___ 5 = 3", dropdowns: [["+", "-", "x", ":"], ["+", "-", "x", ":"]], answer: [":", "-"] },
 
     /* =================================================================
        CHỦ ĐIỂM: MỞ RỘNG VỐN TỪ: MĂNG NON (TỔNG HỢP 91 CÂU)
