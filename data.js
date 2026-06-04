@@ -150,91 +150,91 @@ const QUESTION_BANK = [
     { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Đường tròn tâm O có bán kính là kết quả của phép chia 8424 : 4 (đơn vị cm). Đường kính của đường tròn đó là bao nhiêu cm?", answer: "4212" }, // ĐÃ THÊM DẤU PHẨY VÀO ĐÂY
     
     /* =================================================================
-       MÔN TOÁN: BẢNG NHÂN 7, BẢNG CHIA 7 (THEO ẢNH THỰC TẾ)
+       CHỦ ĐIỂM: BẢNG NHÂN 7, BẢNG CHIA 7 (9 CÂU CHUẨN ẢNH VIOEDU)
        ================================================================= */
        
-    // Hình 1 (image_693546) - Kéo thả đáp án (Dùng Dropdown thả xuống để mô phỏng)
+    // Bức ảnh 1 (Dropdown điền phép tính)
     { 
         topic: "Bảng nhân 7, Bảng chia 7", 
         type: "inline_dropdown", 
-        question: "Kéo thả đáp án vào ô trống để được các phép tính đúng:", 
-        text: "___ x 7 = 7 <br><br> ___ x 7 = 42 <br><br> ___ x 7 = 21 <br><br> ___ x 7 = 35", 
-        dropdowns: [
-            ["1", "3", "5", "6"], 
-            ["1", "3", "5", "6"], 
-            ["1", "3", "5", "6"], 
-            ["1", "3", "5", "6"]
-        ], 
-        answer: ["1", "6", "3", "5"] 
+        question: "Bạn hãy chọn đáp án thích hợp để điền vào chỗ trống.", 
+        text: "___ : 7 = 4", 
+        dropdowns: [["35", "14", "42", "28"]], 
+        answer: ["28"] 
     },
 
-    // Hình 2 (image_693812)
+    // Bức ảnh 2 (Điền số - Tìm tích)
     { 
         topic: "Bảng nhân 7, Bảng chia 7", 
         type: "fib", 
-        question: "Số? ... x 7 = 35", 
-        answer: "5" 
+        question: "Bạn hãy điền số thích hợp vào ô trống.<br>Phép nhân có thừa số thứ nhất là 7, thừa số thứ hai là 2 thì có tích bằng ...", 
+        answer: "14" 
     },
 
-    // Hình 3 (image_69384b) - Dạng Kéo thả sắp xếp dọc
-    { 
-        topic: "Bảng nhân 7, Bảng chia 7", 
-        type: "drag_drop_sort", 
-        question: "Sắp xếp các kết quả sau theo thứ tự từ bé đến lớn:", 
-        items: ["63 : 7", "70 : 7", "14 : 7", "28 : 7"], 
-        answer: ["14 : 7", "28 : 7", "63 : 7", "70 : 7"] 
-    },
-
-    // Hình 4 (image_69386b)
-    { 
-        topic: "Bảng nhân 7, Bảng chia 7", 
-        type: "fib", 
-        question: "Điền số thích hợp vào chỗ trống:<br>Phép chia có số bị chia là 70 và số chia là 7 thì thương là ...", 
-        answer: "10" 
-    },
-
-    // Hình 5 (image_693870)
+    // Bức ảnh 3 (Trắc nghiệm - Chia gạo)
     { 
         topic: "Bảng nhân 7, Bảng chia 7", 
         type: "mcq", 
-        question: "Cô Mây cắm đều 21 bông hoa hồng vào 7 lọ hoa. Hỏi mỗi lọ hoa có bao nhiêu bông hoa hồng?", 
-        options: ["14 bông hoa", "3", "3 bông hoa", "14"], 
-        answer: 2 
-    },
-
-    // Hình 6 (image_693889)
-    { 
-        topic: "Bảng nhân 7, Bảng chia 7", 
-        type: "mcq", 
-        question: "Một xe khách có 42 chỗ ngồi. Nếu mỗi hàng ghế đều có 7 chỗ ngồi thì xe khách đó có bao nhiêu hàng ghế?", 
-        options: ["35", "6", "35 hàng ghế", "6 hàng ghế"], 
+        question: "Bạn hãy chọn đáp án đúng.<br>Bà chia 14kg gạo thành 7 túi nặng như nhau. Hỏi mỗi túi nặng bao nhiêu ki-lô-gam?", 
+        options: ["3kg", "4kg", "5kg", "2kg"], 
         answer: 3 
     },
 
-    // Hình 7 (image_69388f)
-    { 
-        topic: "Bảng nhân 7, Bảng chia 7", 
-        type: "mcq", 
-        question: "Năm nay mẹ 35 tuổi, tuổi của con bằng tuổi của mẹ giảm đi 7 lần. Hỏi năm nay con bao nhiêu tuổi?", 
-        options: ["5", "5 tuổi", "42", "42 tuổi"], 
-        answer: 1 
-    },
-
-    // Hình 8 (image_6938ad)
+    // Bức ảnh 4 (Điền số - Toán đố 2 bước)
     { 
         topic: "Bảng nhân 7, Bảng chia 7", 
         type: "fib", 
-        question: "Số? 63 : 7 = ...", 
-        answer: "9" 
+        question: "Bạn điền số thích hợp vào ô trống.<br>Một khu vui chơi thiếu nhi có 7 xe hai bánh, số xe ba bánh gấp 4 lần số xe hai bánh. Hỏi khu vui chơi đó có bao nhiêu xe ba bánh?<br>Trả lời: ... xe ba bánh.", 
+        answer: "28" 
     },
 
-    // Hình 9 (image_6938e3)
+    // Bức ảnh 5 (Điền số - Hàng đơn vị)
+    { 
+        topic: "Bảng nhân 7, Bảng chia 7", 
+        type: "fib", 
+        question: "Bạn hãy điền số thích hợp vào ô trống.<br>Kết quả phép tính 7 × 6 - 15 có chữ số hàng đơn vị là ...", 
+        answer: "7" 
+    },
+
+    // Bức ảnh 6 (Trắc nghiệm - Chia gạo 21kg)
     { 
         topic: "Bảng nhân 7, Bảng chia 7", 
         type: "mcq", 
-        question: "Trong cửa hàng có 5 kệ sách, mỗi kệ sách đều có 7 quyển sách. Hỏi trong cửa hàng đó có tất cả bao nhiêu quyển sách?", 
-        options: ["35 quyển sách", "35", "42 quyển sách", "42"], 
+        question: "Bạn hãy chọn đáp án đúng.<br>Bà chia 21kg gạo thành 7 túi nặng như nhau. Hỏi mỗi túi nặng bao nhiêu ki-lô-gam?", 
+        options: ["4kg", "2kg", "3kg", "5kg"], 
+        answer: 2 
+    },
+
+    // Bức ảnh 7 (Trắc nghiệm - Trồng cây có đổi đơn vị)
+    { 
+        topic: "Bảng nhân 7, Bảng chia 7", 
+        type: "mcq", 
+        question: "Bạn hãy chọn đáp án đúng.<br>Trên một đoạn đường dài 49m, người ta trồng cây, hai cây liên tiếp nhau 70dm, hai đầu đường đều có trồng cây. Hỏi trên đoạn đường có tất cả bao nhiêu cây?", 
+        options: ["8 cây", "9 cây", "10 cây", "7 cây"], 
         answer: 0 
+    },
+
+    // Bức ảnh 8 (Sắp xếp kéo thả dọc)
+    { 
+        topic: "Bảng nhân 7, Bảng chia 7", 
+        type: "drag_drop_sort", 
+        question: "Cho các phép tính sau<br>35 : 7 ; 15 - 7 ; 42 : 7 ; 49 : 7 - 4.<br>Sắp xếp các phép tính theo thứ tự kết quả tăng dần.", 
+        items: ["15 - 7", "49 : 7 - 4", "35 : 7", "42 : 7"], 
+        answer: ["49 : 7 - 4", "35 : 7", "42 : 7", "15 - 7"] 
+    },
+
+    // Bức ảnh 9 (Trắc nghiệm - Dãy chữ lặp lại)
+    { 
+        topic: "Bảng nhân 7, Bảng chia 7", 
+        type: "mcq", 
+        question: "Bạn hãy chọn đáp án đúng.<br>Một bạn viết liên tiếp một nhóm chữ gồm 7 chữ cái N, C, M, D, A, G, U thành dãy theo quy luật lặp lại của nhóm chữ đó. Biết rằng chữ cái thứ 52 là chữ N, chữ cái thứ 40 là chữ C, chữ cái thứ 35 là chữ M, chữ cái thứ 57 là chữ D, chữ cái thứ 13 là chữ A, chữ cái thứ 46 là chữ G.<br>Thứ tự sắp xếp đúng thứ tự của các chữ cái trong nhóm chữ là:", 
+        options: [
+            "C ; U ; M ; D ; A ; N ; G", 
+            "D ; U ; N ; G ; C ; A ; M", 
+            "N ; G ; A ; M ; D ; U ; C", 
+            "C ; U ; N ; G ; D ; A ; M"
+        ], 
+        answer: 1 
     },
 
     /* =================================================================
