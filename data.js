@@ -475,4 +475,35 @@ const QUESTION_BANK = [
     { topic: "Ôn tập về từ chỉ sự vật", type: "multi_select", question: "Đánh dấu vào các từ chỉ sự vật (bao gồm từ chỉ thời gian, buổi trong ngày):", options: ["Buổi sáng", "Chiều tà", "Chăm chỉ", "Ngày mai", "Xanh biếc"], answer: [0, 1, 3] },
     { topic: "Ôn tập về từ chỉ sự vật", type: "highlight", question: "Gạch chân 3 từ chỉ sự vật xuất hiện trong câu văn sau:", words: ["Ánh trăng ", "sáng vằng vặc ", "chiếu xuống ", "mặt hồ ", "tạo thành ", "những ", "vệt sáng ", "lấp lánh."], answer: [0, 3, 6] },
 
+/* =================================================================
+       CHỦ ĐIỂM: ÔN TẬP VỀ TỪ CHỈ ĐẶC ĐIỂM (DỰA TRÊN ẢNH VIOEDU)
+       ================================================================= */
+    {
+        topic: "Ôn tập về từ chỉ đặc điểm",
+        type: "highlight",
+        question: "Em hãy gạch dưới từ ngữ chỉ đặc điểm trong câu văn sau.<br>Bình minh, mặt trời như chiếc thau đồng đỏ ối chiếu xuống mặt biển.",
+        words: ["Bình minh, ", "mặt trời ", "như ", "chiếc thau đồng ", "đỏ ối ", "chiếu xuống ", "mặt biển."],
+        answer: [4]
+    },
+    {
+        topic: "Ôn tập về từ chỉ đặc điểm",
+        type: "highlight",
+        question: "Em hãy gạch chân những từ ngữ chỉ đặc điểm về hình dáng, kích thước trong đoạn văn sau.<br>Nai con có bộ lông màu nâu nhạt, mịn màng, bốn cẳng cao nghều như là đi trên những đôi cà kheo. Cái đầu dài và nhỏ, hai tai vểnh lên.<br>(Nguyệt Ánh)",
+        words: ["Nai con ", "có ", "bộ lông ", "màu nâu nhạt, ", "mịn màng, ", "bốn cẳng ", "cao nghều ", "như là ", "đi ", "trên ", "những ", "đôi cà kheo. ", "Cái đầu ", "dài ", "và ", "nhỏ, ", "hai tai ", "vểnh lên. ", "(Nguyệt Ánh)"],
+        answer: [6, 13, 15]
+    },
+    {
+        topic: "Ôn tập về từ chỉ đặc điểm",
+        type: "inline_dropdown",
+        question: "Em hãy chọn từ chỉ đặc điểm phù hợp điền vào chỗ trống để hoàn thành đoạn văn sau:",
+        text: "Rừng Tây Nguyên đẹp vì cảnh sắc thiên nhiên. Khi những cơn mưa đầu mùa đổ xuống, bầu trời vẫn ___ . Rừng ___ , ___ tươi. Các đồi gianh vươn lên và cỏ non bò lan ra mặt suối, như choàng cho rừng một chiếc khăn ___ kim cương. Mặt trời xuyên qua kẽ lá, sưởi ấm những con suối ___ .",
+        dropdowns: [
+            ["tối", "xám xịt", "trong"],
+            ["mát mẻ", "đi", "cong"],
+            ["xanh", "đỏ", "tốt"],
+            ["đỏ", "xanh", "vàng"],
+            ["trong veo", "đục ngầu", "cạn khô"]
+        ],
+        answer: ["xám xịt", "mát mẻ", "xanh", "xanh", "trong veo"]
+    }
 ];
