@@ -776,31 +776,4 @@ const QUESTION_BANK = [
         options: ["3 câu", "6 câu", "5 câu", "4 câu"], 
         answer: 2 
     },
-
-    // Hình 6 (image_4deac6.png)
-    { 
-        topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
-        type: "inline_dropdown", 
-        question: "Điền từ ngữ thích hợp vào chỗ trống để hoàn chỉnh câu kể <i>Ai làm gì?</i> rồi giải câu đố sau:", 
-        text: "Con gì mào đỏ<br>___ ò ó o...<br>Từ sáng tinh mơ<br>Gọi người thức giấc?<br><i>Là con</i> ___", 
-        dropdowns: [
-            ["gáy", "hót", "kêu", "hú"],
-            ["gà trống", "gà mái", "chim", "vịt"]
-        ], 
-        answer: ["gáy", "gà trống"] 
-    },
-
-    // Hình 7 (image_4deac9.png)
-    { 
-        topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
-        type: "inline_dropdown", 
-        question: "Em điền tên thành phố phù hợp với câu kể <i>Ai thế nào?</i> miêu tả thành phố đó.", 
-        text: "- Thành phố ___ nổi tiếng với rừng thông và thác nước.<br>- Thủ đô ___ tự hào vì có Văn Miếu - Quốc Tử Giám, trường đại học đầu tiên ở nước ta.<br>- Thành phố ___ vinh dự được mang tên Bác.", 
-        dropdowns: [
-            ["Đà Lạt", "Hà Nội", "Hồ Chí Minh", "Huế"],
-            ["Đà Lạt", "Hà Nội", "Hồ Chí Minh", "Huế"],
-            ["Đà Lạt", "Hà Nội", "Hồ Chí Minh", "Huế"]
-        ], 
-        answer: ["Đà Lạt", "Hà Nội", "Hồ Chí Minh"] 
-    }
 ];
