@@ -247,7 +247,82 @@ const QUESTION_BANK = [
     { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Fill the correct number in the blank.<br>Class 3A has 35 students, arranged in rows. Each row has 7 students.<br>How many rows are there in class 3A?", answer: "5" },
     { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>Students of class 3B are arranged in 8 rows, each row has 4 students. How many students are there in class 3B?", options: ["42", "12", "32", "40"], answer: 2 },
     { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>If 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = 63<br>then 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = ...", options: ["52", "9", "54", "6"], answer: 2 },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>An's family has 63 chickens. The number of roosters is 1/7 of the total number of chickens, and the number of hens is 4 times the number of roosters. The rest are chicks.<br>How many chicks does An's family have?", options: ["18 chicks", "9 chicks", "36 chicks", "45 chicks"], answer: 0 }
+    // Basic Calculations & Missing Factors
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the product:<br>8 × 7 = ...", answer: "56" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the product:<br>9 × 6 = ...", answer: "54" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the product:<br>7 × 7 = ...", answer: "49" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the product:<br>8 × 9 = ...", answer: "72" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the product:<br>9 × 9 = ...", answer: "81" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct number to fill in the blank.", text: "___ × 8 = 64", dropdowns: [["6", "7", "8", "9"]], answer: ["8"] },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct number to fill in the blank.", text: "7 × ___ = 42", dropdowns: [["6", "7", "8", "9"]], answer: ["6"] },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct number to fill in the blank.", text: "___ × 9 = 45", dropdowns: [["4", "5", "6", "7"]], answer: ["5"] },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "Which of the following expressions is equal to 56?", options: ["8 × 6", "9 × 7", "7 × 8", "9 × 5"], answer: 2 },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "Find the product of 9 and 8.", options: ["72", "64", "81", "63"], answer: 0 },
+    
+    // Basic Word Problems
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "Each box has 8 crayons. How many crayons are there in 6 boxes?", options: ["48 crayons", "42 crayons", "54 crayons", "56 crayons"], answer: 0 },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "A spider has 8 legs. How many legs do 7 spiders have in total?", options: ["49 legs", "56 legs", "64 legs", "63 legs"], answer: 1 },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "There are 7 days in a week. How many days are there in 9 weeks?", options: ["56 days", "63 days", "70 days", "72 days"], answer: 1 },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the correct number in the blank.<br>How many days are there in 4 weeks?", answer: "28" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>Students of class 3B are arranged in 8 rows, each row has 4 students. How many students are there in class 3B?", options: ["42", "12", "32", "40"], answer: 2 },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "There are 9 rows of chairs in a classroom. Each row has 5 chairs. How many chairs are there in total?<br>Answer: ... chairs", answer: "45" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "A shirt has 8 buttons. How many buttons are there on 9 shirts?<br>Answer: ... buttons", answer: "72" },
+    
+    // Advanced: Multi-step, Comparison, Logic
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Calculate the value of the expression:<br>8 × 6 + 12 = ...", answer: "60" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Calculate the value of the expression:<br>9 × 7 - 20 = ...", answer: "43" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "Which of the following expressions has the GREATEST value?", options: ["8 × 7", "9 × 6", "7 × 9", "8 × 8"], answer: 3 },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct sign (>, <, =) to fill in the blank.", text: "8 × 5 ___ 9 × 4", dropdowns: [[">", "<", "="]], answer: [">"] },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct sign (>, <, =) to fill in the blank.", text: "7 × 8 ___ 9 × 6", dropdowns: [[">", "<", "="]], answer: [">"] },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "match", question: "Match the expression with its correct product:", left: ["7 × 6", "8 × 4", "9 × 3"], right: ["42", "32", "27"], answer: {"7 × 6": "42", "8 × 4": "32", "9 × 3": "27"} },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "match", question: "Match the expression with its correct product:", left: ["8 × 8", "9 × 5", "7 × 9"], right: ["64", "45", "63"], answer: {"8 × 8": "64", "9 × 5": "45", "7 × 9": "63"} },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "drag_drop_sort", question: "Sort the products from SMALLEST to LARGEST:", items: ["7 × 5", "8 × 3", "9 × 2", "7 × 4"], answer: ["9 × 2", "8 × 3", "7 × 4", "7 × 5"] },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "drag_drop_sort", question: "Sort the products from LARGEST to SMALLEST:", items: ["9 × 8", "8 × 8", "7 × 9", "9 × 9"], answer: ["9 × 9", "9 × 8", "8 × 8", "7 × 9"] },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "An's mother bought 4 bags of apples and 5 bags of oranges. Each bag contains 8 fruits. How many fruits did she buy in total?", options: ["72 fruits", "64 fruits", "81 fruits", "56 fruits"], answer: 0 },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "Lan reads 9 pages of a book every day. How many pages does she read in a full week?", options: ["54 pages", "63 pages", "72 pages", "81 pages"], answer: 1 },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "multi_select", question: "Which of the following equations are CORRECT? (Select all that apply)", options: ["8 × 7 = 56", "9 × 6 = 56", "7 × 8 = 56", "9 × 9 = 82"], answer: [0, 2] },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "multi_select", question: "Select all expressions that have a product GREATER THAN 50:", options: ["7 × 8", "9 × 5", "8 × 8", "7 × 6"], answer: [0, 2] },
+
+    // -----------------------------------------------------------------
+    // DIVISION TABLES OF 7, 8 AND 9 (30 QUESTIONS)
+    // -----------------------------------------------------------------
+    
+    // Basic Calculations & Missing Elements
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the quotient:<br>56 : 8 = ...", answer: "7" },
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the quotient:<br>63 : 9 = ...", answer: "7" },
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the quotient:<br>48 : 8 = ...", answer: "6" },
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the quotient:<br>72 : 9 = ...", answer: "8" },
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the quotient:<br>49 : 7 = ...", answer: "7" },
+    { topic: "Division tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct number to fill in the blank.", text: "81 : ___ = 9", dropdowns: [["7", "8", "9", "10"]], answer: ["9"] },
+    { topic: "Division tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct number to fill in the blank.", text: "___ : 8 = 5", dropdowns: [["32", "40", "48", "56"]], answer: ["40"] },
+    { topic: "Division tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct number to fill in the blank.", text: "54 : ___ = 6", dropdowns: [["7", "8", "9", "6"]], answer: ["9"] },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Find the quotient of 64 and 8.", options: ["6", "7", "8", "9"], answer: 2 },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Find the quotient of 42 and 7.", options: ["6", "7", "8", "9"], answer: 0 },
+    
+    // Basic Word Problems
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "72 students are divided equally into 8 groups. How many students are there in each group?", options: ["7 students", "8 students", "9 students", "10 students"], answer: 2 },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "54 apples are placed equally into 9 baskets. How many apples are in each basket?", options: ["5 apples", "6 apples", "7 apples", "8 apples"], answer: 1 },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "A ribbon is 56 cm long. It is cut into 7 equal pieces. How long is each piece?", options: ["7 cm", "8 cm", "9 cm", "6 cm"], answer: 1 },
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "A teacher has 45 notebooks. She gives them equally to 9 students. How many notebooks does each student get?<br>Answer: ... notebooks", answer: "5" },
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "There are 64 chairs arranged equally in 8 rows. How many chairs are in each row?<br>Answer: ... chairs", answer: "8" },
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Fill the correct number in the blank.<br>Class 3A has 35 students, arranged in rows. Each row has 7 students.<br>How many rows are there in class 3A?", answer: "5" },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>If 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = 63<br>then 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = ...", options: ["52", "9", "54", "6"], answer: 2 },
+    
+    // Advanced: Multi-step, Comparison, Fractions
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Calculate the value of the expression:<br>72 : 8 + 15 = ...", answer: "24" },
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Calculate the value of the expression:<br>81 : 9 × 5 = ...", answer: "45" },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Which of the following expressions has the SMALLEST value?", options: ["56 : 7", "63 : 9", "48 : 8", "36 : 9"], answer: 3 },
+    { topic: "Division tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct sign (>, <, =) to fill in the blank.", text: "64 : 8 ___ 54 : 9", dropdowns: [[">", "<", "="]], answer: [">"] },
+    { topic: "Division tables of 7, 8 and 9", type: "inline_dropdown", question: "Choose the correct sign (>, <, =) to fill in the blank.", text: "72 : 9 ___ 56 : 7", dropdowns: [[">", "<", "="]], answer: ["="] },
+    { topic: "Division tables of 7, 8 and 9", type: "match", question: "Match the division expression with its correct quotient:", left: ["56 : 8", "81 : 9", "40 : 8"], right: ["7", "9", "5"], answer: {"56 : 8": "7", "81 : 9": "9", "40 : 8": "5"} },
+    { topic: "Division tables of 7, 8 and 9", type: "match", question: "Match the division expression with its correct quotient:", left: ["63 : 7", "48 : 8", "27 : 9"], right: ["9", "6", "3"], answer: {"63 : 7": "9", "48 : 8": "6", "27 : 9": "3"} },
+    { topic: "Division tables of 7, 8 and 9", type: "drag_drop_sort", question: "Sort the quotients from SMALLEST to LARGEST:", items: ["32 : 8", "45 : 9", "42 : 7", "56 : 8"], answer: ["32 : 8", "45 : 9", "42 : 7", "56 : 8"] },
+    { topic: "Division tables of 7, 8 and 9", type: "drag_drop_sort", question: "Sort the quotients from LARGEST to SMALLEST:", items: ["72 : 8", "63 : 9", "48 : 8", "36 : 9"], answer: ["72 : 8", "63 : 9", "48 : 8", "36 : 9"] },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "What is 1/8 of 64 kg?", options: ["6 kg", "7 kg", "8 kg", "9 kg"], answer: 2 },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "What is 1/9 of 54 liters?", options: ["5 liters", "6 liters", "7 liters", "8 liters"], answer: 1 },
     { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>An's family has 63 chickens. The number of roosters is 1/7 of the total number of chickens, and the number of hens is 4 times the number of roosters. The rest are chicks.<br>How many chicks does An's family have?", options: ["18 chicks", "9 chicks", "36 chicks", "45 chicks"], answer: 0 },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "If 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = 72<br>then 🍎 + 🍎 + 🍎 = ...", options: ["27", "18", "36", "45"], answer: 0 },
 
     /* =================================================================
        CHỦ ĐIỂM: MỞ RỘNG VỐN TỪ: MĂNG NON (TỔNG HỢP 91 CÂU)
