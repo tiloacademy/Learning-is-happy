@@ -631,7 +631,7 @@ const QUESTION_BANK = [
     { 
         topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
         question: "Trong đoạn văn tả nhà rông: 'Làng càng lớn và có nhiều người tài giỏi thì nhà rông càng bề thế, khang trang.' có mấy từ chỉ đặc điểm?", 
-        options: ["2 từ", "3 từ", "4 từ (lớn, tài giỏi, bề thế, khang trang)", "5 từ"], 
+        options: ["2 từ", "3 từ", "4 từ", "5 từ"], 
         answer: 2 
     },
 
