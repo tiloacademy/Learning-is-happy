@@ -738,7 +738,7 @@ const QUESTION_BANK = [
         answer: 2 
     },
 
-    // Hình 3 (image_4deaa9.png) - ĐÃ CẬP NHẬT KÝ TỰ XUỐNG DÒNG \n
+    // Hình 3 (image_4deaa9.png) - MỖI DÒNG THƠ LÀ 1 CỤM
     { 
         topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", 
         type: "highlight", 
