@@ -1,6 +1,7 @@
 // CẤU TRÚC MÔN HỌC VÀ CHỦ ĐIỂM
 const CURRICULUM = {
     "Toán học": ["Phép cộng trong phạm vi 10 000", "Phép trừ trong phạm vi 10 000", "Tìm các thành phần của phép nhân, phép chia trong phạm vi 10 000", "Chu vi hình chữ nhật, hình vuông", "Trung điểm của đoạn thẳng", "Tâm, bán kính, đường kính của hình tròn", "Bảng nhân 7, Bảng chia 7"],
+    "Toán Tiếng Anh": ["Multiplication tables of 7, 8 and 9", "Division tables of 7, 8 and 9"],
     "Tiếng Việt": ["Ôn tập về từ chỉ sự vật", "Mở rộng vốn từ: Măng non", "Ôn tập về từ chỉ hoạt động", "Phân biệt r / d / gi", "Ôn tập về từ chỉ đặc điểm", "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", "Mở rộng vốn từ: Gia đình", "Câu kể", "Ôn tập câu Ở đâu, Vì sao, Khi nào", "Viết đoạn văn tả đồ dùng"],
     "Tiếng Anh": ["Structures: Greeting", "Vocabulary: Hello and Goodbye", "Phonics: /h/ and /b/", "Structures: Introduce yourself", "Vocabulary: Names and ages", "Phonics: /m/ and /n/", "Structures: Introducing a friend or a teacher", "Vocabulary: Friends and teachers", "Phonics: th - /ð/ and /θ/", "Structures: What's this?"],
     "Kỹ năng sống": ["Tiền ra đời như thế nào?", "Em có bao nhiêu tiền?", "Những chiếc lọ thông minh", "Khi nào em đủ? Khi nào em thiếu?", "Quản lý tiền và ghi chép thông minh", "Bí mật hóa đơn siêu thị"]
@@ -236,6 +237,17 @@ const QUESTION_BANK = [
         ], 
         answer: 1 
     },
+
+    /* =================================================================
+       CHỦ ĐIỂM TOÁN TIẾNG ANH: DIVISION & MULTIPLICATION TABLES OF 7, 8, 9
+       ================================================================= */
+
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the product:<br>9 × 4 = ...", answer: "36" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the correct number in the blank.<br>How many days are there in 4 weeks?", answer: "28" },
+    { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Fill the correct number in the blank.<br>Class 3A has 35 students, arranged in rows. Each row has 7 students.<br>How many rows are there in class 3A?", answer: "5" },
+    { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>Students of class 3B are arranged in 8 rows, each row has 4 students. How many students are there in class 3B?", options: ["42", "12", "32", "40"], answer: 2 },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>If 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = 63<br>then 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = ...", options: ["52", "9", "54", "6"], answer: 2 },
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>An's family has 63 chickens. The number of roosters is 1/7 of the total number of chickens, and the number of hens is 4 times the number of roosters. The rest are chicks.<br>How many chicks does An's family have?", options: ["18 chicks", "9 chicks", "36 chicks", "45 chicks"], answer: 0 },
 
     /* =================================================================
        CHỦ ĐIỂM: MỞ RỘNG VỐN TỪ: MĂNG NON (TỔNG HỢP 91 CÂU)
