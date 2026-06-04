@@ -241,18 +241,24 @@
         btn.setAttribute('onclick', 'selectWordForOrder(this)');
     };
 
+   // ==========================================
+    // LOGIC CHO BÀI TẬP GẠCH CHÂN TÌM CÂU VÀ TÌM TỪ (HIGHLIGHT)
     // ==========================================
-    // LOGIC CHO BÀI TẬP GẠCH CHÂN TÌM CÂU (HIGHLIGHT)
-    // ==========================================
-    window.toggleHighlight = function(span) {
-        let chunkIdx = span.getAttribute('data-chunk');
-        let allSpansInChunk = document.querySelectorAll(`.highlight-word[data-chunk="${chunkIdx}"]`);
-        let isHighlighted = span.classList.contains('highlighted');
-        
-        allSpansInChunk.forEach(s => {
-            if (isHighlighted) s.classList.remove('highlighted');
-            else s.classList.add('highlighted');
-        });
+    window.toggleHighlight = function(span, isSentenceTask) {
+        if (isSentenceTask) {
+            // NẾU LÀ BÀI TÌM CÂU: Bấm 1 chữ, gạch chân cả câu (cả chunk)
+            let chunkIdx = span.getAttribute('data-chunk');
+            let allSpansInChunk = document.querySelectorAll(`.highlight-word[data-chunk="${chunkIdx}"]`);
+            let isHighlighted = span.classList.contains('highlighted');
+            
+            allSpansInChunk.forEach(s => {
+                if (isHighlighted) s.classList.remove('highlighted');
+                else s.classList.add('highlighted');
+            });
+        } else {
+            // NẾU LÀ BÀI TÌM TỪ: Bấm chữ nào, chỉ gạch chân chữ đó
+            span.classList.toggle('highlighted');
+        }
     };
 
     // ==========================================
@@ -430,6 +436,17 @@
             optionsContainer.innerHTML += `<p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Câu hỏi này có thể có nhiều đáp án đúng. Hãy đánh dấu chọn tất cả!</i></p>`;
         } else if (q.type === "highlight") {
             let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; text-align: left;">`;
+            
+            // XÁC ĐỊNH LÀ BÀI TÌM CÂU HAY TÌM TỪ BẰNG CÁCH QUÉT YÊU CẦU CÂU HỎI
+            let isSentenceTask = false;
+            let qText = q.question.toLowerCase();
+            if (qText.includes('câu thơ') || qText.includes('tìm câu') || qText.includes('chọn câu') || qText.includes('gạch chân câu') || qText.includes('gạch dưới câu') || qText.includes('câu kể') || qText.includes('câu hỏi') || qText.includes('câu cảm') || qText.includes('câu khiến')) {
+                isSentenceTask = true;
+            }
+            if (qText.includes('từ ngữ') || qText.includes('từ chỉ') || qText.includes('từ trong') || qText.includes('các từ')) {
+                isSentenceTask = false;
+            }
+
             q.words.forEach((chunk, chunkIndex) => {
                 // Chẻ nhỏ đoạn text để phát hiện ký tự \n (xuống dòng) và các khoảng trắng
                 let syllables = chunk.split(/(?=[ \n])|(?<=[ \n])/g); 
@@ -439,11 +456,16 @@
                     } else if (syllable.trim() === '') {
                         html += syllable; // Giữ nguyên khoảng trắng
                     } else {
-                        html += `<span class="highlight-word" onclick="toggleHighlight(this)" data-chunk="${chunkIndex}">${syllable}</span>`;
+                        html += `<span class="highlight-word" onclick="toggleHighlight(this, ${isSentenceTask})" data-chunk="${chunkIndex}">${syllable}</span>`;
                     }
                 });
             });
-            html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào câu/từ để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
+            
+            // Hiện mẹo làm bài tương ứng cho bé
+            let hintText = isSentenceTask 
+                ? '* Mẹo: Bấm vào 1 từ bất kỳ để gạch chân cả câu. Bấm lại để hủy.' 
+                : '* Mẹo: Bấm vào từng từ (tiếng) để gạch chân cho đến khi đủ. Bấm lại để hủy.';
+            html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>${hintText}</i></p>`;
             optionsContainer.innerHTML = html;
         } else if (q.type === "inline_dropdown") {
             let html = `<div class="inline-text">`;
