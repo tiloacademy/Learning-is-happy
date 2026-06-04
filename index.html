@@ -228,6 +228,17 @@
             document.getElementById('timer').innerText = `⏱ Thời gian: ${mins}:${secs}`;
         }, 1000);
     }
+    // ==========================================
+    // LOGIC CHO BÀI TẬP SẮP XẾP CÂU (ORDER)
+    // ==========================================
+    window.selectWordForOrder = function(btn) {
+        document.getElementById('ordered-box').appendChild(btn);
+        btn.setAttribute('onclick', 'returnWordToPool(this)');
+    };
+    window.returnWordToPool = function(btn) {
+        document.getElementById('word-pool').appendChild(btn);
+        btn.setAttribute('onclick', 'selectWordForOrder(this)');
+    };
 
     // ==========================================
     // LOGIC CHO DẠNG BÀI GẠCH CHÂN (HIGHLIGHT TỰ ĐỘNG THEO CỤM)
