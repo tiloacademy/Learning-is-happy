@@ -505,5 +505,205 @@ const QUESTION_BANK = [
             ["trong veo", "đục ngầu", "cạn khô"]
         ],
         answer: ["xám xịt", "mát mẻ", "xanh", "xanh", "trong veo"]
+    },
+
+    /* =================================================================
+       CHỦ ĐIỂM: ÔN TẬP VỀ TỪ CHỈ ĐẶC ĐIỂM (30 CÂU TỪ SÁCH CÁNH DIỀU)
+       ================================================================= */
+
+    // --- DẠNG 1: GẠCH CHÂN TỪ CHỈ ĐẶC ĐIỂM (HIGHLIGHT) ---
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân các từ chỉ đặc điểm trong hai câu thơ sau (Bài: Lễ khai giảng):", 
+        words: ["Sáng ", "đầu thu ", "trong xanh ", "Em ", "mặc ", "quần áo ", "mới"], 
+        answer: [2, 6] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân từ chỉ đặc điểm về MÀU SẮC trong câu thơ sau (Bài: Lễ khai giảng):", 
+        words: ["Chúng em ", "đi ", "vào lớp ", "Khăn quàng ", "bay ", "đỏ tươi."], 
+        answer: [5] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân từ chỉ đặc điểm trong câu văn sau (Bài: Lễ chào cờ đặc biệt):", 
+        words: ["Dưới ", "ánh nắng ", "dìu dịu ", "của ", "buổi sáng ", "thứ Hai..."], 
+        answer: [2] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân từ chỉ đặc điểm trong câu văn sau (Bài: Lễ chào cờ đặc biệt):", 
+        words: ["Tất cả ", "thầy cô ", "và ", "học sinh ", "hát vang ", "giai điệu ", "hào hùng."], 
+        answer: [6] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân từ chỉ đặc điểm về HÌNH DÁNG, KÍCH THƯỚC trong câu văn sau (Bài: Nhớ lại buổi đầu đi học):", 
+        words: ["Mẹ tôi ", "âu yếm ", "nắm tay ", "tôi ", "đi trên ", "con đường ", "làng ", "dài ", "và ", "hẹp."], 
+        answer: [7, 9] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân các từ chỉ đặc điểm trong đoạn thơ sau (Bài: Hai bàn tay em):", 
+        words: ["Hoa hồng ", "hồng nụ ", "Cánh ", "tròn ", "ngón ", "xinh."], 
+        answer: [1, 3, 5] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân từ chỉ đặc điểm trong khổ thơ sau (Bài: Giặt áo):", 
+        words: ["Lấy ", "bọt ", "xà phòng ", "Làm ", "đôi găng ", "trắng ", "Nghìn ", "đốm ", "cầu vồng ", "Tay em ", "lấp lánh."], 
+        answer: [5, 10] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân các từ chỉ đặc điểm trong đoạn văn sau (Bài: Con heo đất):", 
+        words: ["Thật ra ", "con heo ", "cũng ", "dễ thương. ", "Mũi nó ", "mát lạnh."], 
+        answer: [3, 5] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân từ chỉ đặc điểm về TÍNH TÌNH trong đoạn thơ sau (Bài: Hai bàn tay em):", 
+        words: ["Giờ em ", "ngồi học ", "Bàn tay ", "siêng năng ", "Nở hoa ", "trên giấy."], 
+        answer: [3] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "highlight", 
+        question: "Em hãy gạch chân từ chỉ đặc điểm trong câu văn sau (Bài: Ba anh em):", 
+        words: ["Từ đó, ", "gia đình ", "ba anh em ", "lại ", "sống ", "với nhau ", "êm ấm ", "như xưa."], 
+        answer: [6] 
+    },
+
+    // --- DẠNG 2: ĐẾM SỐ LƯỢNG TỪ CHỈ ĐẶC ĐIỂM (MCQ) ---
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Trong câu văn: 'Cảm giác trong sáng ấy nảy nở trong lòng tôi giữa bầu trời quang đãng.' có bao nhiêu từ chỉ đặc điểm?", 
+        options: ["1 từ (trong sáng)", "2 từ (trong sáng, quang đãng)", "3 từ", "4 từ"], 
+        answer: 1 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Cho đoạn thơ: 'Mùa thu của em / Là xanh cốm mới'. Đoạn thơ trên có mấy từ chỉ đặc điểm?", 
+        options: ["1 từ", "2 từ (xanh, mới)", "3 từ", "Không có từ nào"], 
+        answer: 1 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Trong câu: 'Nhà rông được dựng bằng gỗ tốt kết hợp với tre, nứa.' có bao nhiêu từ chỉ đặc điểm?", 
+        options: ["1 từ (tốt)", "2 từ", "3 từ", "4 từ"], 
+        answer: 0 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Câu ca dao: 'Lụa Nam Định đẹp tươi mát rượi / Lược Hàng Đào chải mái tóc xanh' có bao nhiêu từ chỉ đặc điểm?", 
+        options: ["2 từ", "3 từ (đẹp, mát rượi, xanh)", "4 từ (đẹp, tươi, mát rượi, xanh)", "5 từ"], 
+        answer: 2 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Trong câu chuyện Con heo đất: 'Một cô bé sang nhà dì chơi. Vì đang dỗi mẹ nên em ngồi buồn thiu.' Đoạn văn trên có mấy từ chỉ đặc điểm?", 
+        options: ["1 từ (buồn thiu)", "2 từ (nhỏ, buồn thiu)", "3 từ", "4 từ"], 
+        answer: 0 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Trong đoạn thơ: 'Tay em đánh răng / Răng trắng hoa nhài' có bao nhiêu từ chỉ đặc điểm?", 
+        options: ["1 từ (trắng)", "2 từ", "3 từ", "Không có từ nào"], 
+        answer: 0 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Đoạn văn: 'Vừa bưng bát cơm nóng hổi, em lại nghĩ đến mẹ.' có mấy từ chỉ đặc điểm?", 
+        options: ["1 từ (nóng hổi)", "2 từ", "3 từ", "4 từ"], 
+        answer: 0 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Trong đoạn: 'Đôi mắt lim dim / Ngủ ngon bà nhé!' có bao nhiêu từ chỉ đặc điểm?", 
+        options: ["1 từ", "2 từ (lim dim, ngon)", "3 từ", "4 từ"], 
+        answer: 1 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Bài thơ Bận có câu: 'Trời thu bận xanh / Sông Hồng bận chảy'. Trong 2 câu thơ này có bao nhiêu từ chỉ đặc điểm?", 
+        options: ["1 từ (xanh)", "2 từ (bận, xanh)", "3 từ", "4 từ"], 
+        answer: 0 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
+        question: "Trong đoạn văn tả nhà rông: 'Làng càng lớn và có nhiều người tài giỏi thì nhà rông càng bề thế, khang trang.' có mấy từ chỉ đặc điểm?", 
+        options: ["2 từ", "3 từ", "4 từ (lớn, tài giỏi, bề thế, khang trang)", "5 từ"], 
+        answer: 2 
+    },
+
+    // --- DẠNG 3: ĐIỀN ĐOẠN VĂN THẢ XUỐNG (INLINE DROPDOWN) ---
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích bài: Mùa thu của em):", 
+        text: "Mùa thu của em <br> Là ___ hoa cúc <br> Như nghìn con mắt <br> Mở nhìn trời ___.", 
+        dropdowns: [["vàng", "đỏ", "xanh"], ["êm", "cao", "rộng"]], 
+        answer: ["vàng", "êm"] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích bài: Giặt áo):", 
+        text: "___ như mới <br> Áo quần lên dây <br> Em yêu ngắm mãi <br> Trắng hồng đôi tay.", 
+        dropdowns: [["Sạch sẽ", "Tinh tươm", "Thơm tho"]], 
+        answer: ["Sạch sẽ"] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích bài: Ơi chích chòe ơi):", 
+        text: "Bàn tay ___ <br> Vẫy quạt thật đều <br> Quạt cho bà ngủ <br> Ngấn nắng ___.", 
+        dropdowns: [["nhỏ bé", "bé nhỏ", "xinh xắn"], ["thiu thiu", "iu iu", "lim dim"]], 
+        answer: ["bé nhỏ", "thiu thiu"] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích truyện: Ba con búp bê):", 
+        text: "Sáng hôm sau, Mai reo lên khi thấy ló ra một cái đầu búp bê... một cô bé búp bê ___, ___ xíu, bằng giấy bồi.", 
+        dropdowns: [["mũm mĩm", "tròn trịa", "xinh xắn"], ["nhỏ", "bé", "tí"]], 
+        answer: ["mũm mĩm", "nhỏ"] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích bài: Nhớ lại buổi đầu đi học):", 
+        text: "Hằng năm, cứ vào cuối thu, lá ngoài đường rụng nhiều và trên không có những đám mây ___, lòng tôi lại ___ những kỉ niệm.", 
+        dropdowns: [["trắng xốp", "bàng bạc", "đen kịt"], ["nao nức", "nôn nao", "rạo rực"]], 
+        answer: ["bàng bạc", "nao nức"] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích truyện: Ông Trạng giỏi tính toán):", 
+        text: "Sứ thần lại xé một trang sách ___, nhờ ông đo xem nó ___ bao nhiêu.", 
+        dropdowns: [["mỏng", "dày", "cũ"], ["mỏng", "dày", "nặng"]], 
+        answer: ["mỏng", "dày"] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích bài: Bảy sắc cầu vồng):", 
+        text: "Màu xanh dương bảo mình là sắc ___ của đại dương. Màu tím thì tự hào vì có vẻ đẹp ___ giống như hoa vi-ô-lét.", 
+        dropdowns: [["biếc", "ngắt", "thẳm"], ["đằm thắm", "rực rỡ", "kiêu kì"]], 
+        answer: ["biếc", "đằm thắm"] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích truyện: Ba anh em):", 
+        text: "Chỉ còn một cây cổ thụ trong vườn, cành lá ___. Một người em nhất quyết đòi chia nốt.", 
+        dropdowns: [["xum xuê", "xác xơ", "héo úa"]], 
+        answer: ["xum xuê"] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích truyện: Bảy sắc cầu vồng):", 
+        text: "Một cây cầu vồng ___ hiện lên trên nền trời. Họa sĩ liền vẽ bức tranh một cây cầu vồng vắt ngang qua cánh đồng lúa ___.", 
+        dropdowns: [["rực rỡ", "mờ nhạt", "tươi tắn"], ["vàng rực", "xanh biếc", "chín rộ"]], 
+        answer: ["rực rỡ", "vàng rực"] 
+    },
+    { 
+        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích truyện: Người trí thức yêu nước):", 
+        text: "Dù băng qua rừng ___ hay suối ___, lúc nào ông cũng giữ bên mình chiếc va li đựng nấm pê-ni-xi-lin.", 
+        dropdowns: [["rậm", "hoang", "vắng"], ["sâu", "cạn", "trong"]], 
+        answer: ["rậm", "sâu"] 
     }
 ];
