@@ -419,25 +419,26 @@
         } else if (q.type === "multi_select") {
             q.options.forEach((opt, index) => {
                 optionsContainer.innerHTML += `<label class="option-label"><input type="checkbox" name="ans" value="${index}"> ${opt}</label>`;
+        });
+        optionsContainer.innerHTML += `<p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Câu hỏi này có thể có nhiều đáp án đúng. Hãy đánh dấu chọn tất cả!</i></p>`;
+    } else if (q.type === "highlight") {
+        let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; text-align: left;">`;
+        q.words.forEach((chunk, chunkIndex) => {
+            // Chẻ nhỏ đoạn text để phát hiện ký tự \n (xuống dòng) và các khoảng trắng
+            let syllables = chunk.split(/(?=[ \n])|(?<=[ \n])/g); 
+            syllables.forEach((syllable) => {
+                if (syllable === '\n') {
+                    html += '<br>'; // Xuống dòng
+                } else if (syllable.trim() === '') {
+                    html += syllable; // Giữ nguyên khoảng trắng
+                } else {
+                    html += `<span class="highlight-word" onclick="this.classList.toggle('highlighted')" data-chunk="${chunkIndex}">${syllable}</span>`;
+                }
             });
-            optionsContainer.innerHTML += `<p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Câu hỏi này có thể có nhiều đáp án đúng. Hãy đánh dấu chọn tất cả!</i></p>`;
-        } else if (q.type === "highlight") {
-            let html = `<div class="question-box" style="padding: 20px; background: #fff; border: 2px dashed #bdc3c7; border-radius: 8px; text-align: left;">`;
-            q.words.forEach((chunk, chunkIndex) => {
-                let syllables = chunk.split(/(?=[ \n])|(?<=[ \n])/g); // Split keeping spaces and newlines
-                syllables.forEach((syllable) => {
-                    if (syllable === '\n') {
-                        html += '<br>';
-                    } else if (syllable.trim() === '') {
-                        html += syllable; // Keep spaces as normal text
-                    } else {
-                        html += `<span class="highlight-word" onclick="this.classList.toggle('highlighted')" data-chunk="${chunkIndex}">${syllable}</span>`;
-                    }
-                });
-            });
-            html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào từng tiếng (chữ) để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
-            optionsContainer.innerHTML = html;
-        } else if (q.type === "inline_dropdown") {
+        });
+        html += `</div><p style="font-size:13px; color:#7f8c8d; margin-top:10px;"><i>* Mẹo: Bấm vào từng tiếng (chữ) để gạch chân. Bấm lại lần nữa để hủy.</i></p>`;
+        optionsContainer.innerHTML = html;
+    } else if (q.type === "inline_dropdown") {
             let html = `<div class="inline-text">`;
             let parts = q.text.split('___');
             parts.forEach((part, index) => {
