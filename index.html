@@ -54,6 +54,11 @@
         .inline-select { font-size: 16px; padding: 5px 10px; margin: 0 5px; border-radius: 5px; border: 2px solid var(--primary); font-weight: bold; color: var(--primary); background: #fdfdfd; cursor: pointer; outline: none; }
         .inline-select:hover { background-color: #e9f2fb; }
         
+        /* DẠNG BÀI TOÁN HỌC MỚI: KÉO THẢ SẮP XẾP DỌC */
+        .sortable-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .sortable-item { background: white; border: 2px solid var(--primary); padding: 15px; border-radius: 8px; cursor: grab; font-size: 18px; font-weight: bold; text-align: center; user-select: none; transition: transform 0.1s ease; }
+        .sortable-item.dragging { opacity: 0.5; border-style: dashed; background-color: #f8f9fa; }
+        
         /* Thông báo (Toast) */
         #toast-container { position: fixed; top: 20px; right: 20px; z-index: 1000; }
         .toast { padding: 15px 25px; margin-bottom: 10px; border-radius: 8px; color: white; font-weight: bold; font-size: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); animation: fadein 0.3s, fadeout 0.5s 2s forwards; }
@@ -441,6 +446,40 @@
             });
             html += `</div>`;
             optionsContainer.innerHTML = html;
+        } else if (q.type === "drag_drop_sort") {
+            let html = `<p style="font-size:13px; color:#7f8c8d; margin-bottom:10px;"><i>* Mẹo: Nhấn giữ và kéo thả các ô bên dưới để sắp xếp theo đúng thứ tự.</i></p>
+            <div class="sortable-list" id="sortable-list">`;
+            
+            // Xáo trộn thứ tự hiển thị ban đầu
+            let shuffled = [...q.items].sort(() => 0.5 - Math.random());
+            shuffled.forEach((item) => {
+                html += `<div class="sortable-item" draggable="true" data-val="${item}">${item}</div>`;
+            });
+            html += `</div>`;
+            optionsContainer.innerHTML = html;
+
+            // Logic Kéo Thả (Drag and Drop)
+            const list = document.getElementById('sortable-list');
+            list.addEventListener('dragstart', (e) => {
+                if (e.target.classList.contains('sortable-item')) {
+                    e.target.classList.add('dragging');
+                }
+            });
+            list.addEventListener('dragend', (e) => {
+                if (e.target.classList.contains('sortable-item')) {
+                    e.target.classList.remove('dragging');
+                }
+            });
+            list.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                const draggingItem = document.querySelector('.dragging');
+                if (!draggingItem) return;
+                const siblings = [...list.querySelectorAll('.sortable-item:not(.dragging)')];
+                let nextSibling = siblings.find(sibling => {
+                    return e.clientY <= sibling.getBoundingClientRect().top + sibling.offsetHeight / 2;
+                });
+                list.insertBefore(draggingItem, nextSibling);
+            });
         }
 
         const btn = document.getElementById('submit-btn');
@@ -567,6 +606,13 @@
             studentAnswer = stuAnsArr.join(" | ");
             correctAnswerToSave = q.answer.join(" | ");
             isCorrect = isAllCorrect;
+        } else if (q.type === "drag_drop_sort") {
+            const items = Array.from(document.getElementById('sortable-list').children);
+            let studentArr = items.map(item => item.getAttribute('data-val'));
+            
+            studentAnswer = studentArr.join(" -> ");
+            correctAnswerToSave = q.answer.join(" -> ");
+            isCorrect = (studentArr.length === q.answer.length && studentArr.every((val, index) => val === q.answer[index]));
         }
         
         if (isCorrect) score += 10;
