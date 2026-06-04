@@ -333,7 +333,7 @@
         const q = currentExamQuestions[currentQuestionIndex];
         
         document.getElementById('question-progress').innerText = `Câu hỏi ${currentQuestionIndex + 1} / ${currentExamQuestions.length}`;
-        document.getElementById('question-text').innerText = q.question;
+        document.getElementById('question-text').innerHTML = q.question;
         
         // 1. Vẽ hình học tự động (Toán học)
         const illusContainer = document.getElementById('illustration-container');
