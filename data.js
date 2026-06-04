@@ -613,13 +613,13 @@ const QUESTION_BANK = [
     { 
         topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
         question: "Đoạn văn: 'Vừa bưng bát cơm nóng hổi, em lại nghĩ đến mẹ.' có mấy từ chỉ đặc điểm?", 
-        options: ["1 từ (nóng hổi)", "2 từ", "3 từ", "4 từ"], 
+        options: ["1 từ", "2 từ", "3 từ", "4 từ"], 
         answer: 0 
     },
     { 
         topic: "Ôn tập về từ chỉ đặc điểm", type: "mcq", 
         question: "Trong đoạn: 'Đôi mắt lim dim / Ngủ ngon bà nhé!' có bao nhiêu từ chỉ đặc điểm?", 
-        options: ["1 từ", "2 từ (lim dim, ngon)", "3 từ", "4 từ"], 
+        options: ["1 từ", "2 từ", "3 từ", "4 từ"], 
         answer: 1 
     },
     { 
@@ -693,10 +693,14 @@ const QUESTION_BANK = [
         answer: ["xum xuê"] 
     },
     { 
-        topic: "Ôn tập về từ chỉ đặc điểm", type: "inline_dropdown", 
+        topic: "Ôn tập về từ chỉ đặc điểm", 
+        type: "inline_dropdown", 
         question: "Em hãy chọn từ chỉ đặc điểm thích hợp điền vào chỗ trống (Trích truyện: Bảy sắc cầu vồng):", 
         text: "Một cây cầu vồng ___ hiện lên trên nền trời. Họa sĩ liền vẽ bức tranh một cây cầu vồng vắt ngang qua cánh đồng lúa ___.", 
-        dropdowns: [["rực rỡ", "mờ nhạt", "tươi tắn"], ["vàng rực", "xanh biếc", "chín rộ"]], 
+        dropdowns: [
+            ["rực rỡ", "tối tăm", "méo mó"], // Nhiễu: tính từ sai ngữ cảnh
+            ["vàng rực", "tím lịm", "chua loét"]
+        ], 
         answer: ["rực rỡ", "vàng rực"] 
     },
     { 
@@ -822,6 +826,6 @@ const QUESTION_BANK = [
     { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "mcq", question: "Có bao nhiêu câu 'Ai thế nào?' trong đoạn văn sau: 'Nhà rông thật là đặc sắc. Làng càng lớn thì nhà rông càng bề thế, khang trang. Nhà rông là nơi đón tiếp khách đến làng.' (Trích bài Nhà rông)", options: ["A. 1 câu", "B. 2 câu", "C. 3 câu", "D. 0 câu"], answer: 1 },
     { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "order", question: "Sắp xếp lại các phần để được câu phân tích đúng:", words: ["như ngọn đèn", "Câu 'Trái nhót", "tín hiệu.'", "là câu kể", "Ai là gì?"], answer: "Câu 'Trái nhót như ngọn đèn tín hiệu.' là câu kể Ai là gì?" },
     { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "multi_select", question: "Khẳng định nào sau đây là SAI?", options: ["Câu 'Ai là gì?' dùng để giới thiệu hoặc nhận định.", "Câu 'Ai làm gì?' dùng để kể về màu sắc, hình dáng.", "Bộ phận trả lời câu hỏi 'Ai?' luôn chỉ con người.", "Câu 'Ai thế nào?' dùng để miêu tả đặc điểm, tính chất."], answer: [1, 2] },
-    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "fib", question: "Cho câu 'Bà ngoại đang ngồi nhặt rau ngoài hiên.'. Bộ phận trả lời cho câu hỏi 'Ai?' là từ gì? (Điền 2 chữ)", answer: "Bà ngoại" },
+    { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "fib", question: "Cho câu 'Bà ngoại đang ngồi nhặt rau ngoài hiên.'. Bộ phận trả lời cho câu hỏi 'Ai?' là từ gì?", answer: "Bà ngoại" },
     { topic: "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", type: "inline_dropdown", question: "Xác định mẫu câu cho các hoạt động của bạn Bống trong bài Nhật kí của Bống:", text: "- Câu 'Bống chuẩn bị đồ bơi cho hai chị em.' thuộc mẫu ___.<br>- Câu 'Chiếc kính bơi màu hồng rất đẹp.' thuộc mẫu ___.", dropdowns: [["Ai là gì?", "Ai làm gì?", "Ai thế nào?"], ["Ai là gì?", "Ai làm gì?", "Ai thế nào?"]], answer: ["Ai làm gì?", "Ai thế nào?"] },
 ];
