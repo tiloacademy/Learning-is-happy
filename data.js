@@ -1,6 +1,6 @@
 // CẤU TRÚC MÔN HỌC VÀ CHỦ ĐIỂM
 const CURRICULUM = {
-    "Toán học": ["Phép cộng trong phạm vi 10 000", "Phép trừ trong phạm vi 10 000", "Tìm các thành phần của phép nhân, phép chia trong phạm vi 10 000", "Chu vi hình chữ nhật, hình vuông", "Trung điểm của đoạn thẳng", "Tâm, bán kính, đường kính của hình tròn"],
+    "Toán học": ["Phép cộng trong phạm vi 10 000", "Phép trừ trong phạm vi 10 000", "Tìm các thành phần của phép nhân, phép chia trong phạm vi 10 000", "Chu vi hình chữ nhật, hình vuông", "Trung điểm của đoạn thẳng", "Tâm, bán kính, đường kính của hình tròn", "Bảng nhân 7, Bảng chia 7"],
     "Tiếng Việt": ["Ôn tập về từ chỉ sự vật", "Mở rộng vốn từ: Măng non", "Ôn tập về từ chỉ hoạt động", "Phân biệt r / d / gi", "Ôn tập về từ chỉ đặc điểm", "Ôn tập câu Ai là gì, Ai làm gì, Ai thế nào", "Mở rộng vốn từ: Gia đình", "Câu kể", "Ôn tập câu Ở đâu, Vì sao, Khi nào", "Viết đoạn văn tả đồ dùng"],
     "Tiếng Anh": ["Structures: Greeting", "Vocabulary: Hello and Goodbye", "Phonics: /h/ and /b/", "Structures: Introduce yourself", "Vocabulary: Names and ages", "Phonics: /m/ and /n/", "Structures: Introducing a friend or a teacher", "Vocabulary: Friends and teachers", "Phonics: th - /ð/ and /θ/", "Structures: What's this?"],
     "Kỹ năng sống": ["Tiền ra đời như thế nào?", "Em có bao nhiêu tiền?", "Những chiếc lọ thông minh", "Khi nào em đủ? Khi nào em thiếu?", "Quản lý tiền và ghi chép thông minh", "Bí mật hóa đơn siêu thị"]
@@ -148,6 +148,24 @@ const QUESTION_BANK = [
     { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Chiếc chảo chống dính có đường kính 28 cm. Bán kính của lòng chảo là bao nhiêu cm?", answer: "14" },
     { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Khay trà bằng gỗ có đường kính 4 dm 2 cm. Bán kính của khay trà là bao nhiêu xăng-ti-mét?", answer: "21" },
     { topic: "Tâm, bán kính, đường kính của hình tròn", type: "fib", question: "Đường tròn tâm O có bán kính là kết quả của phép chia 8424 : 4 (đơn vị cm). Đường kính của đường tròn đó là bao nhiêu cm?", answer: "4212" }, // ĐÃ THÊM DẤU PHẨY VÀO ĐÂY
+    
+    /* =================================================================
+       MÔN TOÁN: BẢNG NHÂN 7, BẢNG CHIA 7
+       ================================================================= */
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Kết quả của phép tính 7 x 8 là:", options: ["54", "56", "48", "64"], answer: 1 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Điền số thích hợp vào chỗ chấm: 63 : 7 = ...", answer: "9" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Phép tính nào dưới đây có kết quả lớn nhất?", options: ["7 x 5", "49 : 7", "7 x 6", "42 : 7"], answer: 2 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tìm x, biết: x : 7 = 5. Giá trị của x là:", answer: "35" },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Mỗi tuần lễ có 7 ngày. Hỏi 4 tuần lễ có tất cả bao nhiêu ngày?", options: ["24 ngày", "28 ngày", "32 ngày", "21 ngày"], answer: 1 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Cô giáo có 56 quyển vở, chia đều cho 7 nhóm. Hỏi mỗi nhóm nhận được bao nhiêu quyển vở?", answer: "8" },
+    
+    // --- DẠNG MỚI: KÉO THẢ SẮP XẾP THỨ TỰ ---
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "drag_drop_sort", question: "Sắp xếp các phép tính sau theo thứ tự kết quả từ bé đến lớn:", items: ["7 x 8", "42 : 7", "7 x 4", "35 : 7"], answer: ["35 : 7", "42 : 7", "7 x 4", "7 x 8"] },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "drag_drop_sort", question: "Sắp xếp các kết quả sau theo thứ tự từ lớn đến bé:", items: ["Kết quả của 7 x 9", "Kết quả của 21 : 7", "Kết quả của 7 x 3", "Kết quả của 70 : 7"], answer: ["Kết quả của 7 x 9", "Kết quả của 70 : 7", "Kết quả của 7 x 3", "Kết quả của 21 : 7"] },
+    
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "mcq", question: "Điền dấu thích hợp vào chỗ chấm: 7 x 5 ... 7 x 4 + 7", options: [">", "<", "="], answer: 2 },
+    { topic: "Bảng nhân 7, Bảng chia 7", type: "fib", question: "Tính giá trị biểu thức: 7 x 10 - 25 = ...", answer: "45" },
+
 
     /* =================================================================
        CHỦ ĐIỂM: MỞ RỘNG VỐN TỪ: MĂNG NON (TỔNG HỢP 91 CÂU)
