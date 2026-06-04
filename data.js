@@ -247,7 +247,7 @@ const QUESTION_BANK = [
     { topic: "Division tables of 7, 8 and 9", type: "fib", question: "Fill the correct number in the blank.<br>Class 3A has 35 students, arranged in rows. Each row has 7 students.<br>How many rows are there in class 3A?", answer: "5" },
     { topic: "Multiplication tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>Students of class 3B are arranged in 8 rows, each row has 4 students. How many students are there in class 3B?", options: ["42", "12", "32", "40"], answer: 2 },
     { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>If 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = 63<br>then 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = ...", options: ["52", "9", "54", "6"], answer: 2 },
-    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>An's family has 63 chickens. The number of roosters is 1/7 of the total number of chickens, and the number of hens is 4 times the number of roosters. The rest are chicks.<br>How many chicks does An's family have?", options: ["18 chicks", "9 chicks", "36 chicks", "45 chicks"], answer: 0 }
+    { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>An's family has 63 chickens. The number of roosters is 1/7 of the total number of chickens, and the number of hens is 4 times the number of roosters. The rest are chicks.<br>How many chicks does An's family have?", options: ["18 chicks", "9 chicks", "36 chicks", "45 chicks"], answer: 0 },
     // Basic Calculations & Missing Factors
     { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the product:<br>8 × 7 = ...", answer: "56" },
     { topic: "Multiplication tables of 7, 8 and 9", type: "fib", question: "Fill the suitable number in the blank.<br>Find the product:<br>9 × 6 = ...", answer: "54" },
@@ -323,6 +323,7 @@ const QUESTION_BANK = [
     { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "What is 1/9 of 54 liters?", options: ["5 liters", "6 liters", "7 liters", "8 liters"], answer: 1 },
     { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "Choose the correct answer.<br>An's family has 63 chickens. The number of roosters is 1/7 of the total number of chickens, and the number of hens is 4 times the number of roosters. The rest are chicks.<br>How many chicks does An's family have?", options: ["18 chicks", "9 chicks", "36 chicks", "45 chicks"], answer: 0 },
     { topic: "Division tables of 7, 8 and 9", type: "mcq", question: "If 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 + 🍎 = 72<br>then 🍎 + 🍎 + 🍎 = ...", options: ["27", "18", "36", "45"], answer: 0 },
+
 
     /* =================================================================
        CHỦ ĐIỂM: MỞ RỘNG VỐN TỪ: MĂNG NON (TỔNG HỢP 91 CÂU)
